@@ -4,9 +4,9 @@ package frc.robot;
 public final class Constants {
 
    // Arcade drive talon ports
-   public final static int talon_fr_port = 3;
-   public final static int talon_fl_port = 6;
-   public final static int talon_br_port = 2;
-   public final static int talon_bl_port = 7;
+   public final static int SPARK_FR_DRIVE = 3;
+   public final static int SPARK_FL_DRIVE = 6;
+   public final static int SPARK_BR_DRIVE = 2;
+   public final static int SPARK_BL_DRIVE = 7;
    
 }

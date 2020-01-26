@@ -7,6 +7,7 @@ import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
 
+  // Drivetrain subsystem and command
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final DefaultDrive c_defaultdrive = new DefaultDrive(m_drivetrain);
 
