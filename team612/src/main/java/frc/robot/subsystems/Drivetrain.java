@@ -41,6 +41,8 @@ public class Drivetrain extends SubsystemBase {
     spark_fl_drive.set(leftCommand);
     spark_bl_drive.set(leftCommand);
 
+    SmartDashboard.putNumber("Left Command", leftCommand);
+    SmartDashboard.putNumber("Right Command", rightCommand);
   }
 
   public void configureVoltageOutput() {
