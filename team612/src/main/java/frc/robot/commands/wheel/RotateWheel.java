@@ -1,5 +1,6 @@
 package frc.robot.commands.wheel;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Wheel;
 
@@ -35,6 +36,9 @@ public class RotateWheel extends CommandBase {
   public void execute() {
 
     current_color = m_wheel.getClosestColor();  // Reassign the current sensor value
+    
+    // Run the spark mechanism at fixed speed
+    m_wheel.setSpinner(1);
 
     // Prevent edge cases and invalid sensor values
     if (current_color == prev_color) {
@@ -51,20 +55,15 @@ public class RotateWheel extends CommandBase {
       has_counted_revolution = true;
     }
 
-    // If somehow, we surpass 5 revolutions reset the proccess
-    if (revolution_count > 5) {
-      revolution_count = 0;
-    }
-
     // Once within the range of revolutions, stop the mechanism
-    if(revolution_count >= 3.0 && revolution_count <= 5.0) {
-      System.out.println("STOP!!!!");
+    if(revolution_count >= 3.0) {
       is_complete = true;
     }
 
-    System.out.println(initial_color);
-    System.out.println(current_color);
-    System.out.println(revolution_count);
+    // Smart Dashboard Information
+    SmartDashboard.putString("Initial Color Reading", String.valueOf(initial_color));
+    SmartDashboard.putString("Current Color Reading", String.valueOf(current_color));
+    SmartDashboard.putNumber("Wheel Revolutions", revolution_count);
 
     prev_color = current_color;  // Assign the previous sensor value to the current and continue
 
@@ -72,7 +71,7 @@ public class RotateWheel extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    // TODO: Stop the mechanism here
+    m_wheel.setSpinner(0);  // Stop the spinner
   }
 
   @Override
