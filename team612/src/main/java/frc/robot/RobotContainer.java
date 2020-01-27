@@ -3,6 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.autonomous.SampleAuto;
 import frc.robot.commands.drivetrain.DefaultDrive;
+import frc.robot.commands.intake.StartIntakeMode;
+import frc.robot.controls.ControlMap;
 import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
@@ -19,7 +21,8 @@ public class RobotContainer {
 
   // Put all button bindings here
   private void configureButtonBindings() {
-    
+    // StartIntake mode control group
+    ControlMap.driver_button_A.toggleWhenPressed(new StartIntakeMode());
   }
 
   // Put all default commands here
