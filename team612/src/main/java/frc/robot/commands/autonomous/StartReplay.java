@@ -12,6 +12,7 @@ import org.json.simple.parser.ParseException;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.controls.ControlMap;
+import frc.robot.subsystems.Drivetrain;
 
 public class StartReplay extends CommandBase {
   
@@ -23,32 +24,39 @@ public class StartReplay extends CommandBase {
   // Variables modified by ParseReplay.java
   private JSONArray frames;  // Empty parser object to fetch information
   private double recording_voltage; 
+
+  private int i;  // Current step in replay
+
+  private boolean isComplete;
+  
+  private Drivetrain m_drivetrain;
   
 
-  public StartReplay(String FILENAME) {
+  public StartReplay(Drivetrain m_drivetrain, String FILENAME) {
     JSONObject parsed = parse_json(DIRECTORY + FILENAME);
+    this.m_drivetrain = m_drivetrain;
     // Extract voltage and array of steps from parsed json
     recording_voltage = (double) parsed.get("voltage");
     frames = (JSONArray) parsed.get("frames");
+    addRequirements(m_drivetrain);
   }
 
 
   @Override
   public void initialize() {
-    System.out.println(frames);
+    //System.out.println(frames);
+    i=0;
+    END_REPLAY=false;
   }
 
 
   @Override
   public void execute() {
 
-    int i = 0;  // Current step in replay
+    if (i < frames.size()) {  // Only replay for length of array
 
-    JSONObject frame = (JSONObject) frames.get(i);  // Get new frame
-    //System.out.println(((JSONObject) frame.get("0") ).get("axes"));
-    i++;
-    /*
-    if (i < frame.size()) {  // Only replay for length of array
+      JSONObject frame = (JSONObject) frames.get(i);  // Get new frame
+
       // Get axis values from 0th port (driver), in axes list
       double leftSide = (double) getValueFromReplay(frame, 0, "axes", ControlMap.left_y_axis);
       double rightSide = (double) getValueFromReplay(frame, 0, "axes", ControlMap.right_y_axis);
@@ -57,13 +65,20 @@ public class StartReplay extends CommandBase {
       leftSide = leftSide * getVoltageCompensation();
       rightSide = rightSide * getVoltageCompensation();
 
+      System.out.println(leftSide);
+      System.out.println(rightSide);
+      System.out.println("------");
+      m_drivetrain.tankDrive(leftSide, rightSide);
+
+
+
       //TODO: plug joystick values back into drivetrain.
 
       i++;  // Increase to next frame
     } else {
       END_REPLAY = true;  // End the command once done
+      System.out.println("Done!");
     }
-    */
 
   }
 
@@ -112,7 +127,7 @@ public class StartReplay extends CommandBase {
 
   // Function simplify otherwise sloppy parsing in JSON
   private Object getValueFromReplay(JSONObject step, int joystick_port, String type, int port) {
-    return (Object) ((JSONObject) ( (JSONObject) step.get(joystick_port) ).get(type) ).get(port);
+    return (Object) ((JSONObject) ( (JSONObject) step.get(Integer.toString(joystick_port)) ).get(type) ).get(Integer.toString(port));
   }
 
 

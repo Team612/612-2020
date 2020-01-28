@@ -12,7 +12,7 @@ public class ControlMap {
     // Controller Trigger Axises
     public static int left_y_axis = 1;
     public static int left_x_axis = 1;
-    public static int right_y_axis = 1;
+    public static int right_y_axis = 5;
     public static int right_x_axis = 1;
 
     // Driver buttons

@@ -15,7 +15,7 @@ public class RobotContainer {
 
   // TODO: Replace auto_file with ShuffleBoard selector
   private String auto_file = "output.replay";
-  private final StartReplay m_autocommand = new StartReplay(auto_file);
+  private final StartReplay m_autocommand = new StartReplay(m_drivetrain, auto_file);
 
   public RobotContainer() {
     configureButtonBindings();
