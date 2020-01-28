@@ -1,8 +1,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Climb.StartClimb;
+import frc.robot.commands.Climb.ToggleHook;
 import frc.robot.commands.autonomous.SampleAuto;
 import frc.robot.commands.drivetrain.DefaultDrive;
+import frc.robot.controls.ControlMap;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
@@ -12,6 +16,9 @@ public class RobotContainer {
 
   private final SampleAuto m_sampleauto = new SampleAuto();
 
+  private final Climb m_climb = new Climb();
+  
+
   public RobotContainer() {
     configureButtonBindings();
     configureDefaultCommands();
@@ -19,7 +26,9 @@ public class RobotContainer {
 
   // Put all button bindings here
   private void configureButtonBindings() {
-    
+    ControlMap.gunner_button_RB.whenPressed(new StartClimb(m_climb));
+    ControlMap.gunner_button_LB.whenPressed(new ToggleHook(m_climb));
+
   }
 
   // Put all default commands here
