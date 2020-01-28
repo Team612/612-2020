@@ -5,46 +5,36 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Climb;
+package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climb;
 
 public class StartClimb extends CommandBase {
-  Climb m_climb;
+  
+  private Climb m_climb;  // Local reference to climb subsystem
 
-  /**
-   * 
-   * Creates a new StartClimb.
-   */
   public StartClimb(Climb m_climb) {
     this.m_climb = m_climb;
     addRequirements(m_climb);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  
-  
-
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_climb.extendClimb();
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return true;
   }
+  
 }

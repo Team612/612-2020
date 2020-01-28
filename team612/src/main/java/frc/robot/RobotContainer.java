@@ -1,8 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.Climb.StartClimb;
-import frc.robot.commands.Climb.ToggleHook;
+import frc.robot.commands.climb.StartClimb;
+import frc.robot.commands.climb.ToggleHook;
 import frc.robot.commands.autonomous.SampleAuto;
 import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.controls.ControlMap;
@@ -18,7 +18,6 @@ public class RobotContainer {
 
   private final Climb m_climb = new Climb();
   
-
   public RobotContainer() {
     configureButtonBindings();
     configureDefaultCommands();
