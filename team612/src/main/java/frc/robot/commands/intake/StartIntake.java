@@ -8,33 +8,41 @@
 package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Intake;
 
-public class RunFlywheel extends CommandBase {
-  /**
-   * Creates a new RunFlywheel.
-   */
-  public RunFlywheel() {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class StartIntake extends CommandBase {
+  
+  private double SPEED = 1;  // Fixed speed for intake sparks
+
+  private final Intake m_intake;  // Local reference to intake subsystem
+
+  public StartIntake(Intake m_intake) {
+    this.m_intake = m_intake;
+    addRequirements(m_intake);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_intake.setIntakeMode(true); // Start intake mode
+    m_intake.extendIntake();  // First, extend the intake arm
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_intake.setFlyWheel(SPEED);  // Run the flywheel at a fixed speed while command active
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // When the command ends, stop the flywheel and retract the entire mechanism
+    m_intake.setFlyWheel(0);
+    m_intake.retractIntake();
+    m_intake.setIntakeMode(false);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
   }
+  
 }

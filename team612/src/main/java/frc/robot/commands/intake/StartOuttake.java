@@ -8,33 +8,41 @@
 package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Intake;
 
-public class ExtendArm extends CommandBase {
-  /**
-   * Creates a new ExtendArm.
-   */
-  public ExtendArm() {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class StartOuttake extends CommandBase {
+
+  private double SPEED = 1;  // Fixed speed for intake sparks
+
+  private final Intake m_intake;  // Local reference to intake subsystem
+
+  public StartOuttake(Intake m_intake) {
+    this.m_intake = m_intake;
+    addRequirements(m_intake);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // If the intake mechanism is not retracted, end the outtake command
+    if (!m_intake.getIntakeMode()) {
+      System.out.println("Retract the Intake!");
+      end(true);
+    }
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_intake.setOuttake(SPEED);  // Run outtake while held at specific speed
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_intake.setOuttake(0);  // Once done, end the command
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
   }
+
 }
