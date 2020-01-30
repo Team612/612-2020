@@ -7,9 +7,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -26,7 +27,6 @@ public class Intake extends SubsystemBase {
   private DoubleSolenoid solenoid_l_intake = new DoubleSolenoid(Constants.SOLENOID_L_INTAKE_FORWARD, Constants.SOLENOID_L_INTAKE_REVERSE);
   private DoubleSolenoid solenoid_r_intake =  new DoubleSolenoid(Constants.SOLENOID_R_INTAKE_FORWARD, Constants.SOLENOID_R_INTAKE_REVERSE);
   private DoubleSolenoid solenoid_arm = new DoubleSolenoid(Constants.SOLENOID_ARM_FORWARD, Constants.SOLENOID_ARM_REVERSE);
-
   public void extendIntake() {
     // Push out the arm and intake forward
     solenoid_l_intake.set(Value.kForward);
