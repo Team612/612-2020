@@ -13,11 +13,14 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   private String[] captains = {"Kathiccc", "Arjun", "Emile", "Abhi", "Jakobe", "MOSTLY PRAHALAD", "Chiao", "TOTALLY not kai", "not saaaaaaaaaaaaaaatvik", "not srihan", "not karen", "ONI CHAN"};
+  Compressor compressor = new Compressor(Constants.COMPRESSOR);
 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-    Compressor compressor = new Compressor(Constants.COMPRESSOR);
+  
+    compressor.setClosedLoopControl(true);
+    compressor.start();
   }
   
   @Override
