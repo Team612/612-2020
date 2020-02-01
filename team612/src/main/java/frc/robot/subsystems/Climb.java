@@ -37,20 +37,21 @@ public class Climb extends SubsystemBase {
     // First, move the bottom climb piston up
     solenoid_rb_climb.set(Value.kForward);
     solenoid_lb_climb.set(Value.kForward);
-    solenoid_rb_climb.set(Value.kOff);
-    solenoid_lb_climb.set(Value.kOff);
+    //solenoid_rb_climb.set(Value.kOff);
+    //solenoid_lb_climb.set(Value.kOff);
+    
 
     // Second, move the middle climb piston up
     solenoid_rm_climb.set(Value.kForward);
     solenoid_lm_climb.set(Value.kForward);
-    solenoid_rm_climb.set(Value.kOff);
-    solenoid_lm_climb.set(Value.kOff);
+    //solenoid_rm_climb.set(Value.kOff);
+    //solenoid_lm_climb.set(Value.kOff);
 
     // Third, move the top (hook) climb piston up
     solenoid_rt_climb.set(Value.kForward);
     solenoid_lt_climb.set(Value.kForward);
-    solenoid_rt_climb.set(Value.kOff);
-    solenoid_lt_climb.set(Value.kOff);
+    //solenoid_rt_climb.set(Value.kOff);
+    //solenoid_lt_climb.set(Value.kOff);
 
     hookIsForward = true;  // Set the initial state of the hook
 
@@ -70,8 +71,8 @@ public class Climb extends SubsystemBase {
     }
 
     // Set the hook pistons off and toggle the boolean value
-    solenoid_rt_climb.set(Value.kOff);
-    solenoid_lt_climb.set(Value.kOff);
+    //solenoid_rt_climb.set(Value.kOff);
+    //solenoid_lt_climb.set(Value.kOff);
     hookIsForward = !hookIsForward;
 
   }
