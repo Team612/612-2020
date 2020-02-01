@@ -8,8 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -23,10 +23,16 @@ public class Intake extends SubsystemBase {
   private Spark spark_outtake = new Spark(Constants.SPARK_OUTTAKE);
 
   // Piston objects for intake and arm grabber
+<<<<<<< HEAD
   private DoubleSolenoid solenoid_l_intake = new DoubleSolenoid(Constants.SOLENOID_L_INTAKE[0], Constants.SOLENOID_L_INTAKE[1]);
   private DoubleSolenoid solenoid_r_intake =  new DoubleSolenoid(Constants.SOLENOID_R_INTAKE[0], Constants.SOLENOID_R_INTAKE[1]);
   private DoubleSolenoid solenoid_arm = new DoubleSolenoid(Constants.SOLENOID_ARM[0], Constants.SOLENOID_ARM[1]);
 
+=======
+  private DoubleSolenoid solenoid_l_intake = new DoubleSolenoid(Constants.SOLENOID_L_INTAKE_FORWARD, Constants.SOLENOID_L_INTAKE_REVERSE);
+  private DoubleSolenoid solenoid_r_intake =  new DoubleSolenoid(Constants.SOLENOID_R_INTAKE_FORWARD, Constants.SOLENOID_R_INTAKE_REVERSE);
+  private DoubleSolenoid solenoid_arm = new DoubleSolenoid(Constants.SOLENOID_ARM_FORWARD, Constants.SOLENOID_ARM_REVERSE);
+>>>>>>> ca0b9112ad6cc24b46fc39c5016e10f29aac6460
   public void extendIntake() {
     // Push out the arm and intake forward
     solenoid_l_intake.set(Value.kForward);

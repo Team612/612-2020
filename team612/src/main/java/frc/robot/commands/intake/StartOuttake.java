@@ -24,7 +24,7 @@ public class StartOuttake extends CommandBase {
   @Override
   public void initialize() {
     // If the intake mechanism is not retracted, end the outtake command
-    if (!m_intake.getIntakeMode()) {
+    if (m_intake.getIntakeMode()) {
       System.out.println("Retract the Intake!");
       end(true);
     }
