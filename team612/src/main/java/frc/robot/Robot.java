@@ -12,7 +12,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
-  Compressor compressor = new Compressor();
+  Compressor compressor = new Compressor(0);
 
   @Override
   public void robotInit() {
