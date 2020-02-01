@@ -12,7 +12,7 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private String[] captains = {"Kathiccc", "Arjun", "Emile", "Abhi", "Jakobe", "MOSTLY PRAHALAD", "Chiao", "TOTALLY not kai", "not saaaaaaaaaaaaaaatvik", "not srihan", "not karen", "ONI CHAN"};
+  private String[] captains = {"Kathiccc", "Arjun", "Emile", "Abhi", "Jakobe", "MOSTLY PRAHALAD", "Chiao", "TOTALLY not kai", "not saaaaaaaaaaaaaaatvik", "not srihan", "not karen", "ONI CHAN", "not Kunsh"};
   Compressor compressor = new Compressor(Constants.COMPRESSOR);
 
   @Override
@@ -30,11 +30,11 @@ public class Robot extends TimedRobot {
   
   @Override
   public void disabledInit() {
+    SmartDashboard.putStringArray("True Captains", captains);
   }
 
   @Override
   public void disabledPeriodic() {
-    SmartDashboard.putStringArray("True Captains", captains);
   }
 
   @Override
