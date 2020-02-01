@@ -30,6 +30,7 @@ public class StartIntake extends CommandBase {
   @Override
   public void execute() {
     m_intake.setFlyWheel(SPEED);  // Run the flywheel at a fixed speed while command active
+    System.out.println("WaterMarked");
   }
 
   @Override

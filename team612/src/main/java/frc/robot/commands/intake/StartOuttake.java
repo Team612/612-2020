@@ -33,6 +33,8 @@ public class StartOuttake extends CommandBase {
   @Override
   public void execute() {
     m_intake.setOuttake(SPEED);  // Run outtake while held at specific speed
+    System.out.println("Kai be our Senpai, retards come here, this code is just like an ode");
+
   }
 
   @Override
