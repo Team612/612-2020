@@ -46,7 +46,9 @@ public class Wheel extends SubsystemBase {
 
     // Read the color sensor and get the closest match
     ColorMatchResult match = colorMatcher.matchClosestColor(colorSensor.getColor()); 
-
+    SmartDashboard.putNumber("RawRed", colorSensor.getRed());
+    SmartDashboard.putNumber("RawGreen", colorSensor.getGreen());
+    SmartDashboard.putNumber("RawBlue", colorSensor.getBlue());
     // Get string version of color
     if (match.color == kBlueTarget) {
       SmartDashboard.putString("Current Colour", "Blue");
