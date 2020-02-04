@@ -7,6 +7,7 @@
 
 package frc.robot.commands.climb;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climb;
 
@@ -21,11 +22,17 @@ public class StartClimb extends CommandBase {
 
   @Override
   public void initialize() {
+
   }
 
   @Override
   public void execute() {
+    if (DriverStation.getInstance().getMatchTime() <= 30){
     m_climb.extendClimb();
+    }
+    else{
+      System.out.println("Not in end game");
+    }
   }
 
   @Override

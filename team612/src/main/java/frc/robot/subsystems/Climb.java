@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.Constants;
 
 public class Climb extends SubsystemBase {
@@ -39,13 +40,14 @@ public class Climb extends SubsystemBase {
     solenoid_lb_climb.set(Value.kForward);
     //solenoid_rb_climb.set(Value.kOff);
     //solenoid_lb_climb.set(Value.kOff);
-    
+    sleep(500);
 
     // Second, move the middle climb piston up
     solenoid_rm_climb.set(Value.kForward);
     solenoid_lm_climb.set(Value.kForward);
     //solenoid_rm_climb.set(Value.kOff);
     //solenoid_lm_climb.set(Value.kOff);
+    sleep(500);
 
     // Third, move the top (hook) climb piston up
     solenoid_rt_climb.set(Value.kForward);
@@ -55,6 +57,13 @@ public class Climb extends SubsystemBase {
 
     hookIsForward = true;  // Set the initial state of the hook
 
+  }
+  public void sleep (long milisec) {
+    try {
+    Thread.sleep(milisec);
+    } catch (InterruptedException ex) {
+      
+    }
   }
 
   public void toggleHook(){
@@ -76,6 +85,19 @@ public class Climb extends SubsystemBase {
     hookIsForward = !hookIsForward;
 
   }
+  public void retractIntake(){
+    solenoid_rt_climb.set(Value.kReverse);
+    solenoid_lt_climb.set(Value.kReverse);
+    sleep(500);
+
+    solenoid_rm_climb.set(Value.kReverse);
+    solenoid_lm_climb.set(Value.kReverse);
+    sleep(500);
+
+    solenoid_rb_climb.set(Value.kReverse);
+    solenoid_lb_climb.set(Value.kReverse);
+
+  }
 
   public Climb() {
   }
@@ -85,3 +107,5 @@ public class Climb extends SubsystemBase {
   }
 
 }
+
+
