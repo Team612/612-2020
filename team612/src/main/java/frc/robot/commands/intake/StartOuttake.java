@@ -25,7 +25,7 @@ public class StartOuttake extends CommandBase {
   public void initialize() {
     // If the intake mechanism is not retracted, end the outtake command
     if (m_intake.getIntakeMode()) {
-      System.out.println("Retract the Intake!");
+      System.out.println("must retract intake before starting outtake");
       end(true);
     }
   }
@@ -33,8 +33,6 @@ public class StartOuttake extends CommandBase {
   @Override
   public void execute() {
     m_intake.setOuttake(SPEED);  // Run outtake while held at specific speed
-    System.out.println("Kai be our Senpai, retards come here, this code is just like an ode");
-
   }
 
   @Override
