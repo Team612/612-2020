@@ -3,16 +3,17 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Intake;
 
 public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private String[] captains = {"Kathiccc", "Arjun", "Emile", "Abhi", "Jakobe", "MOSTLY PRAHALAD", "Chiao", "TOTALLY not kai", "not saaaaaaaaaaaaaaatvik", "not srihan", "not karen", "ONI CHAN", "not Kunsh"};
   Compressor compressor = new Compressor(Constants.COMPRESSOR);
 
   @Override
@@ -26,15 +27,16 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    //SmartDashboard.getTab("US Test").add(ultrasonic);
   }
   
   @Override
   public void disabledInit() {
-    SmartDashboard.putStringArray("True Captains", captains);
   }
 
   @Override
   public void disabledPeriodic() {
+
   }
 
   @Override

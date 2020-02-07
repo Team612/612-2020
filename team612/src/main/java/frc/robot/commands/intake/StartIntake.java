@@ -7,6 +7,7 @@
 
 package frc.robot.commands.intake;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
@@ -19,23 +20,29 @@ public class StartIntake extends CommandBase {
   public StartIntake(Intake m_intake) {
     this.m_intake = m_intake;
     addRequirements(m_intake);
+    m_intake.setIntakeMode(false); // Start intake mode
+    m_intake.retractIntake();
+
+    
   }
 
   @Override
   public void initialize() {
     m_intake.setIntakeMode(true); // Start intake mode
     m_intake.extendIntake();  // First, extend the intake arm
+    Timer.delay(1);
   }
 
   @Override
   public void execute() {
-    m_intake.setFlyWheels(SPEED);  // Run the flywheel at a fixed speed while command active
+    m_intake.setFlyWheels(1, 1);
+      // Run the flywheel at a fixed speed while command active
   }
 
   @Override
   public void end(boolean interrupted) {
     // When the command ends, stop the flywheel and retract the entire mechanism
-    m_intake.setFlyWheels(0);  
+    m_intake.setFlyWheels(0,0);  
     m_intake.retractIntake();
     m_intake.setIntakeMode(false);
   }
