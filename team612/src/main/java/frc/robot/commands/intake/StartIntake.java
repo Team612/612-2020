@@ -35,8 +35,8 @@ public class StartIntake extends CommandBase {
 
   @Override
   public void execute() {
+    // Run the flywheel at a fixed speed while command active
     m_intake.setFlyWheels(1, 1);
-      // Run the flywheel at a fixed speed while command active
   }
 
   @Override
