@@ -12,8 +12,8 @@ public final class Constants {
     public static final int[] SOLENOID_INTAKE = {2,3};
     public static final int[] SOLENOID_WALL = {4,5};
 
-    // Ultrasonic port arrays (ping, echo)
-    public static final int[] ULTRASONIC_BELT_LEFT = {4, 5};
+    // IR port arrays
+    public static final int IRSENSOR = 10;
     
 
 

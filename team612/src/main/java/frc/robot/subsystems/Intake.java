@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Spark;
@@ -29,6 +30,10 @@ public class Intake extends SubsystemBase {
   private DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
   private DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
 
+  //Setting up analog input IR sensor
+  AnalogInput IRSensor = new AnalogInput(0);
+  double IRThreshhold = 0;
+
   public void extendIntake() {
     // Push out the arm and intake forward
     solenoid_intake.set(Value.kForward);
@@ -46,12 +51,25 @@ public class Intake extends SubsystemBase {
 
     spark_intake.set(intake_speed);
     spark_lower_belt.set(-belt_speed);
-    spark_upper_belt.set(belt_speed);
+    if (IsWithinThreshold(IRSensor.getAverageVoltage())){
+      spark_upper_belt.set(0);
+    }
+    else {
+      spark_upper_belt.set(belt_speed);
+    }
+
 
     // If balls fall out, apply a negative constant to outtake to keep balls in 
     spark_outtake.set(-0);
 
   }
+
+  public boolean IsWithinThreshold(double range){
+    if (range < IRThreshhold){
+      return true;
+    } 
+    return false;
+  } 
 
   public void setOuttake(double speed){
     // Set the outtake spark to a certain speed
@@ -72,6 +90,7 @@ public class Intake extends SubsystemBase {
   public Intake() {
     
   }
+  
 
   @Override
   public void periodic() {
