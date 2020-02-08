@@ -31,7 +31,7 @@ public class Intake extends SubsystemBase {
   private DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
 
   //Setting up analog input IR sensor
-  AnalogInput IRSensor = new AnalogInput(0);
+  AnalogInput IRSensor = new AnalogInput(1);
   double IRThreshhold = 0;
 
   public void extendIntake() {
@@ -51,25 +51,19 @@ public class Intake extends SubsystemBase {
 
     spark_intake.set(intake_speed);
     spark_lower_belt.set(-belt_speed);
-    if (IsWithinThreshold(IRSensor.getAverageVoltage())){
+
+    
+
+    if (IRSensor.getAverageVoltage() > 0.7) {
+      System.out.println("Ball in chamber!");
       spark_upper_belt.set(0);
-    }
-    else {
+    } else {
       spark_upper_belt.set(belt_speed);
     }
-
-
     // If balls fall out, apply a negative constant to outtake to keep balls in 
-    spark_outtake.set(-0);
+    spark_outtake.set(-0.2);
 
   }
-
-  public boolean IsWithinThreshold(double range){
-    if (range < IRThreshhold){
-      return true;
-    } 
-    return false;
-  } 
 
   public void setOuttake(double speed){
     // Set the outtake spark to a certain speed
@@ -94,6 +88,8 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+    System.out.println(IRSensor.getVoltage());
   }
 
 
