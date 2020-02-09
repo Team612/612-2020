@@ -1,8 +1,8 @@
 package frc.robot.commands.drivetrain;
 
+import frc.robot.controls.ControlMap;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 
 public class DefaultDrive extends CommandBase {
 
@@ -20,6 +20,8 @@ public class DefaultDrive extends CommandBase {
 
   @Override
   public void execute() {
+    // Arcade drive function from subsystem
+    m_drivetrain.arcadeDrive(ControlMap.driver.getRawAxis(ControlMap.right_axis_X), ControlMap.driver.getRawAxis(ControlMap.left_axis_Y));
   }
 
   @Override
