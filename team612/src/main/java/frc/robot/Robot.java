@@ -13,20 +13,22 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  Compressor compressor = new Compressor(0);
+  //Compressor compressor = new Compressor();
 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
     
     // Initialize and start compressor
-    compressor.setClosedLoopControl(true);
-    compressor.start();
+    //compressor.(true);
+    //compressor.start();
   }
   
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    //System.out.println(compressor.getCompressorCurrentTooHighFault());
+
   }
   
   @Override
@@ -59,7 +61,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-
   }
 
   @Override

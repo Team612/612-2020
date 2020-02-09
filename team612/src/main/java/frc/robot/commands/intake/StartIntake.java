@@ -20,15 +20,15 @@ public class StartIntake extends CommandBase {
   public StartIntake(Intake m_intake) {
     this.m_intake = m_intake;
     addRequirements(m_intake);
-    m_intake.setIntakeMode(false); // Start intake mode
-    m_intake.retractIntake();
+    //m_intake.setIntakeMode(false); // Start intake mode
+    //m_intake.retractIntake();
 
     
   }
 
   @Override
   public void initialize() {
-    m_intake.setIntakeMode(true); // Start intake mode
+    //m_intake.setIntakeMode(true); // Start intake mode
     m_intake.extendIntake();  // First, extend the intake arm
     Timer.delay(1);
   }
@@ -44,7 +44,7 @@ public class StartIntake extends CommandBase {
     // When the command ends, stop the flywheel and retract the entire mechanism
     m_intake.setFlyWheels(0,0);  
     m_intake.retractIntake();
-    m_intake.setIntakeMode(false);
+    //m_intake.setIntakeMode(false);
   }
 
   @Override

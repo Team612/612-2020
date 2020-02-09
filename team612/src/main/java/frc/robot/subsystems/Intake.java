@@ -49,26 +49,34 @@ public class Intake extends SubsystemBase {
     // set the intake and belt to a certain speed
     System.out.println("Running intake flywheels");
 
-    spark_intake.set(intake_speed);
+    spark_intake.set(intake_speed*.5);
     spark_lower_belt.set(-belt_speed);
 
     
 
     if (IRSensor.getAverageVoltage() > 0.7) {
       System.out.println("Ball in chamber!");
+       // If balls fall out, apply a negative constant to outtake to keep balls in 
+    //spark_outtake.set(-0.2);
       spark_upper_belt.set(0);
+      solenoid_wall.set(Value.kReverse);
     } else {
       spark_upper_belt.set(belt_speed);
+      spark_outtake.set(0.0);
+      solenoid_wall.set(Value.kForward);
     }
-    // If balls fall out, apply a negative constant to outtake to keep balls in 
-    spark_outtake.set(-0.2);
+   
 
   }
 
   public void setOuttake(double speed){
     // Set the outtake spark to a certain speed
     spark_outtake.set(speed);
+    spark_lower_belt.set(-speed);
+    spark_upper_belt.set(speed);
     System.out.println("Running outtake flywheel");
+
+   
 
   }
 
@@ -82,14 +90,26 @@ public class Intake extends SubsystemBase {
   }
 
   public Intake() {
-    
+    solenoid_wall.set(Value.kForward);
+  }
+
+  public void stopEverything() {
+    spark_intake.set(0);
+    spark_lower_belt.set(0);
+    spark_outtake.set(0);
+    spark_upper_belt.set(0);
   }
   
 
   @Override
   public void periodic() {
-
-    System.out.println(IRSensor.getVoltage());
+    //System.out.println(getIntakeMode());
+    //System.out.println(IRSensor.getVoltage());
+    INTAKE_MODE = solenoid_intake.get() == Value.kForward;
+    System.out.println(INTAKE_MODE);
+    if(!INTAKE_MODE){
+      solenoid_wall.set(Value.kForward);
+    }
   }
 
 
