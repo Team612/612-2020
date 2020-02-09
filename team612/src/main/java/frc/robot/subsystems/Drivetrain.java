@@ -7,71 +7,82 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
 
-  // Deadzone and voltage output constants
   private final double DEADZONE = 0.1;
-  private final double VOLTAGE_OUTPUT = 12;
 
-  // Create spark motors
-  private final Spark spark_fr_drive = new Spark(Constants.SPARK_FR_DRIVE);
-  private final Spark spark_fl_drive = new Spark(Constants.SPARK_FL_DRIVE);
-  private final Spark spark_br_drive = new Spark(Constants.SPARK_BR_DRIVE);
-  private final Spark spark_bl_drive = new Spark(Constants.SPARK_BL_DRIVE);
+  // Talons for drivetrain
+  private WPI_TalonSRX talon_fr_drive = new WPI_TalonSRX(Constants.TALON_FR_DRIVE);
+  private WPI_TalonSRX talon_fl_drive = new WPI_TalonSRX(Constants.TALON_FL_DRIVE);
+  private WPI_TalonSRX talon_br_drive = new WPI_TalonSRX(Constants.TALON_BR_DRIVE);
+  private WPI_TalonSRX talon_bl_drive = new WPI_TalonSRX(Constants.TALON_BL_DRIVE);
 
-  // Basic arcade drive for west coast drivetrain
-  public void arcadeDrive(double x_axis , double y_axis){
+  // Ultrasonic sensor for drive
+  private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
 
-    // Filter deadzone
+  // Double solenoid for changing gears
+  private DoubleSolenoid solenoid_drive = new DoubleSolenoid(Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
+
+  // Arcade drive function (same as tank drive)
+  public void arcadeDrive(double x_axis, double y_axis) {  
+    //sets up deadzones
     x_axis = Math.abs(x_axis) < DEADZONE ? 0.0 : x_axis;
     y_axis = Math.abs(y_axis) < DEADZONE ? 0.0 : y_axis;
+
+    //WPI_Talon SRX Caps voltage at 1.0
+    double leftCommand = y_axis + x_axis;
+    double rightCommand = y_axis - x_axis;
     
-    // Throttle calculation
-    double leftCommand = y_axis - x_axis;
-    double rightCommand = y_axis + x_axis;
+    // right side motor controls
+    talon_br_drive.set(-rightCommand);
+    talon_br_drive.set(-rightCommand);
 
-    // Set each spark with calculated motor percentage
-    spark_fr_drive.set(rightCommand);
-    spark_br_drive.set(rightCommand);
-    spark_fl_drive.set(leftCommand);
-    spark_bl_drive.set(leftCommand);
-
-    SmartDashboard.putNumber("Left Command", leftCommand);
-    SmartDashboard.putNumber("Right Command", rightCommand);
+    //left side motor controls
+    talon_fl_drive.set(leftCommand);
+    talon_bl_drive.set(leftCommand);
   }
 
-  public void configureVoltageOutput() {
+  // Get distance in inches from ultrasonic in drive
+  public double getDistance() {
+    return ultrasonic_drive.getRangeInches();
+  }
 
-    spark_fr_drive.setVoltage(VOLTAGE_OUTPUT);
-    spark_br_drive.setVoltage(VOLTAGE_OUTPUT);
-    spark_fl_drive.setVoltage(VOLTAGE_OUTPUT);
-    spark_bl_drive.setVoltage(VOLTAGE_OUTPUT);
+  // Shift the double solenoid to kForward
+  public void shiftForward(){
+    solenoid_drive.set(Value.kForward);
+    System.out.println("Shifted Drive Forward");
+  }
 
+  // Shift the double solenoid to kReverse
+  public void shiftReverse(){
+    solenoid_drive.set(Value.kReverse);
+    System.out.println("Shifted Drive Reverse");
   }
 
   public Drivetrain() {
-    
-    // Invert spark for one side of drivetrain
-    spark_br_drive.setInverted(true);
-    spark_fr_drive.setInverted(true);
-    configureVoltageOutput();
-
+    // Prepare and enable ultrasonic
+    ultrasonic_drive.setEnabled(true);
+    ultrasonic_drive.setAutomaticMode(true);
   }
 
+  // Periodic loop for ShuffleBoard values
   @Override
   public void periodic() {
-
-    // SmartDashboard display variables
-    SmartDashboard.putNumber("Front Left Spark Percent", spark_fl_drive.get());
-    SmartDashboard.putNumber("Front Right Spark Percent", spark_fr_drive.get());
-    SmartDashboard.putNumber("Back Left Spark Percent", spark_bl_drive.get());
-    SmartDashboard.putNumber("Back Right Spark Percent", spark_br_drive.get());
-    
+    // Shuffle board values
+    SmartDashboard.putNumber("Back Left Drive Talon", talon_bl_drive.get());
+    SmartDashboard.putNumber("Back Right Drive Talon", talon_br_drive.get());
+    SmartDashboard.putNumber("Front Left Drive Talon", talon_fl_drive.get());
+    SmartDashboard.putNumber("Front RIght Drive Talon", talon_fr_drive.get());
+    SmartDashboard.putNumber("Ultrasonic Distance", getDistance());
   }
   
 }

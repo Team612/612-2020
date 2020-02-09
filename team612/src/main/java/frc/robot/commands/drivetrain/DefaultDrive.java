@@ -6,31 +6,35 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DefaultDrive extends CommandBase {
 
+  // Remove PMD warnings
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Drivetrain m_drivetrain;
 
+  private final Drivetrain m_drivetrain;  // Local version of drivetrain
+
+  // Constructor and add requirements from drivetrain subsystem
   public DefaultDrive(Drivetrain m_drivetrain) {
     this.m_drivetrain = m_drivetrain;
     addRequirements(m_drivetrain);
   }
 
   @Override
-  public void initialize() {
+  public void initialize(){
   }
 
   @Override
-  public void execute() {
-    // Arcade drive function from subsystem
-    m_drivetrain.arcadeDrive(ControlMap.driver.getRawAxis(ControlMap.right_axis_X), ControlMap.driver.getRawAxis(ControlMap.left_axis_Y));
+  public void execute(){
+    // Pass values from joystick to west coast drive with deadzone value
+    m_drivetrain.arcadeDrive(ControlMap.driver.getRawAxis(4), ControlMap.driver.getRawAxis(1));
   }
 
   @Override
-  public void end(boolean interrupted) {
+  public void end(boolean interrupted){
   }
 
   @Override
-  public boolean isFinished() {
+  public boolean isFinished(){
     return false;
   }
+  
 
 }
