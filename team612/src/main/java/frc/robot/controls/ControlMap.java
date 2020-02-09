@@ -9,14 +9,6 @@ public class ControlMap{
     public static Joystick driver = new Joystick(0);
     public static Joystick gunner = new Joystick(1);
 
-    //Axes ports
-    public static int left_axis_Y = 4;
-    public static int left_axis_X = 4;
-    public static int right_axis_X = 1;
-    public static int right_axis_Y = 1;
-
-    // TODO: Add controller trigger axises
-
     // Driver buttons
     public static JoystickButton driver_button_A    	= new JoystickButton(driver,1);
     public static JoystickButton driver_button_B 		= new JoystickButton(driver,2);
