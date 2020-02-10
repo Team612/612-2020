@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climb;
 
-public class StartClimb extends CommandBase {
+public class EngageClimb extends CommandBase {
   
   private Climb m_climb;  // Local reference to climb subsystem
 
-  public StartClimb(Climb m_climb) {
+  public EngageClimb(Climb m_climb) {
     this.m_climb = m_climb;
     addRequirements(m_climb);
   }
@@ -28,7 +28,7 @@ public class StartClimb extends CommandBase {
   @Override
   public void execute() {
     if (DriverStation.getInstance().getMatchTime() <= 30){
-    m_climb.extendClimb();
+      m_climb.engageClimb();
     }
     else{
       System.out.println("Not in end game");

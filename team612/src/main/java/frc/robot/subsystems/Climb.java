@@ -8,104 +8,50 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import frc.robot.Constants;
 
 public class Climb extends SubsystemBase {
 
-  // Right solenoids for climb
-  private DoubleSolenoid solenoid_rb_climb = new DoubleSolenoid(Constants.SOLENOID_RB_CLIMB.x, Constants.SOLENOID_RB_CLIMB.y);
-  private DoubleSolenoid solenoid_rm_climb = new DoubleSolenoid(Constants.SOLENOID_RM_CLIMB.x, Constants.SOLENOID_RM_CLIMB.y);
-  private DoubleSolenoid solenoid_rt_climb = new DoubleSolenoid(Constants.SOLENOID_RT_CLIMB.x, Constants.SOLENOID_RT_CLIMB.y);
+  // Initilizing solenoids
+  public static  DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
+  public static DoubleSolenoid solenoid_toggle_climb = new DoubleSolenoid(Constants.SOLENOID_TOGGLE_CLIMB[0],Constants.SOLENOID_TOGGLE_CLIMB[1]);
+  public static Spark spark_winch_climb = new Spark(Constants.SPARK_WINCH_CLIMB);
 
-  // Left solenoids for climb
-  private DoubleSolenoid solenoid_lb_climb = new DoubleSolenoid(Constants.SOLENOID_LB_CLIMB.x, Constants.SOLENOID_LB_CLIMB.y);
-  private DoubleSolenoid solenoid_lm_climb = new DoubleSolenoid(Constants.SOLENOID_LM_CLIMB.x, Constants.SOLENOID_LM_CLIMB.y);
-  private DoubleSolenoid solenoid_lt_climb = new DoubleSolenoid(Constants.SOLENOID_LT_CLIMB.x, Constants.SOLENOID_LT_CLIMB.y);
 
-  // State of climb hook (true = engaged)
-  private boolean hookIsForward = false;
-
-  // Return the current hook state
-  public boolean getHookState(){
-    return hookIsForward;
- }
-
-  public void extendClimb(){
-
-    // First, move the bottom climb piston up
-    solenoid_rb_climb.set(Value.kForward);
-    solenoid_lb_climb.set(Value.kForward);
-    //solenoid_rb_climb.set(Value.kOff);
-    //solenoid_lb_climb.set(Value.kOff);
-    sleep(500);
-
-    // Second, move the middle climb piston up
-    solenoid_rm_climb.set(Value.kForward);
-    solenoid_lm_climb.set(Value.kForward);
-    //solenoid_rm_climb.set(Value.kOff);
-    //solenoid_lm_climb.set(Value.kOff);
-    sleep(500);
-
-    // Third, move the top (hook) climb piston up
-    solenoid_rt_climb.set(Value.kForward);
-    solenoid_lt_climb.set(Value.kForward);
-    //solenoid_rt_climb.set(Value.kOff);
-    //solenoid_lt_climb.set(Value.kOff);
-
-    hookIsForward = true;  // Set the initial state of the hook
-
-  }
-  public void sleep (long milisec) {
-    try {
-    Thread.sleep(milisec);
-    } catch (InterruptedException ex) {
-      
-    }
-  }
-
-  public void toggleHook(){
-
-    // If the hook is engaged
-    if (getHookState()) {
-      // Disengage the hook
-      solenoid_rt_climb.set(Value.kReverse);
-      solenoid_lt_climb.set(Value.kReverse);      
-    } else {
-      // Else, engage the hook
-      solenoid_rt_climb.set(Value.kForward);
-      solenoid_lt_climb.set(Value.kForward);      
-    }
-
-    // Set the hook pistons off and toggle the boolean value
-    //solenoid_rt_climb.set(Value.kOff);
-    //solenoid_lt_climb.set(Value.kOff);
-    hookIsForward = !hookIsForward;
-
-  }
-  public void retractIntake(){
-    solenoid_rt_climb.set(Value.kReverse);
-    solenoid_lt_climb.set(Value.kReverse);
-    sleep(500);
-
-    solenoid_rm_climb.set(Value.kReverse);
-    solenoid_lm_climb.set(Value.kReverse);
-    sleep(500);
-
-    solenoid_rb_climb.set(Value.kReverse);
-    solenoid_lb_climb.set(Value.kReverse);
-
-  }
-
+  /**
+   * Creates a new NewClimb.
+   */
   public Climb() {
+      
+  }
+
+  public void engageClimb(){
+
+    solenoid_engage_climb.set(Value.kForward);
+  }
+
+  public void toggleClimb(){
+
+    if(solenoid_engage_climb.get() == Value.kForward){
+      if(solenoid_toggle_climb.get() == Value.kReverse){
+         solenoid_toggle_climb.set(Value.kForward);
+      }
+      else{
+        solenoid_toggle_climb.set(Value.kReverse);
+      }
+    }
+  }
+
+  public void engageWinch(double speed){
+    
+    spark_winch_climb.set(speed);
   }
 
   @Override
   public void periodic() {
+    // This method will be called once per scheduler run
   }
-
 }
-
-
