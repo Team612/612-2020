@@ -10,35 +10,35 @@ package frc.robot.commands.intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
-public class ExtendIntake extends CommandBase {
+public class RunBelt extends CommandBase {
   
+  // Fixed speed for belt sparks
+  private double BELT_SPEED = 1;
+
   private final Intake m_intake;  // Local reference to intake subsystem
 
-  public ExtendIntake(Intake m_intake) {
+  public RunBelt(Intake m_intake) {
     this.m_intake = m_intake;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Toggled Intake");
-    m_intake.toggleIntake();
+    m_intake.runBelt(BELT_SPEED);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // When the command ends, stop the flywheel
+    m_intake.runBelt(0);  
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
   
 }

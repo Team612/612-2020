@@ -20,39 +20,43 @@ public class Intake extends SubsystemBase {
   private boolean INTAKE_MODE = false;
 
   // Spark objects for intake flywheel, belt, and outtake
-  private final Spark spark_intake = new Spark (Constants.SPARK_INTAKE);
-  private final Spark spark_upper_belt = new Spark (Constants.SPARK_UPPER_BELT);
-  private final Spark spark_lower_belt = new Spark (Constants.SPARK_LOWER_BELT);
-  private final Spark spark_outtake = new Spark (Constants.SPARK_OUTTAKE);
+  private final static Spark spark_intake = new Spark(Constants.SPARK_INTAKE);
+  private final Spark spark_upper_belt = new Spark(Constants.SPARK_UPPER_BELT);
+  private final Spark spark_lower_belt = new Spark(Constants.SPARK_LOWER_BELT);
+  private final Spark spark_outtake = new Spark(Constants.SPARK_OUTTAKE);
 
   // Piston objects for intake and arm grabber
   private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
   private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
 
-  //Setting up analog input IR sensor
+  // Setting up analog input IR sensor
   private final AnalogInput infared_intake = new AnalogInput(Constants.INFARED_INTAKE);
   private final double INFARED_THRESHOLD = 0.7;
 
-  public void extendIntake() {
+  public void toggleIntake() {
     // Push out the arm and intake forward
-    solenoid_intake.set(Value.kForward);
-    solenoid_wall.set(Value.kReverse);
+    System.out.println("Intake toggled");
+    if (solenoid_intake.get() == Value.kForward) {
+      solenoid_intake.set(Value.kReverse);
+    } else {
+      solenoid_intake.set(Value.kForward);
+    }
   }
 
-  public void retractIntake(){
+  public void retractIntake() {
     // Retract out the arm and intake to go back to original setup
-    solenoid_intake.set(Value.kReverse);
     System.out.println("Retracted intake");
+    solenoid_intake.set(Value.kReverse);
   }
 
-  public void setFlyWheels(double intake_speed, double belt_speed){
+  public void setBelt(double belt_speed) {
 
     // set the intake and belt to a certain speed
     System.out.println("Running intake flywheels");
-    spark_intake.set(intake_speed);
     spark_lower_belt.set(-belt_speed);
 
-    // If the upper infared senses a ball, stop the upper belt and engage the wall piston
+    // If the upper infared senses a ball, stop the upper belt and engage the wall
+    // piston
     if (infared_intake.getAverageVoltage() > INFARED_THRESHOLD) {
       System.out.println("Ball in chamber!");
       solenoid_wall.set(Value.kReverse);
@@ -62,8 +66,12 @@ public class Intake extends SubsystemBase {
       solenoid_wall.set(Value.kForward);
       spark_outtake.set(0);
     }
-   
 
+  }
+
+  public void setIntake(double speed) {
+    System.out.println("Intake Run!!");
+    spark_intake.set(speed);
   }
 
   public void setOuttake(double speed){
@@ -77,17 +85,18 @@ public class Intake extends SubsystemBase {
 
   }
 
+  public void runIntake(int speed) {
+    spark_intake.set(speed);
+  }
+
   public Intake() {
     solenoid_wall.set(Value.kForward);
   }
 
   @Override
   public void periodic() {
-
     INTAKE_MODE = solenoid_intake.get() == Value.kForward;
     SmartDashboard.putBoolean("Intake Enabled", INTAKE_MODE);
-
   }
-
 
 }
