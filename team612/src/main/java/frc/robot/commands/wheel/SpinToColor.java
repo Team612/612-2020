@@ -2,6 +2,7 @@ package frc.robot.commands.wheel;
 
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Wheel;
@@ -36,7 +37,7 @@ public class SpinToColor extends CommandBase {
 
   @Override
   public void execute() {
-    
+    m_wheel.engagePiston();
     currentColor = m_wheel.getClosestColor();  // Current sensor reading updating each loop
 
     m_wheel.setSpinner(1);  // Run the spinner at full speed
@@ -59,6 +60,7 @@ public class SpinToColor extends CommandBase {
 
   @Override
   public boolean isFinished() {
+    m_wheel.colorPiston.set(Value.kReverse);
     return isComplete;
   }
 

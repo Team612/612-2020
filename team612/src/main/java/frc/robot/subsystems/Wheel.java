@@ -6,8 +6,10 @@ import com.revrobotics.ColorSensorV3;
 
 import org.ejml.dense.row.decomposition.svd.SafeSvd_DDRM;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,6 +26,9 @@ public class Wheel extends SubsystemBase {
   private final Color kRedTarget = ColorMatch.makeColor(.561, .232, .114);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
   //private String colourVal;
+
+  // Piston for engaging the spin of colour wheel
+  public DoubleSolenoid colorPiston = new DoubleSolenoid(Constants.COLOR_PISTON[0],Constants.COLOR_PISTON[1]);
 
   // The matcher that map the sensor value to one of the targets
   public ColorMatch colorMatcher = new ColorMatch();
@@ -71,6 +76,10 @@ public class Wheel extends SubsystemBase {
 
   public void setSpinner(double speed) {
     spark_wheel.set(speed);
+  }
+
+  public void engagePiston(){
+    colorPiston.set(Value.kForward);
   }
 
   public Wheel() {
