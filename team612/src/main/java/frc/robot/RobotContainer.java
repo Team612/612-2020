@@ -3,8 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.autonomous.SampleAuto;
 import frc.robot.commands.climb.EngageClimb;
+import frc.robot.commands.climb.RunWinch;
 import frc.robot.commands.climb.ToggleHook;
-import frc.robot.commands.climb.Winch;
 import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.controls.ControlMap;
 import frc.robot.subsystems.Climb;
@@ -28,7 +28,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     ControlMap.driver_button_X.whenPressed(new EngageClimb(m_climb));
     ControlMap.driver_button_B.whenPressed(new ToggleHook(m_climb));
-    ControlMap.driver_button_RB.whenPressed(new Winch(m_climb));
+    ControlMap.driver_button_RB.toggleWhenPressed(new RunWinch(m_climb));
   }
 
   // Put all default commands here

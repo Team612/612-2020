@@ -10,17 +10,15 @@ package frc.robot.commands.climb;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climb;
 
-public class Winch extends CommandBase {
+public class RunWinch extends CommandBase {
 
   private Climb m_climb;
 
-  /**
-   * Creates a new Winch.
-   */
-  public Winch(Climb m_climb) {
+  private double WINCH_SPEED = 1;
+
+  public RunWinch(Climb m_climb) {
     this.m_climb = m_climb;
     addRequirements(m_climb);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -31,13 +29,13 @@ public class Winch extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_climb.engageWinch(1);
-
+    m_climb.setWinch(WINCH_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_climb.setWinch(0);
   }
 
   // Returns true when the command should end.

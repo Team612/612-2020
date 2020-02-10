@@ -16,42 +16,40 @@ import frc.robot.Constants;
 public class Climb extends SubsystemBase {
 
   // Initilizing solenoids
-  public static  DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
-  public static DoubleSolenoid solenoid_toggle_climb = new DoubleSolenoid(Constants.SOLENOID_TOGGLE_CLIMB[0],Constants.SOLENOID_TOGGLE_CLIMB[1]);
-  public static Spark spark_winch_climb = new Spark(Constants.SPARK_WINCH_CLIMB);
+  private DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
+  private DoubleSolenoid solenoid_toggle_climb = new DoubleSolenoid(Constants.SOLENOID_TOGGLE_CLIMB[0],Constants.SOLENOID_TOGGLE_CLIMB[1]);
+  private Spark spark_winch_climb = new Spark(Constants.SPARK_WINCH_CLIMB);
 
-
-  /**
-   * Creates a new NewClimb.
-   */
   public Climb() {
-      
   }
 
-  public void engageClimb(){
-
+  // TODO: make this a toggle
+  public void engageClimb() {
     solenoid_engage_climb.set(Value.kForward);
   }
 
-  public void toggleClimb(){
+  public void toggleClimb() {
 
-    if(solenoid_engage_climb.get() == Value.kForward){
-      if(solenoid_toggle_climb.get() == Value.kReverse){
+    // If the climb is engaged
+    if (solenoid_engage_climb.get() == Value.kForward) {
+
+      // Toggle the status of the hook solenoid
+      if (solenoid_toggle_climb.get() == Value.kReverse) {
          solenoid_toggle_climb.set(Value.kForward);
-      }
-      else{
+      } else {
         solenoid_toggle_climb.set(Value.kReverse);
       }
+
     }
   }
 
-  public void engageWinch(double speed){
-    
+  // Run the Winch to actually climb
+  public void setWinch(double speed){
     spark_winch_climb.set(speed);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
+  
 }
