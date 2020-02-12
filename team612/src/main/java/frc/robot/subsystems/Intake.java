@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Spark;
@@ -31,7 +32,9 @@ public class Intake extends SubsystemBase {
 
   // Setting up analog input IR sensor
   private final AnalogInput infared_intake = new AnalogInput(Constants.INFARED_INTAKE);
-  private final double INFARED_THRESHOLD = 0.7;
+  private final AnalogInput infared_jump = new AnalogInput(3);
+  private final double INFARED_INTAKE_THRESHOLD = 0.7;
+  private final double INFARED_JUMP_THRESHOLD = 0.7;
 
   public void toggleIntake() {
     // Push out the arm and intake forward
@@ -57,7 +60,7 @@ public class Intake extends SubsystemBase {
 
     // If the upper infared senses a ball, stop the upper belt and engage the wall
     // piston
-    if (infared_intake.getAverageVoltage() > INFARED_THRESHOLD) {
+    if (infared_intake.getAverageVoltage() > INFARED_INTAKE_THRESHOLD) {
       System.out.println("Ball in chamber!");
       solenoid_wall.set(Value.kReverse);
       spark_upper_belt.set(0);
@@ -67,11 +70,6 @@ public class Intake extends SubsystemBase {
       spark_outtake.set(0);
     }
 
-  }
-
-  public void setIntake(double speed) {
-    System.out.println("Intake Run!!");
-    spark_intake.set(speed);
   }
 
   public void setOuttake(double speed){
@@ -85,8 +83,18 @@ public class Intake extends SubsystemBase {
 
   }
 
-  public void runIntake(int speed) {
-    spark_intake.set(speed);
+  public void setIntake(double speed) {
+
+    System.out.println(infared_jump.getVoltage());
+    if (infared_jump.getVoltage() > INFARED_JUMP_THRESHOLD) {
+      spark_intake.set(0);
+      System.out.println("BALL IN !");
+    } else {
+      spark_intake.set(speed);
+    }
+    
+
+
   }
 
   public Intake() {
@@ -97,6 +105,9 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     INTAKE_MODE = solenoid_intake.get() == Value.kForward;
     SmartDashboard.putBoolean("Intake Enabled", INTAKE_MODE);
+    System.out.println("Infrared jump: "+ infared_jump.getVoltage());
+    System.out.println("Infrared intake: "+ infared_intake.getVoltage());
+
   }
 
 }

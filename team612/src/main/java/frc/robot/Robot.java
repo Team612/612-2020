@@ -12,6 +12,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  
 
   //Compressor compressor = new Compressor();
 
@@ -26,7 +27,10 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotPeriodic() {
+    
     CommandScheduler.getInstance().run();
+   // System.out.println("This Code Was Made By Prahalad");
+
     //System.out.println(compressor.getCompressorCurrentTooHighFault());
 
   }
@@ -37,6 +41,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+   // System.out.println("This Code Was Made By Prahalad");
 
   }
 
@@ -61,6 +66,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    System.out.println("This Code Was Made By Prahalad");
+
   }
 
   @Override

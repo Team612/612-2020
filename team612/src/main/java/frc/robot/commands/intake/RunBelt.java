@@ -27,13 +27,13 @@ public class RunBelt extends CommandBase {
 
   @Override
   public void execute() {
-    m_intake.runBelt(BELT_SPEED);
+    m_intake.setBelt(BELT_SPEED);
   }
 
   @Override
   public void end(boolean interrupted) {
     // When the command ends, stop the flywheel
-    m_intake.runBelt(0);  
+    m_intake.setBelt(0);  
   }
 
   @Override
