@@ -28,7 +28,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // Drivetrain gear shift controls
-    ControlMap.driver_button_LB.whenPressed(new SetHighGear(m_drivetrain));
+    ControlMap.driver_button_Y.whenPressed(new SetHighGear(m_drivetrain));
     ControlMap.driver_button_RB.whenPressed(new SetLowGear(m_drivetrain));
 
     // Intake control bindings

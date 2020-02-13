@@ -14,20 +14,30 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   
 
-  //Compressor compressor = new Compressor();
+  Compressor compressor = new Compressor(1);
+  Compressor compressor_1 = new Compressor(0);
 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    compressor.setClosedLoopControl(true);
+    compressor_1.setClosedLoopControl(true);
+    compressor.start();
+    compressor_1.start();
     
     // Initialize and start compressor
-    //compressor.(true);
-    //compressor.start();
+    
+    
   }
   
   @Override
   public void robotPeriodic() {
-    
+    compressor.clearAllPCMStickyFaults();
+    compressor_1.clearAllPCMStickyFaults();
+    System.out.println(compressor.getCompressorShortedStickyFault());
+    System.out.println(compressor_1.getCompressorShortedStickyFault());
+    System.out.println("The compressor is enabled? : "+compressor.enabled());
+    System.out.println("The compressor2 is enabled? : "+compressor_1.enabled());
     CommandScheduler.getInstance().run();
    // System.out.println("This Code Was Made By Prahalad");
 
@@ -66,7 +76,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    System.out.println("This Code Was Made By Prahalad");
+    System.out.println("This Code Was Made By nobody");
 
   }
 

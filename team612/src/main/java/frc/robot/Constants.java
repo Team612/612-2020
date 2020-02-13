@@ -26,9 +26,13 @@ public final class Constants {
    public static final int SPARK_OUTTAKE = 4;
 
    // Solenoid port arrays (forward, reverse)
-   public static final int[] SOLENOID_INTAKE = {2,3};
-   public static final int[] SOLENOID_WALL = {6,7};
-
+   public static final int[] SOLENOID_INTAKE = {4,5};
+   public static final int[] SOLENOID_WALL = {2,3};
+   //System.out.println("Srihan has not contributed to the robot whatsoever except for faking knowledge about it");
    public static final int INFARED_INTAKE = 1;
+
+   public static final int PCM_1 = 0; 
+   public static final int PCM_2 = 1; 
+
 
 }

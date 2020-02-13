@@ -30,7 +30,7 @@ public class Drivetrain extends SubsystemBase {
   private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
 
   // Double solenoid for changing gears
-  private DoubleSolenoid solenoid_drive = new DoubleSolenoid(Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
+  private DoubleSolenoid solenoid_drive = new DoubleSolenoid(1, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
 
   // Arcade drive function (same as tank drive)
   public void arcadeDrive(double x_axis, double y_axis) {  

@@ -27,22 +27,36 @@ public class Intake extends SubsystemBase {
   private final Spark spark_outtake = new Spark(Constants.SPARK_OUTTAKE);
 
   // Piston objects for intake and arm grabber
-  private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
-  private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
+  private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(1, 2, 3);
+  private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(1, 6, 7);
 
+  private final DoubleSolenoid climb1 = new DoubleSolenoid(1, 4,5 );
+
+  private final DoubleSolenoid climb2 = new DoubleSolenoid(1, 0, 1 );
+  private final DoubleSolenoid climb3 = new DoubleSolenoid(1, 4, 5);
   // Setting up analog input IR sensor
   private final AnalogInput infared_intake = new AnalogInput(Constants.INFARED_INTAKE);
   private final AnalogInput infared_jump = new AnalogInput(3);
   private final double INFARED_INTAKE_THRESHOLD = 0.7;
-  private final double INFARED_JUMP_THRESHOLD = 0.7;
+  private final double INFARED_JUMP_THRESHOLD = 0.75;
 
   public void toggleIntake() {
     // Push out the arm and intake forward
     System.out.println("Intake toggled");
     if (solenoid_intake.get() == Value.kForward) {
       solenoid_intake.set(Value.kReverse);
+      solenoid_wall.set(Value.kReverse);
+      climb1.set(Value.kReverse);
+      climb2.set(Value.kReverse);
+      climb3.set(Value.kReverse);
+
     } else {
       solenoid_intake.set(Value.kForward);
+      solenoid_wall.set(Value.kForward);
+      climb1.set(Value.kForward);
+      climb2.set(Value.kForward);
+      climb3.set(Value.kForward);
+
     }
   }
 
