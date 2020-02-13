@@ -28,7 +28,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     ControlMap.driver_button_X.whenPressed(new EngageClimb(m_climb));
     ControlMap.driver_button_B.whenPressed(new ToggleHook(m_climb));
-    ControlMap.driver_button_RB.toggleWhenPressed(new RunWinch(m_climb));
+    ControlMap.driver_button_RB.whileHeld(new RunWinch(m_climb));
+    controlMap.driver_button_LB.whileHeld(new ReverseWinch(m_climb));
   }
 
   // Put all default commands here
