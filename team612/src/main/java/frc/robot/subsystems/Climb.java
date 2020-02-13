@@ -17,7 +17,7 @@ public class Climb extends SubsystemBase {
 
   // Initilizing solenoids
   private DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
-  private DoubleSolenoid solenoid_toggle_climb = new DoubleSolenoid(Constants.SOLENOID_TOGGLE_CLIMB[0],Constants.SOLENOID_TOGGLE_CLIMB[1]);
+  private DoubleSolenoid solenoid_toggle_hook = new DoubleSolenoid(Constants.SOLENOID_TOGGLE_HOOK[0],Constants.SOLENOID_TOGGLE_HOOK[1]);
   private Spark spark_winch_climb = new Spark(Constants.SPARK_WINCH_CLIMB);
 
   public Climb() {
@@ -34,10 +34,10 @@ public class Climb extends SubsystemBase {
     if (solenoid_engage_climb.get() == Value.kForward) {
 
       // Toggle the status of the hook solenoid
-      if (solenoid_toggle_climb.get() == Value.kReverse) {
-         solenoid_toggle_climb.set(Value.kForward);
+      if (solenoid_toggle_hook.get() == Value.kReverse) {
+         solenoid_toggle_hook.set(Value.kForward);
       } else {
-        solenoid_toggle_climb.set(Value.kReverse);
+        solenoid_toggle_hook.set(Value.kReverse);
       }
 
     }
