@@ -30,7 +30,7 @@ public class Climb extends SubsystemBase {
     } else {
       solenoid_engage_climb.set(Value.kForward);
     }
-  }*
+  }
 
   public void toggleClimb() {
 
