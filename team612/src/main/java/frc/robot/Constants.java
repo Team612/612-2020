@@ -14,13 +14,13 @@ public final class Constants {
     public static int[] ULTRASONIC_DRIVE = {2,4};
 
     // Ping and echo channel port for drive ultrasonic
-    public static int[] SOLENOID_DRIVE = {0,1};
+    public static int[] SOLENOID_DRIVE = {12,13};
 
     /* -------- Intake Subsystem -------- */
 
     // Spark ports for intake
-    public static final int SPARK_INTAKE = 2;
-    public static final int SPARK_UPPER_BELT = 5;
+    public static final int SPARK_INTAKE = 6;
+    public static final int SPARK_UPPER_BELT = 9;
     public static final int SPARK_LOWER_BELT = 8;
     public static final int SPARK_OUTTAKE = 4;
 
@@ -39,6 +39,6 @@ public final class Constants {
     public static final int[] SOLENOID_TOGGLE_HOOK = {0,1};
 
     // Climb sparks
-    public static final int SPARK_WINCH_CLIMB = 8;
+    public static final int SPARK_WINCH_CLIMB = 11;
 
 }

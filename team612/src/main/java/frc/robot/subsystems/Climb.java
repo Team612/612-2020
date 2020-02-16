@@ -49,6 +49,7 @@ public class Climb extends SubsystemBase {
 
   // Run the Winch to actually climb
   public void setWinch(double speed){
+    System.out.println("Running Winch!");
     spark_winch_climb.set(speed);
   }
 
