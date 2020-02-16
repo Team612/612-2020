@@ -118,10 +118,6 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     INTAKE_MODE = solenoid_intake.get() == Value.kForward;
-    SmartDashboard.putBoolean("Intake Enabled", INTAKE_MODE);
-    System.out.println("Infrared jump: "+ infared_jump.getVoltage());
-    System.out.println("Infrared intake: "+ infared_intake.getVoltage());
-
   }
 
 }

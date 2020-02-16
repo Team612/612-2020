@@ -5,6 +5,13 @@ import frc.robot.commands.autonomous.SampleAuto;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.intake.*;
 import frc.robot.controls.ControlMap;
+import frc.robot.commands.climb.EngageClimb;
+import frc.robot.commands.climb.ReverseWinch;
+import frc.robot.commands.climb.RunWinch;
+import frc.robot.commands.climb.ToggleHook;
+import frc.robot.commands.drivetrain.DefaultDrive;
+import frc.robot.controls.ControlMap;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 
@@ -19,6 +26,8 @@ public class RobotContainer {
 
   private final SampleAuto m_sampleauto = new SampleAuto();
 
+  private final Climb m_climb = new Climb();
+  
   public RobotContainer() {
     configureButtonBindings();
     configureDefaultCommands();
@@ -28,15 +37,19 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // Drivetrain gear shift controls
-    ControlMap.driver_button_Y.whenPressed(new SetHighGear(m_drivetrain));
-    ControlMap.driver_button_RB.whenPressed(new SetLowGear(m_drivetrain));
+    ControlMap.driver_button_RB.whenPressed(new SetHighGear(m_drivetrain));
+    ControlMap.driver_button_LB.whenPressed(new SetLowGear(m_drivetrain));
 
     // Intake control bindings
-    ControlMap.driver_button_Y.whenPressed(new ExtendIntake(m_intake));
-    ControlMap.driver_button_A.toggleWhenPressed(new RunBelt(m_intake));
-    ControlMap.driver_button_B.whileHeld(new RunOuttake(m_intake));
-    ControlMap.driver_button_X.toggleWhenPressed(new RunIntake(m_intake));
+    ControlMap.gunner_button_Y.whenPressed(new ExtendIntake(m_intake));
+    ControlMap.gunner_button_A.toggleWhenPressed(new RunBelt(m_intake));
+    ControlMap.gunner_button_B.whileHeld(new RunOuttake(m_intake));
+    ControlMap.gunner_button_X.toggleWhenPressed(new RunIntake(m_intake));
 
+    ControlMap.gunner_button_BCK.whenPressed(new EngageClimb(m_climb));
+    ControlMap.gunner_button_STRT.whenPressed(new ToggleHook(m_climb));
+    ControlMap.gunner_button_RB.whileHeld(new RunWinch(m_climb));
+    ControlMap.gunner_button_LB.whileHeld(new ReverseWinch(m_climb));
 
   }
 
