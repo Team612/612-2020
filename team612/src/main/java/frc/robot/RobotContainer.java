@@ -41,16 +41,17 @@ public class RobotContainer {
     ControlMap.driver_button_LB.whenPressed(new SetLowGear(m_drivetrain));
 
     // Intake control bindings
-    ControlMap.gunner_button_Y.whenPressed(new ExtendIntake(m_intake));
-    ControlMap.gunner_button_A.toggleWhenPressed(new RunBelt(m_intake));
-    ControlMap.gunner_button_B.whileHeld(new RunOuttake(m_intake));
-    ControlMap.gunner_button_X.toggleWhenPressed(new RunIntake(m_intake));
-
-    ControlMap.gunner_button_BCK.whenPressed(new EngageClimb(m_climb));
-    ControlMap.gunner_button_STRT.whenPressed(new ToggleHook(m_climb));
-    ControlMap.gunner_button_RB.whileHeld(new RunWinch(m_climb));
-    ControlMap.gunner_button_LB.whileHeld(new ReverseWinch(m_climb));
-
+    ControlMap.RUN_INTAKE.toggleWhenPressed(new RunIntake(m_intake));
+    ControlMap.RUN_OUTTAKE.whileHeld(new RunOuttake(m_intake));
+    ControlMap.RUN_FLYWHEEL.whileHeld(new RunFlywheel(m_intake));
+    
+    ControlMap.ENGAGE_CLIMB.whenPressed(new EngageClimb(m_climb));
+    //ControlMap.gunner_button_STRT.whenPressed(new ToggleHook(m_climb));
+    ControlMap.RUN_FLYWHEEL.whileHeld(new RunFlywheel(m_intake));
+    ControlMap.TOGGLE_HOOK.whenPressed(new ToggleHook(m_climb));
+    ControlMap.RUN_WINCH.whileHeld(new RunWinch(m_climb));
+    //ControlMap.gunner_button_LB.whileHeld(new ReverseWinch(m_climb));
+    
   }
 
   // Put all default commands here

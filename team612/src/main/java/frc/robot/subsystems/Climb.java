@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -24,14 +25,20 @@ public class Climb extends SubsystemBase {
   }
 
   // TODO: make this a toggle
-  public void engageClimb() {
+  /*public void engageClimb() {
     if(solenoid_engage_climb.get() == Value.kForward){
     solenoid_engage_climb.set(Value.kReverse);
     } else {
       solenoid_engage_climb.set(Value.kForward);
     }
+  }*/
+  public void engageClimb(){
+    if (solenoid_engage_climb.get() == Value.kForward){
+      solenoid_engage_climb.set(Value.kReverse);
+    } else {
+      solenoid_engage_climb.set(Value.kForward);
+    }
   }
-
   public void toggleClimb() {
 
     // If the climb is engaged

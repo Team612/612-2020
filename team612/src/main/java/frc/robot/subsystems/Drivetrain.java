@@ -33,22 +33,34 @@ public class Drivetrain extends SubsystemBase {
   //private DoubleSolenoid solenoid_drive = new DoubleSolenoid(1, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
 
   // Arcade drive function (same as tank drive)
+  
   public void arcadeDrive(double x_axis, double y_axis) {  
     //sets up deadzones
     x_axis = Math.abs(x_axis) < DEADZONE ? 0.0 : x_axis;
     y_axis = Math.abs(y_axis) < DEADZONE ? 0.0 : y_axis;
 
     //WPI_Talon SRX Caps voltage at 1.0
-    double leftCommand = y_axis + x_axis;
-    double rightCommand = y_axis - x_axis;
+    double leftCommand = y_axis - x_axis;
+    double rightCommand = y_axis + x_axis;
     
     // right side motor controls
-    talon_br_drive.set(-rightCommand);
+    talon_fr_drive.set(-rightCommand);
     talon_br_drive.set(-rightCommand);
 
     //left side motor controls
     talon_fl_drive.set(leftCommand);
     talon_bl_drive.set(leftCommand);
+  }
+
+  public void tankDrive(double left_command, double right_command) {
+    left_command = Math.abs(left_command) < DEADZONE ? 0.0 : left_command;
+    right_command = Math.abs(right_command) < DEADZONE ? 0.0 : right_command;
+
+    talon_fr_drive.set(-right_command);
+    talon_br_drive.set(-right_command);
+
+    talon_fl_drive.set(left_command);
+    talon_bl_drive.set(left_command);
   }
 
   // Get distance in inches from ultrasonic in drive
