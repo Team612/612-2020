@@ -2,6 +2,7 @@ package frc.robot;
 
 public final class Constants {
 
+    // Run arcade or tank drive
     public static boolean ENABLE_ARCADE = true;
 
     /* -------- Drivetrain Subsystem -------- */
@@ -31,9 +32,6 @@ public final class Constants {
     public static final int[] SOLENOID_INTAKE = {4,5};
     public static final int INFARED_INTAKE = 1;
     public static final int INFARED_JUMP = 3;
-
-    public static final int PCM_1 = 0; 
-    public static final int PCM_2 = 1; 
 
     /* -------- Climb Subsystem -------- */
 

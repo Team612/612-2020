@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Spark;
@@ -17,8 +16,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-
-  private boolean INTAKE_MODE = false;
 
   // Spark objects for intake flywheel, belt, and outtake
   private final static Spark spark_intake = new Spark(Constants.SPARK_INTAKE);
@@ -55,7 +52,6 @@ public class Intake extends SubsystemBase {
     spark_lower_belt.set(-belt_speed);
 
     // If the upper infared senses a ball, stop the upper belt and engage the wall
-    // piston
     if (infared_intake.getAverageVoltage() > INFARED_INTAKE_THRESHOLD) {
       System.out.println("Ball in chamber!");
       solenoid_wall.set(Value.kReverse);
@@ -68,7 +64,7 @@ public class Intake extends SubsystemBase {
 
   }
 
-  public void setOuttake(double speed){
+  public void setOuttake(double speed) {
     solenoid_wall.set(Value.kForward);
 
     // Set the outtake spark to a certain speed
@@ -76,33 +72,28 @@ public class Intake extends SubsystemBase {
     spark_outtake.set(speed);
     spark_lower_belt.set(-speed);
     spark_upper_belt.set(speed);
-
   }
 
+  // Set the intake flywheel to a certain speed
   public void setIntake(double speed) {
 
     System.out.println(infared_jump.getAverageVoltage());
     if (infared_jump.getAverageVoltage() > INFARED_JUMP_THRESHOLD) {
-      spark_intake.set(0);
-      System.out.println("BALL IN !");
+      spark_intake.set(0);  // Status: Ball is is detected above intake
     } else {
       spark_intake.set(speed);
     }
-    
-
-
+  
   }
 
   public Intake() {
-    
     solenoid_wall.set(Value.kForward);
   }
 
   @Override
   public void periodic() {
-    INTAKE_MODE = solenoid_intake.get() == Value.kForward;
-    System.out.println("IR Sensor Jump: " + infared_jump.getAverageVoltage());
-    System.out.println("IR Sensor Intake: " + infared_intake.getAverageVoltage());
+    SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
+    SmartDashboard.putNumber("IR Sensor Intake: ", infared_intake.getAverageVoltage());
   }
 
 }

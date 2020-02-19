@@ -18,6 +18,7 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
 
+  // Controller deadzone constant
   private final double DEADZONE = 0.1;
 
   // Talons for drivetrain
@@ -30,10 +31,9 @@ public class Drivetrain extends SubsystemBase {
   private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
 
   // Double solenoid for changing gears
-  //private DoubleSolenoid solenoid_drive = new DoubleSolenoid(1, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
-
-  // Arcade drive function (same as tank drive)
+  private DoubleSolenoid solenoid_drive = new DoubleSolenoid(1, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
   
+  // Basic arcade drive function
   public void arcadeDrive(double x_axis, double y_axis) {  
     //sets up deadzones
     x_axis = Math.abs(x_axis) < DEADZONE ? 0.0 : x_axis;
@@ -52,6 +52,7 @@ public class Drivetrain extends SubsystemBase {
     talon_bl_drive.set(leftCommand);
   }
 
+  // Basic tank drive function
   public void tankDrive(double left_command, double right_command) {
     left_command = Math.abs(left_command) < DEADZONE ? 0.0 : left_command;
     right_command = Math.abs(right_command) < DEADZONE ? 0.0 : right_command;
@@ -69,14 +70,14 @@ public class Drivetrain extends SubsystemBase {
   }
 
   // Shift the double solenoid to kForward
-  public void shiftForward(){
-    //solenoid_drive.set(Value.kForward);
+  public void shiftForward() {
+    solenoid_drive.set(Value.kForward);
     System.out.println("Shifted Drive Forward");
   }
 
   // Shift the double solenoid to kReverse
-  public void shiftReverse(){
-    //solenoid_drive.set(Value.kReverse);
+  public void shiftReverse() {
+    solenoid_drive.set(Value.kReverse);
     System.out.println("Shifted Drive Reverse");
   }
 
@@ -93,10 +94,9 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Back Left Drive Talon", talon_bl_drive.get());
     SmartDashboard.putNumber("Back Right Drive Talon", talon_br_drive.get());
     SmartDashboard.putNumber("Front Left Drive Talon", talon_fl_drive.get());
-    SmartDashboard.putNumber("Front RIght Drive Talon", talon_fr_drive.get());
+    SmartDashboard.putNumber("Front Right Drive Talon", talon_fr_drive.get());
     SmartDashboard.putNumber("Ultrasonic Distance", getDistance());
-   // System.out.println("This Code Was Made By Prahalad");
-
+    System.out.println("This Code Was Made By Prahalad");
   }
   
 }
