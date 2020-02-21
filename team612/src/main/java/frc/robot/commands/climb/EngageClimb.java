@@ -21,12 +21,11 @@ public class EngageClimb extends CommandBase {
 
   @Override
   public void initialize() {
-
   }
 
   @Override
   public void execute() {
-    m_climb.engageClimb();
+    m_climb.toggleClimb();
   }
 
   @Override

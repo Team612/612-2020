@@ -13,15 +13,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  Compressor compressor = new Compressor(0);
-
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-
-    compressor.setClosedLoopControl(true);
-    compressor.start();
-
   }
   
   @Override

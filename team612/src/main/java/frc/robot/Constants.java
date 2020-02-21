@@ -32,9 +32,6 @@ public final class Constants {
     public static final int INFARED_INTAKE = 1;
     public static final int INFARED_JUMP = 3;
 
-    public static final int PCM_1 = 0; 
-    public static final int PCM_2 = 1; 
-
     /* -------- Climb Subsystem -------- */
 
     // Climb solenoids

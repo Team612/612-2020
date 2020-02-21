@@ -9,38 +9,28 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Climb extends SubsystemBase {
 
-  // Initilizing solenoids
-  private DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(0, Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
-  private DoubleSolenoid solenoid_toggle_hook = new DoubleSolenoid(0, Constants.SOLENOID_TOGGLE_HOOK[0],Constants.SOLENOID_TOGGLE_HOOK[1]);
+  // Climb winch spark
   private Spark spark_winch_climb = new Spark(Constants.SPARK_WINCH_CLIMB);
 
-  public Climb() {
-  }
+  // Climb solenoids
+  private DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(0, Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
+  private DoubleSolenoid solenoid_toggle_hook = new DoubleSolenoid(0, Constants.SOLENOID_TOGGLE_HOOK[0],Constants.SOLENOID_TOGGLE_HOOK[1]);
 
-  // TODO: make this a toggle
-  /*public void engageClimb() {
-    if(solenoid_engage_climb.get() == Value.kForward){
-    solenoid_engage_climb.set(Value.kReverse);
-    } else {
-      solenoid_engage_climb.set(Value.kForward);
-    }
-  }*/
-  public void engageClimb(){
+  public void toggleClimb() {
     if (solenoid_engage_climb.get() == Value.kForward){
       solenoid_engage_climb.set(Value.kReverse);
     } else {
       solenoid_engage_climb.set(Value.kForward);
     }
   }
-  public void toggleClimb() {
-
+  
+  public void toggleHook() {
     // If the climb is engaged
     if (solenoid_engage_climb.get() == Value.kForward) {
 
@@ -60,10 +50,11 @@ public class Climb extends SubsystemBase {
     spark_winch_climb.set(speed);
   }
 
+  public Climb() {
+  }
+
   @Override
   public void periodic() {
-    System.out.println("climb: "+solenoid_engage_climb.get());
-    System.out.println("toggle:"+solenoid_toggle_hook.get());
   }
   
 }
