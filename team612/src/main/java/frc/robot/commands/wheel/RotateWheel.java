@@ -22,7 +22,7 @@ public class RotateWheel extends CommandBase {
 
   public RotateWheel(Wheel m_wheel) {
     this.m_wheel = m_wheel;
-    addRequirements(m_wheel); // needed?
+   // addRequirements(m_wheel); // needed?
   }
 
   @Override

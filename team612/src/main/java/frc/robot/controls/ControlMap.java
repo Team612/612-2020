@@ -9,7 +9,6 @@ public class ControlMap {
     private static Joystick driver = new Joystick(0);
     private static Joystick gunner = new Joystick(1);
 
-    // TODO: Add controller trigger axises
 
     // Driver buttons
     public static JoystickButton driver_button_A    	= new JoystickButton(driver,1);

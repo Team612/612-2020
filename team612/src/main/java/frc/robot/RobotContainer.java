@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.autonomous.SampleAuto;
 import frc.robot.commands.drivetrain.DefaultDrive;
+import frc.robot.commands.wheel.ExtendColorWheel;
 import frc.robot.commands.wheel.RotateWheel;
 import frc.robot.commands.wheel.SpinToColor;
 import frc.robot.controls.ControlMap;
@@ -17,8 +18,9 @@ public class RobotContainer {
   
   // Color wheel subsystem and commands
   private final Wheel m_wheel = new Wheel();
-  private final RotateWheel c_rotatewheel = new RotateWheel(m_wheel);
-  private final SpinToColor c_spintocolor = new SpinToColor(m_wheel);
+  // private final RotateWheel c_rotatewheel = new RotateWheel(m_wheel);
+  // private final SpinToColor c_spintocolor = new SpinToColor(m_wheel);
+  // private final ExtendColorWheel c_extendcolorwheel f= new ExtendColorWheel(m_wheel); 
 
   private final SampleAuto m_sampleauto = new SampleAuto();
 
@@ -29,13 +31,14 @@ public class RobotContainer {
 
   // Put all button bindings here
   private void configureButtonBindings() {
-    ControlMap.gunner_button_A.whenPressed(c_rotatewheel);
-    ControlMap.gunner_button_B.whenPressed(c_spintocolor);
+    ControlMap.gunner_button_A.whenPressed(new RotateWheel(m_wheel));
+    ControlMap.gunner_button_B.whenPressed(new SpinToColor(m_wheel));
+    ControlMap.gunner_button_LB.whenPressed(new ExtendColorWheel(m_wheel));
   }
 
   // Put all default commands here
   private void configureDefaultCommands() {
-    m_drivetrain.setDefaultCommand(c_defaultdrive);
+   // m_drivetrain.setDefaultCommand(c_defaultdrive);
   }
 
   public Command getAutonomousCommand() {

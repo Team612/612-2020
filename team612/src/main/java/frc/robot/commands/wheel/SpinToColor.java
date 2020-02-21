@@ -37,7 +37,7 @@ public class SpinToColor extends CommandBase {
 
   @Override
   public void execute() {
-    m_wheel.engagePiston();
+  
     currentColor = m_wheel.getClosestColor();  // Current sensor reading updating each loop
 
     m_wheel.setSpinner(1);  // Run the spinner at full speed
