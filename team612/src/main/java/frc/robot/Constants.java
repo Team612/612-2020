@@ -2,15 +2,15 @@ package frc.robot;
 
 public final class Constants {
 
-    public static boolean ENABLE_ARCADE = true;
+    public static boolean ENABLE_ARCADE = false;
 
     /* -------- Drivetrain Subsystem -------- */
 
     // Drivetrain talon ports
-    public static int TALON_FR_DRIVE = 1;
-    public static int TALON_FL_DRIVE = 14;
-    public static int TALON_BR_DRIVE = 0;
-    public static int TALON_BL_DRIVE = 15;
+    public static int SPARK_FR_DRIVE = 1;
+    public static int SPARK_FL_DRIVE = 14;
+    public static int SPARK_BR_DRIVE = 0;
+    public static int SPARK_BL_DRIVE = 15;
 
     // Forward and reverse channel for drive double solenoid
     public static int[] ULTRASONIC_DRIVE = {2,4};

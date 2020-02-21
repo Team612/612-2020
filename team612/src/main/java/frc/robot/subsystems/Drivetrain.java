@@ -21,16 +21,16 @@ public class Drivetrain extends SubsystemBase {
   private final double DEADZONE = 0.1;
 
   // Talons for drivetrain
-  private WPI_TalonSRX talon_fr_drive = new WPI_TalonSRX(Constants.TALON_FR_DRIVE);
-  private WPI_TalonSRX talon_fl_drive = new WPI_TalonSRX(Constants.TALON_FL_DRIVE);
-  private WPI_TalonSRX talon_br_drive = new WPI_TalonSRX(Constants.TALON_BR_DRIVE);
-  private WPI_TalonSRX talon_bl_drive = new WPI_TalonSRX(Constants.TALON_BL_DRIVE);
+  private Spark spark_fr_drive = new Spark(Constants.SPARK_FR_DRIVE);
+  private Spark spark_fl_drive = new Spark(Constants.SPARK_FL_DRIVE);
+  private Spark spark_br_drive = new Spark(Constants.SPARK_BR_DRIVE);
+  private Spark spark_bl_drive = new Spark(Constants.SPARK_BL_DRIVE);
 
   // Ultrasonic sensor for drive
-  private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
+  //private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
 
   // Double solenoid for changing gears
-  //private DoubleSolenoid solenoid_drive = new DoubleSolenoid(1, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
+  private DoubleSolenoid solenoid_drive = new DoubleSolenoid(1, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
 
   // Arcade drive function (same as tank drive)
   
@@ -44,28 +44,28 @@ public class Drivetrain extends SubsystemBase {
     double rightCommand = y_axis + x_axis;
     
     // right side motor controls
-    talon_fr_drive.set(-rightCommand);
-    talon_br_drive.set(-rightCommand);
+    spark_fr_drive.set(-rightCommand);
+    spark_br_drive.set(-rightCommand);
 
     //left side motor controls
-    talon_fl_drive.set(leftCommand);
-    talon_bl_drive.set(leftCommand);
+    spark_fl_drive.set(leftCommand);
+    spark_bl_drive.set(leftCommand);
   }
 
   public void tankDrive(double left_command, double right_command) {
     left_command = Math.abs(left_command) < DEADZONE ? 0.0 : left_command;
     right_command = Math.abs(right_command) < DEADZONE ? 0.0 : right_command;
 
-    talon_fr_drive.set(-right_command);
-    talon_br_drive.set(-right_command);
+    spark_fr_drive.set(-right_command);
+    spark_br_drive.set(-right_command);
 
-    talon_fl_drive.set(left_command);
-    talon_bl_drive.set(left_command);
+    spark_fl_drive.set(left_command);
+    spark_bl_drive.set(left_command);
   }
 
   // Get distance in inches from ultrasonic in drive
   public double getDistance() {
-    return ultrasonic_drive.getRangeInches();
+   // return ultrasonic_drive.getRangeInches();
   }
 
   // Shift the double solenoid to kForward
@@ -82,19 +82,19 @@ public class Drivetrain extends SubsystemBase {
 
   public Drivetrain() {
     // Prepare and enable ultrasonic
-    ultrasonic_drive.setEnabled(true);
-    ultrasonic_drive.setAutomaticMode(true);
+    // ultrasonic_drive.setEnabled(true);
+    // ultrasonic_drive.setAutomaticMode(true);
   }
 
   // Periodic loop for ShuffleBoard values
   @Override
   public void periodic() {
     // Shuffle board values
-    SmartDashboard.putNumber("Back Left Drive Talon", talon_bl_drive.get());
-    SmartDashboard.putNumber("Back Right Drive Talon", talon_br_drive.get());
-    SmartDashboard.putNumber("Front Left Drive Talon", talon_fl_drive.get());
-    SmartDashboard.putNumber("Front RIght Drive Talon", talon_fr_drive.get());
-    SmartDashboard.putNumber("Ultrasonic Distance", getDistance());
+    SmartDashboard.putNumber("Back Left Drive Talon", spark_bl_drive.get());
+    SmartDashboard.putNumber("Back Right Drive Talon", spark_br_drive.get());
+    SmartDashboard.putNumber("Front Left Drive Talon", spark_fl_drive.get());
+    SmartDashboard.putNumber("Front RIght Drive Talon", spark_fr_drive.get());
+    //SmartDashboard.putN0umber("Ultrasonic Distance", getDistance());
    // System.out.println("This Code Was Made By Prahalad");
 
   }
