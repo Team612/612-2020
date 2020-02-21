@@ -34,6 +34,7 @@ public class RobotContainer {
     ControlMap.gunner_button_A.whenPressed(new RotateWheel(m_wheel));
     ControlMap.gunner_button_B.whenPressed(new SpinToColor(m_wheel));
     ControlMap.gunner_button_LB.whenPressed(new ExtendColorWheel(m_wheel));
+    
   }
 
   // Put all default commands here

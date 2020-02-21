@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class ControlMap {
 
     // Controller objects
-    private static Joystick driver = new Joystick(0);
+    public static Joystick driver = new Joystick(0);
     private static Joystick gunner = new Joystick(1);
 
 
@@ -34,4 +34,5 @@ public class ControlMap {
     public static JoystickButton gunner_button_LJ   	= new JoystickButton(gunner,9);
     public static JoystickButton gunner_button_RJ   	= new JoystickButton(gunner,10);
 
+    
 }
