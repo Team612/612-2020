@@ -33,6 +33,8 @@ public class Drivetrain extends SubsystemBase {
   // Double solenoid for changing gears
   private DoubleSolenoid solenoid_drive = new DoubleSolenoid(1, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
   
+  // 
+
   // Basic arcade drive function
   public void arcadeDrive(double x_axis, double y_axis) {  
     //sets up deadzones
@@ -97,6 +99,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Front Right Drive Talon", talon_fr_drive.get());
     SmartDashboard.putNumber("Ultrasonic Distance", getDistance());
     System.out.println("This Code Was Made By Prahalad");
+    System.out.println("Kai be our senpai");
   }
   
 }

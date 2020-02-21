@@ -8,6 +8,7 @@
 package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
 public class RunOuttake extends CommandBase {
@@ -28,6 +29,7 @@ public class RunOuttake extends CommandBase {
   @Override
   public void execute() {
     m_intake.setOuttake(SPEED);  // Run outtake while held at specific speed
+    Robot.led.outtake();
   }
 
   @Override

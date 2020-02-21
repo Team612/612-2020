@@ -7,6 +7,7 @@
 
 package frc.robot.commands.climb;
 
+import frc.robot.*;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climb;
 
@@ -30,6 +31,9 @@ public class RunWinch extends CommandBase {
   @Override
   public void execute() {
     m_climb.setWinch(WINCH_SPEED);
+    Robot.led.winch();
+    Robot.led.outtake();
+
   }
 
   // Called once the command ends or is interrupted.

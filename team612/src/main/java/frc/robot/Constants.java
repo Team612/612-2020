@@ -42,4 +42,7 @@ public final class Constants {
     // Climb sparks
     public static final int SPARK_WINCH_CLIMB = 11;
 
+    //led ports
+    public static final int LED_PWM = 42069;
+
 }
