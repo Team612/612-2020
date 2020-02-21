@@ -22,11 +22,11 @@ public class ControlMap{
     public static JoystickButton driver_button_RJ   	= new JoystickButton(driver,10);
 
     // Gunner buttons
-    public static JoystickButton RUN_INTAKE    	 = new JoystickButton(gunner,7);
-    public static JoystickButton RUN_OUTTAKE     = new JoystickButton(gunner,8);
-    public static JoystickButton RUN_FLYWHEEL     = new JoystickButton(gunner,9);
-    public static JoystickButton ENGAGE_CLIMB    = new JoystickButton(gunner, 2); // change port
-    public static JoystickButton TOGGLE_HOOK     = new JoystickButton(gunner, 3);
-    public static JoystickButton RUN_WINCH       = new JoystickButton(gunner, 6); 
+    public static JoystickButton RUN_INTAKE    	        = new JoystickButton(gunner,7);
+    public static JoystickButton RUN_OUTTAKE            = new JoystickButton(gunner,8);
+    public static JoystickButton RUN_FLYWHEEL           = new JoystickButton(gunner,9);
+    public static JoystickButton ENGAGE_CLIMB           = new JoystickButton(gunner,2); // change port
+    public static JoystickButton TOGGLE_HOOK            = new JoystickButton(gunner,3);
+    public static JoystickButton RUN_WINCH              = new JoystickButton(gunner,6); 
 
 }
