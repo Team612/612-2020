@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 
 public class Climb extends SubsystemBase {
 
   // Climb winch spark
-  private Spark spark_winch_climb = new Spark(Constants.SPARK_WINCH_CLIMB);
+  private WPI_TalonSRX spark_winch_climb = new WPI_TalonSRX(Constants.SPARK_WINCH_CLIMB);
 
   // Climb solenoids
   private DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(0, Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);

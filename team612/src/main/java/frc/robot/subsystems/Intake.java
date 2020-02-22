@@ -14,14 +14,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 
 public class Intake extends SubsystemBase {
 
   // Spark objects for intake flywheel, belt, and outtake
-  private final static Spark spark_intake = new Spark(Constants.SPARK_INTAKE);
-  private final Spark spark_upper_belt = new Spark(Constants.SPARK_UPPER_BELT);
-  private final Spark spark_lower_belt = new Spark(Constants.SPARK_LOWER_BELT);
-  private final Spark spark_outtake = new Spark(Constants.SPARK_OUTTAKE);
+  private final WPI_TalonSRX spark_intake = new WPI_TalonSRX(Constants.SPARK_INTAKE);
+  private final WPI_TalonSRX spark_upper_belt = new WPI_TalonSRX(Constants.SPARK_UPPER_BELT);
+  private final WPI_TalonSRX spark_lower_belt = new WPI_TalonSRX(Constants.SPARK_LOWER_BELT);
+  private final WPI_TalonSRX spark_outtake = new WPI_TalonSRX(Constants.SPARK_OUTTAKE);
 
   // Piston objects for intake and arm grabber
   private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(0, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
