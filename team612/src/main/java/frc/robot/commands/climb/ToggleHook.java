@@ -25,7 +25,7 @@ public class ToggleHook extends CommandBase {
 
   @Override
   public void execute(){
-    m_climb.toggleClimb();
+    m_climb.toggleHook();
   }
 
   @Override

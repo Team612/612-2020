@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
@@ -21,12 +23,14 @@ public class Drivetrain extends SubsystemBase {
 
   // Controller deadzone constant
   private final double DEADZONE = 0.1;
-
+  
   // Talons for drivetrain
-  private Spark spark_fr_drive = new Spark(Constants.SPARK_FR_DRIVE);
-  private Spark spark_fl_drive = new Spark(Constants.SPARK_FL_DRIVE);
-  private Spark spark_br_drive = new Spark(Constants.SPARK_BR_DRIVE);
-  private Spark spark_bl_drive = new Spark(Constants.SPARK_BL_DRIVE);
+  private CANSparkMax spark_fr_drive = new CANSparkMax(Constants.SPARK_FR_DRIVE, MotorType.kBrushless);
+  private CANSparkMax spark_fl_drive = new CANSparkMax(Constants.SPARK_FL_DRIVE, MotorType.kBrushless);
+  private CANSparkMax spark_br_drive = new CANSparkMax(Constants.SPARK_BR_DRIVE, MotorType.kBrushless);
+  private CANSparkMax spark_bl_drive = new CANSparkMax(Constants.SPARK_BL_DRIVE, MotorType.kBrushless);
+
+  
 
   // Ultrasonic sensor for drive
   //private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
@@ -96,8 +100,6 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Back Right Drive Talon", spark_br_drive.get());
     SmartDashboard.putNumber("Front Left Drive Talon", spark_fl_drive.get());
     SmartDashboard.putNumber("Front RIght Drive Talon", spark_fr_drive.get());
-    //SmartDashboard.putN0umber("Ultrasonic Distance", getDistance());
-   // System.out.println("This Code Was Made By Prahalad");
 
   }
   

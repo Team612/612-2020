@@ -54,7 +54,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    System.out.println("This Code Was Made By nobody");
 
   }
 

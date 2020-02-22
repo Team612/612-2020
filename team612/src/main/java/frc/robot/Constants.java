@@ -2,13 +2,13 @@ package frc.robot;
 
 public final class Constants {
 
-    public static boolean ENABLE_ARCADE = false;
+    public static boolean ENABLE_ARCADE = true;
 
     /* -------- Drivetrain Subsystem -------- */
 
     // Drivetrain talon ports
     public static int SPARK_FR_DRIVE = 2;//59
-    public static int SPARK_FL_DRIVE = 59;
+    public static int SPARK_FL_DRIVE = 12;
     public static int SPARK_BR_DRIVE = 3;
     public static int SPARK_BL_DRIVE = 1;
 

@@ -12,8 +12,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
@@ -35,6 +38,10 @@ public class Intake extends SubsystemBase {
   private final double INFARED_INTAKE_THRESHOLD = 0.775;
   private final double INFARED_JUMP_THRESHOLD = 0.75;
 
+  boolean firstRead = false;
+
+  public double new_speed; 
+
   public void extendIntake() {
     solenoid_intake.set(Value.kReverse);
   }
@@ -51,15 +58,20 @@ public class Intake extends SubsystemBase {
 
     // set the intake and belt to a certain speed
     System.out.println("Running intake flywheels");
-    spark_lower_belt.set(-belt_speed);
+    spark_lower_belt.set(belt_speed);
 
     // If the upper infared senses a ball, stop the upper belt and engage the wall
     if (infared_intake.getAverageVoltage() > INFARED_INTAKE_THRESHOLD) {
       System.out.println("Ball in chamber!");
       solenoid_wall.set(Value.kReverse);
+      if (firstRead) {
+        Timer.delay(.1);
+        firstRead = false;
+      }
       spark_upper_belt.set(0);
     } else {
-      spark_upper_belt.set(belt_speed);
+      firstRead = true;
+      spark_upper_belt.set(-belt_speed);
       solenoid_wall.set(Value.kForward);
       spark_outtake.set(0);
     }
@@ -71,9 +83,9 @@ public class Intake extends SubsystemBase {
 
     // Set the outtake spark to a certain speed
     System.out.println("Running outtake flywheel");
-    spark_outtake.set(speed);
-    spark_lower_belt.set(-speed);
-    spark_upper_belt.set(speed);
+    spark_outtake.set(speed*.75);
+    spark_lower_belt.set(speed);
+    spark_upper_belt.set(-speed);
   }
 
   // Set the intake flywheel to a certain speed
@@ -90,10 +102,15 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     solenoid_wall.set(Value.kForward);
+    spark_upper_belt.setNeutralMode(NeutralMode.Coast);
+    spark_lower_belt.setNeutralMode(NeutralMode.Coast);
   }
 
   @Override
   public void periodic() {
+    System.out.println(infared_jump.getAverageVoltage());
+    System.out.println(infared_intake.getAverageVoltage());
+    System.out.println("---------");
     SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
     SmartDashboard.putNumber("IR Sensor Intake: ", infared_intake.getAverageVoltage());
   }

@@ -53,8 +53,11 @@ public class Climb extends SubsystemBase {
   }
 
   public Climb() {
-  }
+    solenoid_engage_climb.set(Value.kReverse);
+    solenoid_toggle_hook.set(Value.kReverse);
 
+  }
+  
   @Override
   public void periodic() {
   }

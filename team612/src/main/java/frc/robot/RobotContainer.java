@@ -50,6 +50,17 @@ public class RobotContainer {
     ControlMap.TOGGLE_HOOK.whenPressed(new ToggleHook(m_climb));
     ControlMap.RUN_WINCH.whileHeld(new RunWinch(m_climb));
     
+    /*
+    // Intake control bindings
+    ControlMap.RUN_INTAKE.toggleWhenPressed(new RunIntake(m_intake));
+    ControlMap.RUN_OUTTAKE.whileHeld(new RunOuttake(m_intake));
+    ControlMap.RUN_FLYWHEEL.whileHeld(new RunFlywheel(m_intake));
+
+    // Climb control bindings
+    ControlMap.ENGAGE_CLIMB.whenPressed(new EngageClimb(m_climb));
+    ControlMap.TOGGLE_HOOK.whenPressed(new ToggleHook(m_climb));
+    ControlMap.RUN_WINCH.whileHeld(new RunWinch(m_climb));
+    */
   }
 
   // Put all default commands here
