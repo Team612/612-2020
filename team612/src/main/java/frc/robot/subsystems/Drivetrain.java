@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -67,9 +68,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   // Get distance in inches from ultrasonic in drive
-  public double getDistance() {
-   // return ultrasonic_drive.getRangeInches();
-  }
+ 
 
   // Shift the double solenoid to kForward
   public void shiftForward() {
