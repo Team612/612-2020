@@ -14,15 +14,23 @@ import frc.robot.controls.ControlMap;
 import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.wheel.ExtendColorWheel;
+import frc.robot.commands.wheel.RotateWheel;
+import frc.robot.commands.wheel.SpinToColor;
+import frc.robot.controls.ControlMap;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Wheel;
 
 public class RobotContainer {
 
-  // Drivetrain subsystem and command
+  // Drivetrain related subsystem and commands
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final DefaultDrive c_drive = new DefaultDrive(m_drivetrain);
-
-  // Intake subsystem
+  
   private final Intake m_intake = new Intake();
+
+  // Color wheel subsystem and commands
+  private final Wheel m_wheel = new Wheel();
 
   private final SampleAuto m_sampleauto = new SampleAuto();
 
@@ -49,6 +57,10 @@ public class RobotContainer {
     ControlMap.ENGAGE_CLIMB.whenPressed(new EngageClimb(m_climb));
     ControlMap.TOGGLE_HOOK.whenPressed(new ToggleHook(m_climb));
     ControlMap.RUN_WINCH.whileHeld(new RunWinch(m_climb));
+
+    ControlMap.driver_button_A.whenPressed(new RotateWheel(m_wheel));
+    ControlMap.driver_button_B.whenPressed(new SpinToColor(m_wheel));
+    ControlMap.driver_button_LB.whenPressed(new ExtendColorWheel(m_wheel));
     
     /*
     // Intake control bindings

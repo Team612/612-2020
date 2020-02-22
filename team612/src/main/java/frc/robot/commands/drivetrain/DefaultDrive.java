@@ -12,7 +12,6 @@ public class DefaultDrive extends CommandBase {
 
   private final Drivetrain m_drivetrain;  // Local version of drivetrain
 
-  // Constructor and add requirements from drivetrain subsystem
   public DefaultDrive(Drivetrain m_drivetrain) {
     this.m_drivetrain = m_drivetrain;
     addRequirements(m_drivetrain);
