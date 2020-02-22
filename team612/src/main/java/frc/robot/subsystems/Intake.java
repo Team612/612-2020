@@ -26,8 +26,8 @@ public class Intake extends SubsystemBase {
   private final WPI_TalonSRX spark_outtake = new WPI_TalonSRX(Constants.SPARK_OUTTAKE);
 
   // Piston objects for intake and arm grabber
-  private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(0, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
-  private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(0, Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
+  private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
+  private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
 
   // Setting up analog input IR sensor
   private final AnalogInput infared_intake = new AnalogInput(Constants.INFARED_INTAKE);

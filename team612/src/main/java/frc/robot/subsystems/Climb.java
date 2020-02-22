@@ -21,8 +21,8 @@ public class Climb extends SubsystemBase {
   private WPI_TalonSRX spark_winch_climb = new WPI_TalonSRX(Constants.SPARK_WINCH_CLIMB);
 
   // Climb solenoids
-  private DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(0, Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
-  private DoubleSolenoid solenoid_toggle_hook = new DoubleSolenoid(0, Constants.SOLENOID_TOGGLE_HOOK[0],Constants.SOLENOID_TOGGLE_HOOK[1]);
+  private DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
+  private DoubleSolenoid solenoid_toggle_hook = new DoubleSolenoid(Constants.PCM_1, Constants.SOLENOID_TOGGLE_HOOK[0],Constants.SOLENOID_TOGGLE_HOOK[1]);
 
   public void toggleClimb() {
     if (solenoid_engage_climb.get() == Value.kForward){
