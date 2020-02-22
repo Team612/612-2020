@@ -58,9 +58,9 @@ public class RobotContainer {
     ControlMap.TOGGLE_HOOK.whenPressed(new ToggleHook(m_climb));
     ControlMap.RUN_WINCH.whileHeld(new RunWinch(m_climb));
 
-    ControlMap.driver_button_A.whenPressed(new RotateWheel(m_wheel));
-    ControlMap.driver_button_B.whenPressed(new SpinToColor(m_wheel));
-    ControlMap.driver_button_LB.whenPressed(new ExtendColorWheel(m_wheel));
+    ControlMap.ROTATE_WHEEL.toggleWhenPressed(new RotateWheel(m_wheel));
+    ControlMap.SPIN_TO_COLOR.toggleWhenPressed(new SpinToColor(m_wheel));
+    ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
     
     /*
     // Intake control bindings

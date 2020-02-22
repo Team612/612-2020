@@ -29,4 +29,9 @@ public class ControlMap{
     public static JoystickButton TOGGLE_HOOK            = new JoystickButton(gunner,3); // X
     public static JoystickButton RUN_WINCH              = new JoystickButton(gunner,6); // RB
 
+    public static JoystickButton ENGAGE_COLOR_WHEEL = new JoystickButton(gunner, 4);//Y
+    public static JoystickButton ROTATE_WHEEL = new JoystickButton(gunner, 1);// A
+    public static JoystickButton SPIN_TO_COLOR = new JoystickButton(gunner, 5);
+    
+
 }
