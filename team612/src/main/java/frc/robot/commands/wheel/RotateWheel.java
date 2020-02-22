@@ -36,9 +36,10 @@ public class RotateWheel extends CommandBase {
   public void execute() {
 
     current_color = m_wheel.getClosestColor();  // Reassign the current sensor value
-    
+    System.out.println(revolution_count);
+    System.out.println(current_color);
     // Run the spark mechanism at fixed speed
-    m_wheel.setSpinner(1);
+    m_wheel.setSpinner(.4);
 
     // Prevent edge cases and invalid sensor values
     if (current_color == prev_color) {
@@ -56,7 +57,7 @@ public class RotateWheel extends CommandBase {
     }
 
     // Once within the range of revolutions, stop the mechanism
-    if(revolution_count >= 3.0) {
+    if(revolution_count >= 3.5) {
       is_complete = true;
     }
 

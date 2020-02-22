@@ -33,6 +33,7 @@ public class SpinToColor extends CommandBase {
 
   @Override
   public void initialize() {
+    isComplete = false;
   }
 
   @Override
@@ -40,7 +41,7 @@ public class SpinToColor extends CommandBase {
   
     currentColor = m_wheel.getClosestColor();  // Current sensor reading updating each loop
 
-    m_wheel.setSpinner(1);  // Run the spinner at full speed
+    m_wheel.setSpinner(.25);  // Run the spinner at full speed
 
     if (currentColor == sensorTarget) {
       isComplete = true;  // Once on the target value, stop the command
@@ -50,6 +51,9 @@ public class SpinToColor extends CommandBase {
     SmartDashboard.putString("Current Color Reading", String.valueOf(currentColor));
     SmartDashboard.putString("Target Color", String.valueOf(targetColor));
     SmartDashboard.putString("Sensor Target Color", String.valueOf(sensorTarget));
+    System.out.println("color: "+ currentColor);
+    System.out.println("target: "+ sensorTarget);
+    System.out.println("game target"+ targetColor);
 
   }
 
@@ -60,7 +64,7 @@ public class SpinToColor extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    m_wheel.colorPiston.set(Value.kReverse);
+   // m_wheel.colorPiston.set(Value.kReverse);
     return isComplete;
   }
 

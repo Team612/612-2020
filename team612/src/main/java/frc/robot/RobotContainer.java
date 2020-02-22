@@ -31,9 +31,9 @@ public class RobotContainer {
 
   // Put all button bindings here
   private void configureButtonBindings() {
-    ControlMap.gunner_button_A.whenPressed(new RotateWheel(m_wheel));
-    ControlMap.gunner_button_B.whenPressed(new SpinToColor(m_wheel));
-    ControlMap.gunner_button_LB.whenPressed(new ExtendColorWheel(m_wheel));
+    ControlMap.driver_button_A.whenPressed(new RotateWheel(m_wheel));
+    ControlMap.driver_button_B.whenPressed(new SpinToColor(m_wheel));
+    ControlMap.driver_button_LB.whenPressed(new ExtendColorWheel(m_wheel));
     
   }
 
