@@ -1,6 +1,7 @@
 package frc.robot.controls;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.InternalButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class ControlMap{
@@ -32,6 +33,11 @@ public class ControlMap{
     public static JoystickButton ENGAGE_COLOR_WHEEL = new JoystickButton(gunner, 4);//Y
     public static JoystickButton ROTATE_WHEEL = new JoystickButton(gunner, 1);// A
     public static JoystickButton SPIN_TO_COLOR = new JoystickButton(gunner, 5);
+
+    // Gunner buttons
+    public static InternalButton RUN_INTAKE_REPLAY    	        = new InternalButton();// back button
+    public static InternalButton RUN_OUTTAKE_REPLAY            = new InternalButton();// start
+    public static InternalButton RUN_FLYWHEEL_REPLAY           = new InternalButton(); // Left joystick press
     
 
 }

@@ -1,7 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.autonomous.SampleAuto;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.intake.*;
 import frc.robot.controls.ControlMap;
@@ -12,6 +11,11 @@ import frc.robot.commands.climb.ToggleHook;
 import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.controls.ControlMap;
 import frc.robot.subsystems.Climb;
+import frc.robot.commands.autonomous.EndRecord;
+import frc.robot.commands.autonomous.StartRecord;
+import frc.robot.commands.autonomous.StartReplay;
+import frc.robot.commands.drivetrain.DefaultDrive;
+import frc.robot.controls.ControlMap;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.wheel.ExtendColorWheel;
@@ -32,7 +36,9 @@ public class RobotContainer {
   // Color wheel subsystem and commands
   private final Wheel m_wheel = new Wheel();
 
-  private final SampleAuto m_sampleauto = new SampleAuto();
+  // TODO: Replace auto_file with ShuffleBoard selector
+  private String auto_file = "output.replay";
+  private final StartReplay m_autocommand = new StartReplay(m_drivetrain, auto_file);
 
   private final Climb m_climb = new Climb();
   
@@ -61,6 +67,11 @@ public class RobotContainer {
     ControlMap.ROTATE_WHEEL.toggleWhenPressed(new RotateWheel(m_wheel));
     ControlMap.SPIN_TO_COLOR.toggleWhenPressed(new SpinToColor(m_wheel));
     ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
+
+    // Intake control bindings
+    ControlMap.RUN_INTAKE_REPLAY.toggleWhenPressed(new RunIntake(m_intake));
+    ControlMap.RUN_OUTTAKE_REPLAY.whileHeld(new RunOuttake(m_intake));
+    ControlMap.RUN_FLYWHEEL_REPLAY.whileHeld(new RunFlywheel(m_intake));
     
     /*
     // Intake control bindings
@@ -81,7 +92,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return m_sampleauto;
+    return m_autocommand;
   }
 
 }

@@ -97,7 +97,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Back Left Drive Talon", spark_bl_drive.get());
     SmartDashboard.putNumber("Back Right Drive Talon", spark_br_drive.get());
     SmartDashboard.putNumber("Front Left Drive Talon", spark_fl_drive.get());
-    SmartDashboard.putNumber("Front RIght Drive Talon", spark_fr_drive.get());
+    SmartDashboard.putNumber("Front Right Drive Talon", spark_fr_drive.get());
 
   }
   

@@ -3,6 +3,7 @@ package frc.robot;
 public final class Constants {
 
     public static boolean ENABLE_ARCADE = true;
+    public static boolean ENABLE_RECORDING = true;
 
     /* -------- Drivetrain Subsystem -------- */
 
@@ -49,6 +50,5 @@ public final class Constants {
     //Color Wheel 15, PCM: 0 , {2,3}; 
     public static final int SPARK_WHEEL = 15;
     public static final int[] COLOR_PISTON = {2,3};
-    
 
 }
