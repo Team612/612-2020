@@ -4,6 +4,10 @@ public final class Constants {
 
     public static boolean ENABLE_ARCADE = true;
 
+    // PCM Ports
+    public static final int PCM_1 = 0;
+    public static final int PCM_2 = 1;
+
     /* -------- Drivetrain Subsystem -------- */
 
     // Drivetrain talon ports
@@ -41,10 +45,6 @@ public final class Constants {
     // Climb sparks
 
     public static final int SPARK_WINCH_CLIMB = 14;
-
-    public static final int PCM_1 = 0;
-    
-    public static final int PCM_2 = 1;
 
     //Color Wheel 15, PCM: 0 , {2,3}; 
     public static final int SPARK_WHEEL = 15;

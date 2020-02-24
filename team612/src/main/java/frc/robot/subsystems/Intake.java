@@ -23,21 +23,26 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class Intake extends SubsystemBase {
 
   // Spark objects for intake flywheel, belt, and outtake
-  private final WPI_TalonSRX talon_intake      = new WPI_TalonSRX(Constants.SPARK_INTAKE);
-  private final WPI_TalonSRX talon_upper_belt  = new WPI_TalonSRX(Constants.SPARK_UPPER_BELT);
-  private final WPI_TalonSRX talon_lower_belt  = new WPI_TalonSRX(Constants.SPARK_LOWER_BELT);
-  private final WPI_TalonSRX talon_outtake     = new WPI_TalonSRX(Constants.SPARK_OUTTAKE);
+  private final WPI_TalonSRX talon_intake = new WPI_TalonSRX(Constants.SPARK_INTAKE);
+  private final WPI_TalonSRX talon_upper_belt = new WPI_TalonSRX(Constants.SPARK_UPPER_BELT);
+  private final WPI_TalonSRX talon_lower_belt = new WPI_TalonSRX(Constants.SPARK_LOWER_BELT);
+  private final WPI_TalonSRX talon_outtake = new WPI_TalonSRX(Constants.SPARK_OUTTAKE);
 
   // Piston objects for intake and arm grabber
   private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
-  private final DoubleSolenoid solenoid_wall   = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
+  private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
 
   // Setting up analog input IR sensor
-  private final AnalogInput infared_intake     = new AnalogInput(Constants.INFARED_INTAKE);
-  private final AnalogInput infared_jump       = new AnalogInput(Constants.INFARED_JUMP);
+  private final AnalogInput infared_intake = new AnalogInput(Constants.INFARED_INTAKE);
+  private final AnalogInput infared_jump = new AnalogInput(Constants.INFARED_JUMP);
+
+  // Infared threshold to detect balls
   private final double INFARED_INTAKE_THRESHOLD = 0.775;
   private final double INFARED_JUMP_THRESHOLD = 0.75;
 
+  private final int INTAKE_DELAY = 0.2;
+
+  // Check if ball is first read of interation
   boolean firstRead = false;
 
   public double new_speed; 
@@ -64,8 +69,9 @@ public class Intake extends SubsystemBase {
     if (infared_intake.getAverageVoltage() > INFARED_INTAKE_THRESHOLD) {
       System.out.println("Ball in chamber!");
       solenoid_wall.set(Value.kReverse);
+      // If it is the first time the ball is detected
       if (firstRead) {
-        Timer.delay(.2);
+        Timer.delay(INTAKE_DELAY);  // Delay to allow ball to reach top
         firstRead = false;
       }
       talon_upper_belt.set(0);
@@ -90,14 +96,12 @@ public class Intake extends SubsystemBase {
 
   // Set the intake flywheel to a certain speed
   public void setIntake(double speed) {
-
     System.out.println(infared_jump.getAverageVoltage());
     if (infared_jump.getAverageVoltage() > INFARED_JUMP_THRESHOLD) {
       talon_intake.set(0);  // Status: Ball is is detected above intake
     } else {
       talon_intake.set(speed);
     }
-  
   }
 
   public Intake() {

@@ -20,20 +20,20 @@ public class Wheel extends SubsystemBase {
   private final WPI_TalonSRX talon_wheel = new WPI_TalonSRX(Constants.SPARK_WHEEL);
 
   // Target values for each color value (RGB values from manual)
-  private final Color kRedTarget         = ColorMatch.makeColor(.561, .232, .114);
-  private final Color kBlueTarget        = ColorMatch.makeColor(.143, .427, .429);
-  private final Color kGreenTarget       = ColorMatch.makeColor(.197, .561, .240);
-  private final Color kYellowTarget      = ColorMatch.makeColor(.361, .524, .113);
+  private final Color kRedTarget = ColorMatch.makeColor(.561, .232, .114);
+  private final Color kBlueTarget = ColorMatch.makeColor(.143, .427, .429);
+  private final Color kGreenTarget = ColorMatch.makeColor(.197, .561, .240);
+  private final Color kYellowTarget = ColorMatch.makeColor(.361, .524, .113);
   //private String colourVal;
 
   // Piston for engaging the spin of colour wheel
-  public DoubleSolenoid colorPiston      = new DoubleSolenoid(Constants.PCM_1, Constants.COLOR_PISTON[0],Constants.COLOR_PISTON[1]);
+  public DoubleSolenoid colorPiston = new DoubleSolenoid(Constants.PCM_1, Constants.COLOR_PISTON[0],Constants.COLOR_PISTON[1]);
 
   // The matcher that map the sensor value to one of the targets
-  public ColorMatch colorMatcher         = new ColorMatch();
+  public ColorMatch colorMatcher = new ColorMatch();
 
   // Create the color sensor object
-  public ColorSensorV3 colorSensor       = new ColorSensorV3(I2C.Port.kOnboard);
+  public ColorSensorV3 colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
 
   public void createMatches() {
     // Create the color matches
@@ -68,14 +68,16 @@ public class Wheel extends SubsystemBase {
     
   }
 
+  // Run the spinner at a certain speed
   public void setSpinner(double speed) {
     talon_wheel.set(speed);
   }
 
-  public void engagePiston(){
+  // Engage the color wheel piston
+  public void engagePiston() {
     if (colorPiston.get() == Value.kForward){
       colorPiston.set(Value.kReverse);
-       } else {
+    } else {
       colorPiston.set(Value.kForward);
     }
   }
