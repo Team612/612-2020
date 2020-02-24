@@ -32,7 +32,7 @@ public class RobotContainer {
   // Color wheel subsystem and commands
   private final Wheel m_wheel = new Wheel();
 
-  private final SampleAuto m_sampleauto = new SampleAuto();
+  //private final SampleAuto m_sampleauto = new SampleAuto();
 
   private final Climb m_climb = new Climb();
   
@@ -57,7 +57,9 @@ public class RobotContainer {
     ControlMap.ENGAGE_CLIMB.whenPressed(new EngageClimb(m_climb));
     ControlMap.TOGGLE_HOOK.whenPressed(new ToggleHook(m_climb));
     ControlMap.RUN_WINCH.whileHeld(new RunWinch(m_climb));
-
+    ControlMap.REVERSE_WINCH.whileHeld(new ReverseWinch(m_climb));
+    
+    // Color Wheel control bindings
     ControlMap.ROTATE_WHEEL.toggleWhenPressed(new RotateWheel(m_wheel));
     ControlMap.SPIN_TO_COLOR.toggleWhenPressed(new SpinToColor(m_wheel));
     ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
@@ -79,9 +81,9 @@ public class RobotContainer {
   private void configureDefaultCommands() {
     m_drivetrain.setDefaultCommand(c_drive);
   }
-
+  /*
   public Command getAutonomousCommand() {
     return m_sampleauto;
   }
-
+  */
 }

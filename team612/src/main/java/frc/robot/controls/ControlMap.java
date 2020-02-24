@@ -27,7 +27,8 @@ public class ControlMap{
     public static JoystickButton RUN_FLYWHEEL           = new JoystickButton(gunner,9); // Left joystick press
     public static JoystickButton ENGAGE_CLIMB           = new JoystickButton(gunner,2); // B
     public static JoystickButton TOGGLE_HOOK            = new JoystickButton(gunner,3); // X
-    public static JoystickButton RUN_WINCH              = new JoystickButton(gunner,6); // RB
+    public static JoystickButton RUN_WINCH              = new JoystickButton(gunner,10); // RB
+    public static JoystickButton REVERSE_WINCH          = new JoystickButton(gunner,6);
 
     public static JoystickButton ENGAGE_COLOR_WHEEL = new JoystickButton(gunner, 4);//Y
     public static JoystickButton ROTATE_WHEEL = new JoystickButton(gunner, 1);// A

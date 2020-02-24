@@ -8,6 +8,7 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Drivetrain;
 
 public class SampleAuto extends CommandBase {
   /**
@@ -26,6 +27,7 @@ public class SampleAuto extends CommandBase {
   @Override
   public void execute() {
     System.out.println("Temporary Autonomous File");
+    
   }
 
   // Called once the command ends or is interrupted.
