@@ -17,43 +17,57 @@ public class SpinToColor extends CommandBase {
   private char targetColor; // Actual target value (FMS)
   private char sensorTarget;  // Sensor target value (Since two colors behind on wheel) 
   private char currentColor;  // Current sensor value
+  private char initialColor;
 
   private boolean isComplete = false;  // Variable to end the command
 
   private Wheel m_wheel;  // Local subsystem from wheel
 
+  private double spinnerSpeed = 0.25;
+  private boolean isFirst = false;
+
   public SpinToColor(Wheel m_wheel) {
     // Create and add requirements for subsystem
     this.m_wheel = m_wheel;
     addRequirements(m_wheel);
-
-    getGameData();  // Get game data and end function if values not in drivetrain
+      // Get game data and end function if values not in drivetrain
 
   }
 
   @Override
   public void initialize() {
+    getGameData();
     isComplete = false;
+    initialColor = m_wheel.getClosestColor();
+    isFirst = true;
   }
 
   @Override
   public void execute() {
-  
+    
     currentColor = m_wheel.getClosestColor();  // Current sensor reading updating each loop
 
-    m_wheel.setSpinner(.25);  // Run the spinner at full speed
+    if (currentColor == sensorTarget && isFirst) {
+      m_wheel.setSpinner(spinnerSpeed);
+    } else {
+      isFirst = false;
 
-    if (currentColor == sensorTarget) {
-      isComplete = true;  // Once on the target value, stop the command
+      m_wheel.setSpinner(spinnerSpeed);  // Run the spinner at full speed
+
+      if (currentColor == sensorTarget) {
+        isComplete = true;  // Once on the target value, stop the command
+      }
+
+      // SmartDashboard color values
+      SmartDashboard.putString("Current Color Reading", String.valueOf(currentColor));
+      SmartDashboard.putString("Target Color", String.valueOf(targetColor));
+      SmartDashboard.putString("Sensor Target Color", String.valueOf(sensorTarget));
     }
 
-    // SmartDashboard color values
-    SmartDashboard.putString("Current Color Reading", String.valueOf(currentColor));
-    SmartDashboard.putString("Target Color", String.valueOf(targetColor));
-    SmartDashboard.putString("Sensor Target Color", String.valueOf(sensorTarget));
     System.out.println("color: "+ currentColor);
-    System.out.println("target: "+ sensorTarget);
-    System.out.println("game target"+ targetColor);
+      System.out.println("target: "+ sensorTarget);
+      System.out.println("game target"+ targetColor);
+      System.out.println(isFirst);
 
   }
 

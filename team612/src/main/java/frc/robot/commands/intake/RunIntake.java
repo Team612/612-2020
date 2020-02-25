@@ -15,7 +15,7 @@ public class RunIntake extends CommandBase {
 
   private final Intake m_intake;
   private double INTAKE_SPEED = .8; 
-  private double BELT_SPEED = 1;
+  private double BELT_SPEED = .5;
 
   public RunIntake(Intake m_intake) {
     this.m_intake = m_intake;

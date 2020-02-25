@@ -18,7 +18,6 @@ public class RunFlywheel extends CommandBase {
 
   public RunFlywheel(Intake m_intake) {
     this.m_intake = m_intake;
-    addRequirements(m_intake);
   }
 
   @Override

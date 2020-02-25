@@ -33,8 +33,8 @@ public final class Constants {
     // Solenoid port arrays (forward, reverse)
     public static final int[] SOLENOID_WALL = {4,5};//1
     public static final int[] SOLENOID_INTAKE = {2,3};//1
-    public static final int INFARED_INTAKE = 3;
-    public static final int INFARED_JUMP = 1;
+    public static final int INFARED_INTAKE = 1;
+    public static final int INFARED_JUMP = 3;
 
     /* -------- Climb Subsystem -------- */
 

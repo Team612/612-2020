@@ -39,10 +39,10 @@ public class Intake extends SubsystemBase {
   private final AnalogInput infared_jump = new AnalogInput(Constants.INFARED_JUMP);
 
   // Infared threshold to detect balls
-  private final double INFARED_INTAKE_THRESHOLD = 0.775;
+  private final double INFARED_INTAKE_THRESHOLD = 0.9;
   private final double INFARED_JUMP_THRESHOLD = 0.75;
 
-  private final double INTAKE_DELAY = 0.1;
+  private final double INTAKE_DELAY = .07;
 
   // Check if ball is first read of interation
   boolean firstRead = false;
@@ -73,10 +73,13 @@ public class Intake extends SubsystemBase {
       solenoid_wall.set(Value.kReverse);
       // If it is the first time the ball is detected
       if (firstRead) {
-        Timer.delay(INTAKE_DELAY);  // Delay to allow ball to reach top
+        //Timer.delay(INTAKE_DELAY);  // Delay to allow ball to reach top
         firstRead = false;
       }
+      Timer.delay(INTAKE_DELAY);
       talon_upper_belt.set(0);
+      
+     
     } else {
       firstRead = true;
       talon_upper_belt.set(-belt_speed);
@@ -108,8 +111,8 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     solenoid_wall.set(Value.kForward);
-    talon_upper_belt.setNeutralMode(NeutralMode.Coast);
-    talon_lower_belt.setNeutralMode(NeutralMode.Coast);
+    talon_upper_belt.setNeutralMode(NeutralMode.Brake);
+    talon_lower_belt.setNeutralMode(NeutralMode.Brake);
   }
 
   @Override
@@ -119,6 +122,6 @@ public class Intake extends SubsystemBase {
     System.out.println("---------");
     SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
     SmartDashboard.putNumber("IR Sensor Intake: ", infared_intake.getAverageVoltage());
-    ControlMap.driver.setRumble(RumbleType.kLeftRumble, 1);
+    //ControlMap.driver.setRumble(RumbleType.kLeftRumble, 1);
   }
 }
