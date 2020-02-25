@@ -108,11 +108,6 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println(infared_jump.getAverageVoltage());
-    System.out.println(infared_intake.getAverageVoltage());
-    System.out.println("---------");
-    SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
-    SmartDashboard.putNumber("IR Sensor Intake: ", infared_intake.getAverageVoltage());
   }
 
 }

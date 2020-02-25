@@ -1,5 +1,6 @@
 package frc.robot;
 
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.intake.*;
@@ -73,6 +74,11 @@ public class RobotContainer {
     ControlMap.RUN_OUTTAKE_REPLAY.whileHeld(new RunOuttake(m_intake));
     ControlMap.RUN_FLYWHEEL_REPLAY.whileHeld(new RunFlywheel(m_intake));
     
+    if (Constants.ENABLE_RECORDING) {
+      System.out.println("Hi friend");
+      ControlMap.driver_button_A.whenPressed(new StartRecord(auto_file));
+      ControlMap.driver_button_B.whenPressed(new EndRecord());
+    }
     /*
     // Intake control bindings
     ControlMap.RUN_INTAKE.toggleWhenPressed(new RunIntake(m_intake));

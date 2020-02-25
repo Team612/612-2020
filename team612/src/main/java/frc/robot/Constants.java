@@ -5,13 +5,17 @@ public final class Constants {
     public static boolean ENABLE_ARCADE = true;
     public static boolean ENABLE_RECORDING = true;
 
+    // PCM Ports
+    public static final int PCM_1 = 0;
+    public static final int PCM_2 = 1;
+
     /* -------- Drivetrain Subsystem -------- */
 
     // Drivetrain talon ports
-    public static int SPARK_FR_DRIVE = 2;//59
-    public static int SPARK_FL_DRIVE = 12;
-    public static int SPARK_BR_DRIVE = 3;
-    public static int SPARK_BL_DRIVE = 1;
+    public static int SPARK_FR_DRIVE = 1;//59
+    public static int SPARK_FL_DRIVE = 14;
+    public static int SPARK_BR_DRIVE = 0;
+    public static int SPARK_BL_DRIVE = 15;
 
     // Forward and reverse channel for drive double solenoid
     public static int[] ULTRASONIC_DRIVE = {2,4};
@@ -36,19 +40,15 @@ public final class Constants {
     /* -------- Climb Subsystem -------- */
 
     // Climb solenoids
-    public static final int[] SOLENOID_ENGAGE_CLIMB = {7,6};//1
-    public static final int[] SOLENOID_TOGGLE_HOOK = {0,1};//0
+    public static final int[] SOLENOID_ENGAGE_CLIMB = {7,6};
+    public static final int[] SOLENOID_TOGGLE_HOOK = {0,1};
 
     // Climb sparks
-
     public static final int SPARK_WINCH_CLIMB = 14;
 
-    public static final int PCM_1 = 0;
-    
-    public static final int PCM_2 = 1;
+    /* -------- Color Wheel Subsystem -------- */
 
-    //Color Wheel 15, PCM: 0 , {2,3}; 
     public static final int SPARK_WHEEL = 15;
     public static final int[] COLOR_PISTON = {2,3};
-
+    
 }

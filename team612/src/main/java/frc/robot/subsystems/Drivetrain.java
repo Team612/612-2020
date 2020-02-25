@@ -25,13 +25,13 @@ public class Drivetrain extends SubsystemBase {
   private final double DEADZONE = 0.1;
   
   // Talons for drivetrain
-  private CANSparkMax spark_fr_drive = new CANSparkMax(Constants.SPARK_FR_DRIVE, MotorType.kBrushless);
-  private CANSparkMax spark_fl_drive = new CANSparkMax(Constants.SPARK_FL_DRIVE, MotorType.kBrushless);
-  private CANSparkMax spark_br_drive = new CANSparkMax(Constants.SPARK_BR_DRIVE, MotorType.kBrushless);
-  private CANSparkMax spark_bl_drive = new CANSparkMax(Constants.SPARK_BL_DRIVE, MotorType.kBrushless);
+  private WPI_TalonSRX spark_fr_drive = new WPI_TalonSRX(Constants.SPARK_FR_DRIVE);
+  private WPI_TalonSRX spark_fl_drive = new WPI_TalonSRX(Constants.SPARK_FL_DRIVE);
+  private WPI_TalonSRX spark_br_drive = new WPI_TalonSRX(Constants.SPARK_BR_DRIVE);
+  private WPI_TalonSRX spark_bl_drive = new WPI_TalonSRX(Constants.SPARK_BL_DRIVE);
 
   // Ultrasonic sensor for drive
-  //private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
+  // private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
 
   // Double solenoid for changing gears
   private DoubleSolenoid solenoid_drive = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
@@ -69,9 +69,6 @@ public class Drivetrain extends SubsystemBase {
     spark_bl_drive.set(left_command);
   }
 
-  // Get distance in inches from ultrasonic in drive
- 
-
   // Shift the double solenoid to kForward
   public void shiftForward() {
     solenoid_drive.set(Value.kForward);
@@ -97,7 +94,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Back Left Drive Talon", spark_bl_drive.get());
     SmartDashboard.putNumber("Back Right Drive Talon", spark_br_drive.get());
     SmartDashboard.putNumber("Front Left Drive Talon", spark_fl_drive.get());
-    SmartDashboard.putNumber("Front Right Drive Talon", spark_fr_drive.get());
+    SmartDashboard.putNumber("Front RIght Drive Talon", spark_fr_drive.get());
 
   }
   

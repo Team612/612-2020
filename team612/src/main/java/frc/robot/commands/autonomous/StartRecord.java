@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.controls.ControlMap;
 
@@ -23,6 +24,8 @@ public class StartRecord extends CommandBase {
   private JSONArray frames;  // Output array to pass into the file
   private double voltage;  // Store current voltage before replay
 
+  Timer timestamp = new Timer();
+
   public StartRecord(String OUTPUT_FILE) {  // Passs output file in constructor
     this.OUTPUT_FILE = OUTPUT_FILE;
   }
@@ -30,6 +33,10 @@ public class StartRecord extends CommandBase {
 
   @Override
   public void initialize() {
+    timestamp.stop();
+    timestamp.reset();
+    timestamp.start();
+    System.out.println("Starting Record!");
     RECORDING = true;  // Reset the value of RECORDING every time the command is called
     frames = new JSONArray();  // Reset the JSON array each call
     voltage = RobotController.getBatteryVoltage();
@@ -51,6 +58,8 @@ public class StartRecord extends CommandBase {
     JSONObject export_json = new JSONObject();
     export_json.put("voltage", voltage);
     export_json.put("frames", frames);
+
+    timestamp.stop();
 
     save_json(export_json, DIRECTORY + OUTPUT_FILE);  // Save the final JSONArray to directory in ROBORIO
 
@@ -99,11 +108,12 @@ public class StartRecord extends CommandBase {
       joy_frame.put("axes", axes);
       joy_frame.put("pov", pov);
 
+      frame.put("time", timestamp.get());
       frame.put(count, joy_frame);  // Append the controller and its mapping to the current frame object
       count++;
       
     }
-    
+    System.out.println(frame);
     return frame;  // Return the finalized single loop json object
 
   }

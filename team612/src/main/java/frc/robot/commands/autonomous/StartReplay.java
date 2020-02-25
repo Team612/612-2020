@@ -10,6 +10,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.intake.RunIntake;
@@ -35,20 +36,31 @@ public class StartReplay extends CommandBase {
   private Drivetrain m_drivetrain;
   private Intake m_intake;
   
+  String FILENAME;
+
+  Timer timestamp = new Timer();
 
   public StartReplay(Drivetrain m_drivetrain, String FILENAME) {
-    JSONObject parsed = parse_json(DIRECTORY + FILENAME);
+    this.FILENAME = FILENAME;
     this.m_drivetrain = m_drivetrain;
-
-    // Extract voltage and array of steps from parsed json
-    recording_voltage = (double) parsed.get("voltage");
-    frames = (JSONArray) parsed.get("frames");
     addRequirements(m_drivetrain);
   }
 
 
   @Override
   public void initialize() {
+
+    timestamp.stop();
+    timestamp.reset();
+    timestamp.start();
+
+    JSONObject parsed = parse_json(DIRECTORY + FILENAME);
+
+    // Extract voltage and array of steps from parsed json
+    recording_voltage = (double) parsed.get("voltage");
+    frames = (JSONArray) parsed.get("frames");
+   
+
     //System.out.println(frames);
     i=0;
     END_REPLAY=false;
@@ -70,15 +82,33 @@ public class StartReplay extends CommandBase {
       forward *= getVoltageCompensation();
       turn *= getVoltageCompensation();
 
-      m_drivetrain.arcadeDrive(forward, turn);
+      System.out.println("Old" + (double) frame.get("time"));
+      System.out.println("New" + timestamp.get());
+
+      m_drivetrain.arcadeDrive(0, forward);
+      System.out.println(i);
+
       
+      /*
       boolean INTAKE = (boolean) getValueFromReplay(frame, 1, "buttons", 4);
       boolean OUTTAKE = (boolean) getValueFromReplay(frame, 1, "buttons", 4);
       boolean FLYWHEEL = (boolean) getValueFromReplay(frame, 1, "buttons", 4);
+      */
+      System.out.println(forward);
+      System.out.println(turn);
+      System.out.println(getVoltageCompensation());
+      /*
+      System.out.println(INTAKE);
+      System.out.println(OUTTAKE);
+      System.out.println(FLYWHEEL);
+      */
+      System.out.println("----------");
 
+      /*
       ControlMap.RUN_INTAKE_REPLAY.setPressed(INTAKE);
       ControlMap.RUN_FLYWHEEL_REPLAY.setPressed(FLYWHEEL);
       ControlMap.RUN_OUTTAKE_REPLAY.setPressed(OUTTAKE);
+      */
 
       //TODO: plug joystick values back into drivetrain.
 
@@ -94,6 +124,7 @@ public class StartReplay extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    timestamp.stop();
   }
 
 
