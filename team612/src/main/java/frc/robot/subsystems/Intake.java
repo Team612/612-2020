@@ -10,11 +10,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.controls.ControlMap;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -40,7 +42,7 @@ public class Intake extends SubsystemBase {
   private final double INFARED_INTAKE_THRESHOLD = 0.775;
   private final double INFARED_JUMP_THRESHOLD = 0.75;
 
-  private final int INTAKE_DELAY = 0.2;
+  private final double INTAKE_DELAY = 0.1;
 
   // Check if ball is first read of interation
   boolean firstRead = false;
@@ -98,7 +100,7 @@ public class Intake extends SubsystemBase {
   public void setIntake(double speed) {
     System.out.println(infared_jump.getAverageVoltage());
     if (infared_jump.getAverageVoltage() > INFARED_JUMP_THRESHOLD) {
-      talon_intake.set(0);  // Status: Ball is is detected above intake
+      talon_intake.set(-0.1);  // Status: Ball is is detected above intake
     } else {
       talon_intake.set(speed);
     }
@@ -117,6 +119,6 @@ public class Intake extends SubsystemBase {
     System.out.println("---------");
     SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
     SmartDashboard.putNumber("IR Sensor Intake: ", infared_intake.getAverageVoltage());
+    ControlMap.driver.setRumble(RumbleType.kLeftRumble, 1);
   }
-
 }
