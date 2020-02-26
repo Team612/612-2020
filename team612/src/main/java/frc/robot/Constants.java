@@ -35,6 +35,7 @@ public final class Constants {
     public static final int[] SOLENOID_INTAKE = {2,3};//1
     public static final int INFARED_INTAKE = 1;
     public static final int INFARED_JUMP = 3;
+    public static final int INFARED_3 = 5;
 
     /* -------- Climb Subsystem -------- */
 

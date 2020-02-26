@@ -37,7 +37,7 @@ public class Intake extends SubsystemBase {
   // Setting up analog input IR sensor
   private final AnalogInput infared_intake = new AnalogInput(Constants.INFARED_INTAKE);
   private final AnalogInput infared_jump = new AnalogInput(Constants.INFARED_JUMP);
-
+  private final AnalogInput infared_3 = new AnalogInput(Constants.INFARED_3);
   // Infared threshold to detect balls
   private final double INFARED_INTAKE_THRESHOLD = 0.9;
   private final double INFARED_JUMP_THRESHOLD = 0.75;
@@ -73,6 +73,9 @@ public class Intake extends SubsystemBase {
       solenoid_wall.set(Value.kReverse);
       // If it is the first time the ball is detected
       if (firstRead) {
+        talon_upper_belt.set(1);
+        Timer.delay(0.5);
+        talon_upper_belt.set(0);
         //Timer.delay(INTAKE_DELAY);  // Delay to allow ball to reach top
         firstRead = false;
       }
