@@ -20,15 +20,17 @@ import frc.robot.controls.ControlMap;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 public class Intake extends SubsystemBase {
 
   // Spark objects for intake flywheel, belt, and outtake
-  private final WPI_TalonSRX talon_intake = new WPI_TalonSRX(Constants.SPARK_INTAKE);
-  private final WPI_TalonSRX talon_upper_belt = new WPI_TalonSRX(Constants.SPARK_UPPER_BELT);
-  private final WPI_TalonSRX talon_lower_belt = new WPI_TalonSRX(Constants.SPARK_LOWER_BELT);
-  private final WPI_TalonSRX talon_outtake = new WPI_TalonSRX(Constants.SPARK_OUTTAKE);
+  private final CANSparkMax talon_intake = new CANSparkMax(Constants.SPARK_INTAKE, MotorType.kBrushless);
+  private final CANSparkMax talon_upper_belt = new CANSparkMax(Constants.SPARK_UPPER_BELT, MotorType.kBrushed);
+  private final CANSparkMax talon_lower_belt = new CANSparkMax(Constants.SPARK_LOWER_BELT, MotorType.kBrushless);
+  private final CANSparkMax talon_outtake = new CANSparkMax(Constants.SPARK_OUTTAKE, MotorType.kBrushless);
 
   // Piston objects for intake and arm grabber
   private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);

@@ -25,10 +25,10 @@ public class Drivetrain extends SubsystemBase {
   private final double DEADZONE = 0.1;
   
   // Talons for drivetrain
-  private CANSparkMax spark_fr_drive = new CANSparkMax(Constants.SPARK_FR_DRIVE, MotorType.kBrushless);
-  private CANSparkMax spark_fl_drive = new CANSparkMax(Constants.SPARK_FL_DRIVE, MotorType.kBrushless);
-  private CANSparkMax spark_br_drive = new CANSparkMax(Constants.SPARK_BR_DRIVE, MotorType.kBrushless);
-  private CANSparkMax spark_bl_drive = new CANSparkMax(Constants.SPARK_BL_DRIVE, MotorType.kBrushless);
+  private WPI_TalonSRX spark_fr_drive = new WPI_TalonSRX(Constants.SPARK_FR_DRIVE);
+  private WPI_TalonSRX spark_fl_drive = new WPI_TalonSRX(Constants.SPARK_FL_DRIVE);
+  private WPI_TalonSRX spark_br_drive = new WPI_TalonSRX(Constants.SPARK_BR_DRIVE);
+  private WPI_TalonSRX spark_bl_drive = new WPI_TalonSRX(Constants.SPARK_BL_DRIVE);
 
   // Ultrasonic sensor for drive
   // private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
