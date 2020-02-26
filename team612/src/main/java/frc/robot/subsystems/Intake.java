@@ -21,6 +21,7 @@ import frc.robot.controls.ControlMap;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
@@ -110,8 +111,8 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     solenoid_wall.set(Value.kForward);
-    talon_upper_belt.setNeutralMode(NeutralMode.Coast);
-    talon_lower_belt.setNeutralMode(NeutralMode.Coast);
+    talon_upper_belt.setIdleMode(IdleMode.kCoast);
+    talon_lower_belt.setIdleMode(IdleMode.kCoast);
   }
 
   @Override
