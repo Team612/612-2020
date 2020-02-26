@@ -33,8 +33,11 @@ public final class Constants {
     // Solenoid port arrays (forward, reverse)
     public static final int[] SOLENOID_WALL = {4,5};//1
     public static final int[] SOLENOID_INTAKE = {2,3};//1
-    public static final int INFARED_INTAKE = 1;
-    public static final int INFARED_JUMP = 3;
+
+    // Infared sensor ports
+    public static final int INFARED_UPPER = 1;
+    public static final int INFARED_LOWER = 3;
+    public static final int INFARED_JUMP = 2;
 
     /* -------- Climb Subsystem -------- */
 
