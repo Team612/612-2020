@@ -36,12 +36,15 @@ public class Intake extends SubsystemBase {
   private final AnalogInput infared_lower = new AnalogInput(Constants.INFARED_LOWER);
   private final AnalogInput infared_jump = new AnalogInput(Constants.INFARED_JUMP);
   //private final AnalogInput infared_3 = new AnalogInput(Constants.INFARED_3);
+
   // Infared threshold to detect balls
   private final double INFARED_INTAKE_THRESHOLD = .4;
   private final double INFARED_JUMP_THRESHOLD = 0.85;
   private final double INFRARED_LOWER_THRESHOLD = .9;
-
-  private final double INTAKE_DELAY = 0.5;
+  
+  //Setting up delay values for usde with IR sensors
+  private final double UPPER_DELAY = 0.5;
+  private final double LOWER_DELAY = 0.1;
 
   // Check if ball is first read of interation
   boolean firstRead = false;
@@ -69,6 +72,7 @@ public class Intake extends SubsystemBase {
     if (infared_upper.getAverageVoltage() > INFARED_INTAKE_THRESHOLD) {
       System.out.println("Ball in chamber!");
       solenoid_wall.set(Value.kReverse);
+      /*
       // If it is the first time the ball is detected
       if (firstRead) {
         talon_upper_belt.set(1);
@@ -77,19 +81,21 @@ public class Intake extends SubsystemBase {
         //Timer.delay(INTAKE_DELAY);  // Delay to allow ball to reach top
         firstRead = false;
       }
-      Timer.delay(INTAKE_DELAY);
+      */
+      Timer.delay(UPPER_DELAY);
       talon_upper_belt.set(0);
       
       System.out.println("Ball in upper chamber!");
-      talon_upper_belt.set(0);
+      //talon_upper_belt.set(0);
      
       if (infared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
         System.out.println("Ball in lower chamber!");
         solenoid_wall.set(Value.kForward);
+        Timer.delay(LOWER_DELAY);
         talon_lower_belt.set(0);
       } else {
         solenoid_wall.set(Value.kReverse);
-        System.out.println("Hahaha");
+        //System.out.println("Hahaha");
         talon_lower_belt.set(belt_speed);
       }
 
