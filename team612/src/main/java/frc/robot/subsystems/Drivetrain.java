@@ -47,10 +47,13 @@ public class Drivetrain extends SubsystemBase {
     //WPI_Talon SRX Caps voltage at 1.0
     double leftCommand = y_axis - x_axis;
     double rightCommand = y_axis + x_axis;
+    //System.out.println(leftCommand);
+    //System.out.println(rightCommand);
     
     // right side motor controls
     spark_fr_drive.set(-rightCommand);
     spark_br_drive.set(-rightCommand);
+    System.out.println(spark_br_drive.get());
 
     //left side motor controls
     spark_fl_drive.set(leftCommand);

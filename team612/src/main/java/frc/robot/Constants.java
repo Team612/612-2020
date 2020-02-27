@@ -13,9 +13,9 @@ public final class Constants {
     
     // Drivetrain talon ports
     public static int SPARK_FR_DRIVE = 2;//59
-    public static int SPARK_FL_DRIVE = 12;
+    public static int SPARK_FL_DRIVE = 13;
     public static int SPARK_BR_DRIVE = 3;
-    public static int SPARK_BL_DRIVE = 1;
+    public static int SPARK_BL_DRIVE = 5;
 
     // Forward and reverse channel for drive double solenoid
     public static int[] ULTRASONIC_DRIVE = {2,4};

@@ -105,8 +105,8 @@ public class Intake extends SubsystemBase {
 
   public void setUpperOuttake(double speed) {
     //set the outtake spark to a certain speed
-    System.out.println("Running outtake to upper target");
-    talon_outtake.set(speed*0.07);
+    System.out.println("Running outtake t%o upper target");
+    talon_outtake.set(speed*1.0);
     //talon_lower_belt.set(speed);
     //talon_upper_belt.set(speed);
   }
