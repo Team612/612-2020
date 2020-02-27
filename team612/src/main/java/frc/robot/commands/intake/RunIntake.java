@@ -17,6 +17,8 @@ public class RunIntake extends CommandBase {
   private final Intake m_intake;
   private double INTAKE_SPEED = .8; 
   private double BELT_SPEED = 1;
+  public static boolean isRunning = false;
+
 
   public RunIntake(Intake m_intake) {
     this.m_intake = m_intake;
@@ -27,6 +29,7 @@ public class RunIntake extends CommandBase {
   public void initialize() {
     m_intake.extendIntake();
     Timer.delay(.5);
+    isRunning = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +38,6 @@ public class RunIntake extends CommandBase {
     m_intake.setIntake(INTAKE_SPEED);
     m_intake.setBelt(BELT_SPEED);
     Robot.led.intake();
-
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +46,7 @@ public class RunIntake extends CommandBase {
     m_intake.setIntake(0);
     m_intake.setBelt(BELT_SPEED);
     m_intake.retractIntake();
+    isRunning = false;
   }
 
   // Returns true when the command should end.

@@ -12,6 +12,9 @@ public class DefaultDrive extends CommandBase {
 
   private final Drivetrain m_drivetrain;  // Local version of drivetrain
 
+  public static boolean isRunning = false;
+
+
   // Constructor and add requirements from drivetrain subsystem
   public DefaultDrive(Drivetrain m_drivetrain) {
     this.m_drivetrain = m_drivetrain;
@@ -20,6 +23,7 @@ public class DefaultDrive extends CommandBase {
 
   @Override
   public void initialize(){
+    isRunning = true;
   }
 
   @Override
@@ -32,8 +36,10 @@ public class DefaultDrive extends CommandBase {
     }
   }
 
+
   @Override
   public void end(boolean interrupted){
+    isRunning = false; 
   }
 
   @Override

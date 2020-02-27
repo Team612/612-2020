@@ -16,6 +16,8 @@ public class ReverseWinch extends CommandBase {
 
   private double WINCH_SPEED = -1;
 
+  public static boolean isRunning = false;
+
   public ReverseWinch(Climb m_climb) {
     this.m_climb = m_climb;
     addRequirements(m_climb);
@@ -24,7 +26,9 @@ public class ReverseWinch extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    isRunning = true;
   }
+
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -36,11 +40,13 @@ public class ReverseWinch extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_climb.setWinch(0);
+    isRunning = false;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    
     return false;
   }
 }

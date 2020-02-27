@@ -27,6 +27,8 @@ public class Drivetrain extends SubsystemBase {
   private WPI_TalonSRX talon_br_drive = new WPI_TalonSRX(Constants.TALON_BR_DRIVE);
   private WPI_TalonSRX talon_bl_drive = new WPI_TalonSRX(Constants.TALON_BL_DRIVE);
 
+  public static boolean isForward = true;
+
   // Ultrasonic sensor for drive
   private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
 
@@ -44,6 +46,10 @@ public class Drivetrain extends SubsystemBase {
     //WPI_Talon SRX Caps voltage at 1.0
     double leftCommand = y_axis - x_axis;
     double rightCommand = y_axis + x_axis;
+
+    if (leftCommand > 0 && rightCommand > 0){
+      isForward = true; 
+    }
     
     // right side motor controls
     talon_fr_drive.set(-rightCommand);
@@ -59,12 +65,18 @@ public class Drivetrain extends SubsystemBase {
     left_command = Math.abs(left_command) < DEADZONE ? 0.0 : left_command;
     right_command = Math.abs(right_command) < DEADZONE ? 0.0 : right_command;
 
+    if (left_command > 0 && right_command > 0){
+      isForward = true; 
+    }
+
+
     talon_fr_drive.set(-right_command);
     talon_br_drive.set(-right_command);
 
     talon_fl_drive.set(left_command);
     talon_bl_drive.set(left_command);
   }
+
 
   // Get distance in inches from ultrasonic in drive
   public double getDistance() {

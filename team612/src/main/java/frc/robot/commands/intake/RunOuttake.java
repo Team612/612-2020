@@ -16,6 +16,7 @@ public class RunOuttake extends CommandBase {
   private double SPEED = 1;  // Fixed speed for intake sparks
 
   private final Intake m_intake;  // Local reference to intake subsystem
+  public static boolean isRunning = false;
 
   public RunOuttake(Intake m_intake) {
     this.m_intake = m_intake;
@@ -24,6 +25,7 @@ public class RunOuttake extends CommandBase {
 
   @Override
   public void initialize() {
+    isRunning = true;
   }
 
   @Override
@@ -35,6 +37,7 @@ public class RunOuttake extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_intake.setOuttake(0);  // Once done, end the command
+    isRunning = false;
   }
 
   @Override
