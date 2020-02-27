@@ -36,8 +36,9 @@ public class Intake extends SubsystemBase {
   private final AnalogInput infared_jump = new AnalogInput(Constants.INFARED_JUMP);
 
   // Infared threshold to detect balls
-  private final double INFARED_INTAKE_THRESHOLD = 0.9;
-  private final double INFARED_JUMP_THRESHOLD = 0.75;
+  private final double INFARED_INTAKE_THRESHOLD = .4;
+  private final double INFARED_JUMP_THRESHOLD = 0.85;
+  private final double INFRARED_LOWER_THRESHOLD = .9;
 
   // Check if ball is first read of interation
   boolean firstRead = false;
@@ -66,10 +67,15 @@ public class Intake extends SubsystemBase {
       
       System.out.println("Ball in upper chamber!");
       talon_upper_belt.set(0);
-
-      if (infared_lower.getAverageValue() > INFARED_INTAKE_THRESHOLD) {
+     
+      if (infared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
         System.out.println("Ball in lower chamber!");
+        solenoid_wall.set(Value.kForward);
         talon_lower_belt.set(0);
+      } else {
+        solenoid_wall.set(Value.kReverse);
+        System.out.println("Hahaha");
+        talon_lower_belt.set(belt_speed);
       }
 
     } else {
@@ -109,8 +115,9 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println(infared_jump.getAverageVoltage());
-    System.out.println(infared_upper.getAverageVoltage());
+    System.out.println("Jump: " + infared_jump.getAverageVoltage());
+    System.out.println("Upper: " + infared_upper.getAverageVoltage());
+    System.out.println(infared_lower.getAverageValue() > INFRARED_LOWER_THRESHOLD);
     System.out.println("---------");
     SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
     SmartDashboard.putNumber("IR Sensor Intake: ", infared_upper.getAverageVoltage());

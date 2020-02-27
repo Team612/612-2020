@@ -35,9 +35,9 @@ public final class Constants {
     public static final int[] SOLENOID_INTAKE = {2,3};//1
 
     // Infared sensor ports
-    public static final int INFARED_UPPER = 1;
-    public static final int INFARED_LOWER = 3;
-    public static final int INFARED_JUMP = 2;
+    public static final int INFARED_UPPER = 3;
+    public static final int INFARED_LOWER = 1;
+    public static final int INFARED_JUMP = 0;
 
     /* -------- Climb Subsystem -------- */
 
