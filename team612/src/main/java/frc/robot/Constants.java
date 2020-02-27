@@ -31,7 +31,7 @@ public final class Constants {
     public static final int SPARK_OUTTAKE = 5;
 
     // Solenoid port arrays (forward, reverse)
-    public static final int[] SOLENOID_WALL = {4,5};//1
+    public static final int[] SOLENOID_WALL = {5,4};//1
     public static final int[] SOLENOID_INTAKE = {2,3};//1
 
     // Infared sensor ports

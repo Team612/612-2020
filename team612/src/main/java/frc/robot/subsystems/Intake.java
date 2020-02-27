@@ -44,11 +44,11 @@ public class Intake extends SubsystemBase {
 
   //Setting up delay values for usde with IR sensors
   private final double UPPER_DELAY = 0.2;
-  private final double LOWER_DELAY = 1;
+  private final double LOWER_DELAY = 0.6;
 
   // Check if ball is first read of interation
-  boolean firstReadUpper = true;
-  boolean firstReadLower = true;
+  public boolean firstReadUpper = true;
+  public boolean firstReadLower = true;
 
   public double new_speed; 
 
@@ -72,49 +72,41 @@ public class Intake extends SubsystemBase {
     // If the upper infared senses a ball, stop the upper belt and engage the wall
     if (infared_upper.getAverageVoltage() > INFARED_UPPER_THRESHOLD) {
       System.out.println("Ball in chamber!");
-      solenoid_wall.set(Value.kReverse);
       
       // If it is the first time the ball is detected
       if (firstReadUpper) {
-        solenoid_wall.set(Value.kReverse);
-        talon_upper_belt.set(1);
-        Timer.delay(0.5);
-        talon_upper_belt.set(0);
-        //Timer.delay(INTAKE_DELAY);  // Delay to allow ball to reach top
+        solenoid_wall.set(Value.kForward);
         firstReadUpper = false;
       }
-      
       Timer.delay(UPPER_DELAY);
       talon_upper_belt.set(0);
       
       System.out.println("Ball in upper chamber!");
-      //talon_upper_belt.set(0);
      
       if (infared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
         System.out.println("Ball in lower chamber!");
         if(firstReadLower){
-        solenoid_wall.set(Value.kForward);
+        solenoid_wall.set(Value.kReverse);
         firstReadLower = false;
         }
         Timer.delay(LOWER_DELAY);
         talon_lower_belt.set(0);
       } else {
-        solenoid_wall.set(Value.kReverse);
-        //System.out.println("Hahaha");
+        //solenoid_wall.set(Value.kForward);
         talon_lower_belt.set(belt_speed);
       }
 
     } else {
       talon_lower_belt.set(belt_speed);
       talon_upper_belt.set(belt_speed);
-      solenoid_wall.set(Value.kForward);
+      solenoid_wall.set(Value.kReverse);
       talon_outtake.set(0);
     }
 
   }
 
   public void setOuttake(double speed) {
-    solenoid_wall.set(Value.kReverse);
+    solenoid_wall.set(Value.kForward);
 
     // Set the outtake spark to a certain speed
     System.out.println("Running outtake flywheel");
@@ -127,14 +119,14 @@ public class Intake extends SubsystemBase {
   public void setIntake(double speed) {
     System.out.println(infared_jump.getAverageVoltage());
     if (infared_jump.getAverageVoltage() > INFARED_JUMP_THRESHOLD) {
-      talon_intake.set(-0.1);  // Status: Ball is is detected above intake
+      talon_intake.set(-0.20);  // Status: Ball is is detected above intake
     } else {
       talon_intake.set(speed);
     }
   }
 
   public Intake() {
-    solenoid_wall.set(Value.kForward);
+    solenoid_wall.set(Value.kReverse);
     talon_upper_belt.setNeutralMode(NeutralMode.Brake);
     talon_lower_belt.setNeutralMode(NeutralMode.Brake);
   }
@@ -143,9 +135,12 @@ public class Intake extends SubsystemBase {
   public void periodic() {
     System.out.println("Jump: " + infared_jump.getAverageVoltage());
     System.out.println("Upper: " + infared_upper.getAverageVoltage());
-    System.out.println(infared_lower.getAverageVoltage());
+    System.out.println("Lower" + infared_lower.getAverageVoltage());
     System.out.println("---------");
-    System.out.println(LOWER_DELAY);
+    //System.out.println("LowerDelay" + LOWER_DELAY);
+    //System.out.println("BooleanDwn" + firstReadLower);
+    //System.out.println("BooleanUp" + firstReadUpper);
+
     // SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
     // SmartDashboard.putNumber("IR Sensor Intake: ", infared_upper.getAverageVoltage());
     //ControlMap.driver.setRumble(RumbleType.kLeftRumble, 1);

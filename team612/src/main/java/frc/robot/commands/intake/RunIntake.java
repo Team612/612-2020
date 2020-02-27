@@ -26,6 +26,8 @@ public class RunIntake extends CommandBase {
   public void initialize() {
     m_intake.extendIntake();
     Timer.delay(.5);
+    m_intake.firstReadUpper = true;
+    m_intake.firstReadLower = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
