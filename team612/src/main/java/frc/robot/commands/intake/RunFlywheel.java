@@ -27,12 +27,12 @@ public class RunFlywheel extends CommandBase {
 
   @Override
   public void execute() {
-    m_intake.setIntake(SPEED); // Run outtake while held at specific speed
+    //m_intake.setIntake(SPEED); // Run outtake while held at specific speed
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_intake.setIntake(0);  // Once done, end the command
+    //m_intake.setIntake(0);  // Once done, end the command
   }
 
   @Override

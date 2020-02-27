@@ -31,14 +31,14 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.setIntake(INTAKE_SPEED);
+    //m_intake.setIntake(INTAKE_SPEED);
     m_intake.setBelt(BELT_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intake.setIntake(0);
+    //m_intake.setIntake(0);
     m_intake.setBelt(BELT_SPEED);
     m_intake.retractIntake();
   }

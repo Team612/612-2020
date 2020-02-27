@@ -21,6 +21,7 @@ import frc.robot.controls.ControlMap;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -28,18 +29,19 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends SubsystemBase {
 
   // Spark objects for intake flywheel, belt, and outtake
-  private final CANSparkMax talon_intake = new CANSparkMax(Constants.SPARK_INTAKE, MotorType.kBrushless);
-  private final CANSparkMax talon_upper_belt = new CANSparkMax(Constants.SPARK_UPPER_BELT, MotorType.kBrushed);
-  private final CANSparkMax talon_lower_belt = new CANSparkMax(Constants.SPARK_LOWER_BELT, MotorType.kBrushless);
-  private final CANSparkMax talon_outtake = new CANSparkMax(Constants.SPARK_OUTTAKE, MotorType.kBrushless);
-
+  private final Spark talon_intake = new Spark(Constants.SPARK_INTAKE);
+  private final Spark talon_upper_belt = new Spark(Constants.SPARK_UPPER_BELT);
+  private final Spark talon_lower_belt = new Spark(Constants.SPARK_LOWER_BELT);
+  private final Spark talon_outtake = new Spark(Constants.SPARK_OUTTAKE);
+  
+  
   // Piston objects for intake and arm grabber
-  private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
-  private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
+  //private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
+  //private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
 
   // Setting up analog input IR sensor
-  private final AnalogInput infared_intake = new AnalogInput(Constants.INFARED_INTAKE);
-  private final AnalogInput infared_jump = new AnalogInput(Constants.INFARED_JUMP);
+  //private final AnalogInput infared_intake = new AnalogInput(Constants.INFARED_INTAKE);
+  //private final AnalogInput infared_jump = new AnalogInput(Constants.INFARED_JUMP);
 
   // Infared threshold to detect balls
   private final double INFARED_INTAKE_THRESHOLD = 0.775;
@@ -53,13 +55,13 @@ public class Intake extends SubsystemBase {
   public double new_speed; 
 
   public void extendIntake() {
-    solenoid_intake.set(Value.kReverse);
+    //solenoid_intake.set(Value.kReverse);
   }
 
   public void retractIntake() {
     // Retract out the arm and intake to go back to original setup
     System.out.println("Retracted intake");
-    solenoid_intake.set(Value.kForward);
+    //solenoid_intake.set(Value.kForward);
     talon_lower_belt.set(0);
     talon_upper_belt.set(0);
   }
@@ -70,10 +72,11 @@ public class Intake extends SubsystemBase {
     System.out.println("Running intake flywheels");
     talon_lower_belt.set(belt_speed);
 
+    /*
     // If the upper infared senses a ball, stop the upper belt and engage the wall
     if (infared_intake.getAverageVoltage() > INFARED_INTAKE_THRESHOLD) {
       System.out.println("Ball in chamber!");
-      solenoid_wall.set(Value.kReverse);
+      //solenoid_wall.set(Value.kReverse);
       // If it is the first time the ball is detected
       if (firstRead) {
         Timer.delay(INTAKE_DELAY);  // Delay to allow ball to reach top
@@ -83,22 +86,32 @@ public class Intake extends SubsystemBase {
     } else {
       firstRead = true;
       talon_upper_belt.set(-belt_speed);
-      solenoid_wall.set(Value.kForward);
+      //solenoid_wall.set(Value.kForward);
       talon_outtake.set(0);
     }
+    */
 
   }
 
   public void setOuttake(double speed) {
-    solenoid_wall.set(Value.kForward);
+    //solenoid_wall.set(Value.kForward);
 
     // Set the outtake spark to a certain speed
     System.out.println("Running outtake flywheel");
-    talon_outtake.set(speed*.75);
-    talon_lower_belt.set(speed);
-    talon_upper_belt.set(-speed);
+    talon_outtake.set(-speed*0.75);
+    //talon_lower_belt.set(speed);
+    //talon_upper_belt.set(-speed);
   }
 
+  public void setUpperOuttake(double speed) {
+    //set the outtake spark to a certain speed
+    System.out.println("Running outtake to upper target");
+    talon_outtake.set(speed*0.07);
+    //talon_lower_belt.set(speed);
+    //talon_upper_belt.set(speed);
+  }
+
+  /*
   // Set the intake flywheel to a certain speed
   public void setIntake(double speed) {
     System.out.println(infared_jump.getAverageVoltage());
@@ -108,20 +121,21 @@ public class Intake extends SubsystemBase {
       talon_intake.set(speed);
     }
   }
+  */
 
   public Intake() {
-    solenoid_wall.set(Value.kForward);
-    talon_upper_belt.setIdleMode(IdleMode.kCoast);
-    talon_lower_belt.setIdleMode(IdleMode.kCoast);
+    //solenoid_wall.set(Value.kForward);
+    //talon_upper_belt.setIdleMode(IdleMode.kCoast);
+    //talon_lower_belt.setIdleMode(IdleMode.kCoast);
   }
 
   @Override
   public void periodic() {
-    System.out.println(infared_jump.getAverageVoltage());
-    System.out.println(infared_intake.getAverageVoltage());
-    System.out.println("---------");
-    SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
-    SmartDashboard.putNumber("IR Sensor Intake: ", infared_intake.getAverageVoltage());
-    ControlMap.driver.setRumble(RumbleType.kLeftRumble, 1);
+    //System.out.println(infared_jump.getAverageVoltage());
+    //System.out.println(infared_intake.getAverageVoltage());
+    System.out.println(talon_outtake.get());
+    //SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
+    //SmartDashboard.putNumber("IR Sensor Intake: ", infared_intake.getAverageVoltage());
+    //ControlMap.driver.setRumble(RumbleType.kLeftRumble, 1);
   }
 }

@@ -27,9 +27,9 @@ public final class Constants {
 
     // Spark ports for intake
     public static final int SPARK_INTAKE = 4;
-    public static final int SPARK_UPPER_BELT = 6;
+    public static final int SPARK_UPPER_BELT = 1;
     public static final int SPARK_LOWER_BELT = 7;
-    public static final int SPARK_OUTTAKE = 5;
+    public static final int SPARK_OUTTAKE = 0;
 
     // Solenoid port arrays (forward, reverse)
     public static final int[] SOLENOID_WALL = {4,5};//1
