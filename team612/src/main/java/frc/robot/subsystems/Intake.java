@@ -78,7 +78,7 @@ public class Intake extends SubsystemBase {
         solenoid_wall.set(Value.kForward);
         firstReadUpper = false;
       }
-      Timer.delay(UPPER_DELAY);
+      //Timer.delay(UPPER_DELAY);
       talon_upper_belt.set(0);
       
       System.out.println("Ball in upper chamber!");
@@ -89,7 +89,7 @@ public class Intake extends SubsystemBase {
         solenoid_wall.set(Value.kReverse);
         firstReadLower = false;
         }
-        Timer.delay(LOWER_DELAY);
+        //Timer.delay(LOWER_DELAY);
         talon_lower_belt.set(0);
       } else {
         //solenoid_wall.set(Value.kForward);
