@@ -1,5 +1,5 @@
 # 612 Robot 2020
-Chantilly Robotics Team 612 Repository for 2020
+Chantilly Robotics Team 612 Repository for 2020 Infinite Recharge
 
 ## Robot Description
 ![Image of Robot](https://i.ytimg.com/vi/bZmBRJogFVo/hqdefault.jpg)
