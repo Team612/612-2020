@@ -22,6 +22,9 @@ public class RobotContainer {
 
   // Default command objects
   private final DefaultDrive c_drive = new DefaultDrive(m_drivetrain);
+
+  // Autonomous command
+  private final SampleAuto c_sampleauto = new SampleAuto();
   
   public RobotContainer() {
     configureButtonBindings();
@@ -57,9 +60,9 @@ public class RobotContainer {
   private void configureDefaultCommands() {
     m_drivetrain.setDefaultCommand(c_drive);
   }
-  /*
+
   public Command getAutonomousCommand() {
-    return m_sampleauto;
+    return c_sampleauto;
   }
-  */
+
 }
