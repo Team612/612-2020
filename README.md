@@ -2,7 +2,7 @@
 Chantilly Robotics Team 612 Repository for 2020 Infinite Recharge
 
 ## Robot Description
-<img src="robot.JPG" width="350" title="hover text"/>
+<img src="robot.JPG" width="400" title="hover text"/>
 
 * __Deposit:__ lower port, 4-5 balls per cycle
 * __Climb:__ consistent pneumatic climb during endgame
