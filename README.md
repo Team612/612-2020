@@ -2,7 +2,7 @@
 Chantilly Robotics Team 612 Repository for 2020 Infinite Recharge
 
 ## Robot Description
-![Image of Robot](robot.JPG)
+<img src="https://cdn.wallpaperhub.app/cloudcache/1/b/5/8/e/f/1b58ef6e3d36a42e01992accf5c52d6eea244353.jpg" width="350" title="hover text">
 * __Deposit:__ lower port, 4-5 balls per cycle
 * __Climb:__ consistent pneumatic climb during endgame
 * __Drive:__ West coast drive, able to drive through trench
