@@ -57,6 +57,7 @@ public class Intake extends SubsystemBase {
     // Retract out the arm and intake to go back to original setup
     System.out.println("Retracted intake");
     solenoid_intake.set(Value.kForward);
+    talon_intake.set(0);
     talon_lower_belt.set(0);
     talon_upper_belt.set(0);
   }
