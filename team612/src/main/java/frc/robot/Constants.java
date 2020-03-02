@@ -27,7 +27,7 @@ public final class Constants {
 
     // Spark ports for intake
     public static final int SPARK_INTAKE = 4;
-    public static final int SPARK_UPPER_BELT = 0;
+    public static final int SPARK_UPPER_BELT = 6;
     public static final int SPARK_LOWER_BELT = 7;
     public static final int SPARK_OUTTAKE = 5;
 
