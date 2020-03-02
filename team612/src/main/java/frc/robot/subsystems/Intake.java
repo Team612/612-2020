@@ -9,13 +9,16 @@ import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 public class Intake extends SubsystemBase {
 
   // Spark objects for intake flywheel, belt, and outtake
   private final WPI_TalonSRX talon_intake = new WPI_TalonSRX(Constants.SPARK_INTAKE);
-  private final WPI_TalonSRX talon_upper_belt = new WPI_TalonSRX(Constants.SPARK_UPPER_BELT);
+  private final CANSparkMax spark_upper_belt = new CANSparkMax(Constants.SPARK_UPPER_BELT, MotorType.kBrushless);
   private final WPI_TalonSRX talon_lower_belt = new WPI_TalonSRX(Constants.SPARK_LOWER_BELT);
   private final WPI_TalonSRX talon_outtake = new WPI_TalonSRX(Constants.SPARK_OUTTAKE);
 
@@ -55,7 +58,7 @@ public class Intake extends SubsystemBase {
     System.out.println("Retracted intake");
     solenoid_intake.set(Value.kForward);
     talon_lower_belt.set(0);
-    talon_upper_belt.set(0);
+    spark_upper_belt.set(0);
   }
 
   public void setBelt(double belt_speed) {
@@ -69,7 +72,7 @@ public class Intake extends SubsystemBase {
       
       // If it is the first time the ball is detected
       solenoid_wall.set(Value.kForward);
-      talon_upper_belt.set(0);
+      spark_upper_belt.set(0);
      
       if (infared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
         enable_ir_intake = false;
@@ -87,7 +90,7 @@ public class Intake extends SubsystemBase {
 
     } else {
       talon_lower_belt.set(belt_speed);
-      talon_upper_belt.set(belt_speed);
+      spark_upper_belt.set(belt_speed);
       solenoid_wall.set(Value.kReverse);
       talon_outtake.set(0);
     }
@@ -100,7 +103,7 @@ public class Intake extends SubsystemBase {
     System.out.println("Running outtake flywheel");
     talon_outtake.set(speed);
     talon_lower_belt.set(speed);
-    talon_upper_belt.set(speed);
+    spark_upper_belt.set(speed);
   }
 
   // Set the intake flywheel to a certain speed
@@ -117,7 +120,7 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     solenoid_wall.set(Value.kReverse);
-    talon_upper_belt.setNeutralMode(NeutralMode.Coast);
+    spark_upper_belt.setIdleMode(IdleMode.kCoast);
     talon_lower_belt.setNeutralMode(NeutralMode.Coast);
   }
 
