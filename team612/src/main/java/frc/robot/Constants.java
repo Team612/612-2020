@@ -27,7 +27,7 @@ public final class Constants {
 
     // Spark ports for intake
     public static final int SPARK_INTAKE = 4;
-    public static final int SPARK_UPPER_BELT = 6;
+    public static final int SPARK_UPPER_BELT = 0;
     public static final int SPARK_LOWER_BELT = 7;
     public static final int SPARK_OUTTAKE = 5;
 
@@ -36,9 +36,9 @@ public final class Constants {
     public static final int[] SOLENOID_INTAKE = {2,3};//1
 
     // Infared sensor ports
-    public static final int INFARED_UPPER = 3;
-    public static final int INFARED_LOWER = 1;
-    public static final int INFARED_JUMP = 0;
+    public static final int INFRARED_UPPER = 3;
+    public static final int INFRARED_LOWER = 1;
+    public static final int INFRARED_JUMP = 0;
 
     /* -------- Climb Subsystem -------- */
 
