@@ -3,7 +3,7 @@ package frc.robot.controls;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-public class ControlMap{
+public class ControlMap {
 
     // Controller objects
     public static Joystick driver = new Joystick(0);
@@ -16,6 +16,7 @@ public class ControlMap{
     public static JoystickButton driver_button_Y    	= new JoystickButton(driver,4);
     public static JoystickButton driver_button_LB   	= new JoystickButton(driver,5);
     public static JoystickButton driver_button_RB   	= new JoystickButton(driver,6);
+    
     public static JoystickButton driver_button_BCK  	= new JoystickButton(driver,7);
     public static JoystickButton driver_button_STRT 	= new JoystickButton(driver,8);
     public static JoystickButton driver_button_LJ   	= new JoystickButton(driver,9);
@@ -28,11 +29,12 @@ public class ControlMap{
     public static JoystickButton ENGAGE_CLIMB           = new JoystickButton(gunner,2); // B
     public static JoystickButton TOGGLE_HOOK            = new JoystickButton(gunner,3); // X
     public static JoystickButton RUN_WINCH              = new JoystickButton(gunner,10); // Joyright
-    public static JoystickButton REVERSE_WINCH          = new JoystickButton(gunner,6); //RB
+    //public static JoystickButton REVERSE_WINCH          = new JoystickButton(gunner,6); //RB
 
-    public static JoystickButton ENGAGE_COLOR_WHEEL = new JoystickButton(gunner, 4);//Y
-    public static JoystickButton ROTATE_WHEEL = new JoystickButton(gunner, 1);// A
+    public static JoystickButton ENGAGE_COLOR_WHEEL = new JoystickButton(gunner, 4); //Y
+    public static JoystickButton ROTATE_WHEEL = new JoystickButton(gunner, 1); // A
     public static JoystickButton SPIN_TO_COLOR = new JoystickButton(gunner, 5);
+    
     
 
 }

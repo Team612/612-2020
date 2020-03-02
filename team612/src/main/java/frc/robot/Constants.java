@@ -3,6 +3,7 @@ package frc.robot;
 public final class Constants {
 
     public static boolean ENABLE_ARCADE = true;
+    public static boolean SCORE_AUTO = true;
 
     // PCM Ports
     public static final int PCM_1 = 0;

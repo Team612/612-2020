@@ -1,17 +1,9 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -44,11 +36,13 @@ public class Intake extends SubsystemBase {
 
   //Setting up delay values for usde with IR sensors
   private final double UPPER_DELAY = 0.2;
-  private final double LOWER_DELAY = 0.6;
+  private final double LOWER_DELAY = .5;
 
   // Check if ball is first read of interation
   public boolean firstReadUpper = true;
   public boolean firstReadLower = true;
+
+  private boolean enable_ir_intake = true;
 
   public double new_speed; 
 
@@ -74,22 +68,17 @@ public class Intake extends SubsystemBase {
       System.out.println("Ball in chamber!");
       
       // If it is the first time the ball is detected
-      if (firstReadUpper) {
-        solenoid_wall.set(Value.kForward);
-        firstReadUpper = false;
-      }
-      //Timer.delay(UPPER_DELAY);
+      solenoid_wall.set(Value.kForward);
       talon_upper_belt.set(0);
-      
-      System.out.println("Ball in upper chamber!");
      
       if (infared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
+        enable_ir_intake = false;
         System.out.println("Ball in lower chamber!");
         if(firstReadLower){
-        solenoid_wall.set(Value.kReverse);
-        firstReadLower = false;
+          //Timer.delay(LOWER_DELAY);// yeet this thing right now or else i swear i will do something i regret
+          solenoid_wall.set(Value.kReverse);
+          firstReadLower = false;
         }
-        //Timer.delay(LOWER_DELAY);
         talon_lower_belt.set(0);
       } else {
         //solenoid_wall.set(Value.kForward);
@@ -106,8 +95,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void setOuttake(double speed) {
-    solenoid_wall.set(Value.kForward);
-
+    solenoid_wall.set(Value.kReverse);
     // Set the outtake spark to a certain speed
     System.out.println("Running outtake flywheel");
     talon_outtake.set(speed);
@@ -118,31 +106,23 @@ public class Intake extends SubsystemBase {
   // Set the intake flywheel to a certain speed
   public void setIntake(double speed) {
     System.out.println(infared_jump.getAverageVoltage());
-    if (infared_jump.getAverageVoltage() > INFARED_JUMP_THRESHOLD) {
-      talon_intake.set(-0.20);  // Status: Ball is is detected above intake
-    } else {
-      talon_intake.set(speed);
+    if (enable_ir_intake){
+      if (infared_jump.getAverageVoltage() > INFARED_JUMP_THRESHOLD) {
+        talon_intake.set(-0.20);  // Status: Ball is is detected above intake
+      } else {
+        talon_intake.set(speed);
+      }
     }
   }
 
   public Intake() {
     solenoid_wall.set(Value.kReverse);
-    talon_upper_belt.setNeutralMode(NeutralMode.Brake);
-    talon_lower_belt.setNeutralMode(NeutralMode.Brake);
+    talon_upper_belt.setNeutralMode(NeutralMode.Coast);
+    talon_lower_belt.setNeutralMode(NeutralMode.Coast);
   }
 
   @Override
   public void periodic() {
-    System.out.println("Jump: " + infared_jump.getAverageVoltage());
-    System.out.println("Upper: " + infared_upper.getAverageVoltage());
-    System.out.println("Lower" + infared_lower.getAverageVoltage());
-    System.out.println("---------");
-    //System.out.println("LowerDelay" + LOWER_DELAY);
-    //System.out.println("BooleanDwn" + firstReadLower);
-    //System.out.println("BooleanUp" + firstReadUpper);
-
-    // SmartDashboard.putNumber("IR Sensor Jump: ", infared_jump.getAverageVoltage());
-    // SmartDashboard.putNumber("IR Sensor Intake: ", infared_upper.getAverageVoltage());
-    //ControlMap.driver.setRumble(RumbleType.kLeftRumble, 1);
+    
   }
 }

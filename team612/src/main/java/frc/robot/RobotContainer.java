@@ -24,7 +24,7 @@ public class RobotContainer {
   private final DefaultDrive c_drive = new DefaultDrive(m_drivetrain);
 
   // Autonomous command
-  private final SampleAuto c_sampleauto = new SampleAuto();
+  private final SampleAuto c_sampleauto = new SampleAuto(m_drivetrain, m_intake);
   
   public RobotContainer() {
     configureButtonBindings();
@@ -46,8 +46,8 @@ public class RobotContainer {
     // Climb control bindings
     ControlMap.ENGAGE_CLIMB.whenPressed(new EngageClimb(m_climb));
     ControlMap.TOGGLE_HOOK.whenPressed(new ToggleHook(m_climb));
-    ControlMap.RUN_WINCH.whileHeld(new RunWinch(m_climb));
-    ControlMap.REVERSE_WINCH.whileHeld(new ReverseWinch(m_climb));
+    ControlMap.RUN_WINCH.whileHeld(new ReverseWinch(m_climb));
+    //ControlMap.REVERSE_WINCH.whileHeld(new ReverseWinch(m_climb));
     
     // Color Wheel control bindings
     ControlMap.ROTATE_WHEEL.toggleWhenPressed(new RotateWheel(m_wheel));

@@ -15,7 +15,7 @@ public class RunIntake extends CommandBase {
 
   private final Intake m_intake;
   private double INTAKE_SPEED = .8; 
-  private double BELT_SPEED = .5;
+  private double BELT_SPEED = .825;
 
   public RunIntake(Intake m_intake) {
     this.m_intake = m_intake;
@@ -25,7 +25,6 @@ public class RunIntake extends CommandBase {
   @Override
   public void initialize() {
     m_intake.extendIntake();
-    Timer.delay(.5);
     m_intake.firstReadUpper = true;
     m_intake.firstReadLower = true;
   }

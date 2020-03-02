@@ -2,6 +2,8 @@
 /* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
 package frc.robot;
 
+
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -12,9 +14,12 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  
+  CameraServer cam; 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    cam.getInstance().startAutomaticCapture();
   }
   
   @Override

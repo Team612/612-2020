@@ -58,8 +58,6 @@ public class Climb extends SubsystemBase {
   
   @Override
   public void periodic() {
-   // System.out.println("Climb State: "+solenoid_engage_climb.get());
-    //System.out.println("Hook State: "+solenoid_toggle_hook.get());
   }
   
 }
