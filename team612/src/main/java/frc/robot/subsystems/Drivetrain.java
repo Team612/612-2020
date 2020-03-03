@@ -67,11 +67,11 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
 
     // SmartDashboard display variables
-    SmartDashboard.putNumber("Front Left Spark Percent", spark_fl_drive.get());
+   /* SmartDashboard.putNumber("Front Left Spark Percent", spark_fl_drive.get());
     SmartDashboard.putNumber("Front Right Spark Percent", spark_fr_drive.get());
     SmartDashboard.putNumber("Back Left Spark Percent", spark_bl_drive.get());
     SmartDashboard.putNumber("Back Right Spark Percent", spark_br_drive.get());
-    
+    */
   }
   
 }
