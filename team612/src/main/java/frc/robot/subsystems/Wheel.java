@@ -7,7 +7,6 @@ import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -17,7 +16,7 @@ import frc.robot.Constants;
 public class Wheel extends SubsystemBase {
 
   // Spark object to move color wheel mechanism
-  private final WPI_TalonSRX talon_wheel = new WPI_TalonSRX(Constants.SPARK_WHEEL);
+  private final WPI_TalonSRX talon_wheel = new WPI_TalonSRX(Constants.TALON_WHEEL);
 
   // Target values for each color value (RGB values from manual)
   private final Color kRedTarget = ColorMatch.makeColor(.561, .232, .114);
@@ -27,7 +26,7 @@ public class Wheel extends SubsystemBase {
   //private String colourVal;
 
   // Piston for engaging the spin of colour wheel
-  public DoubleSolenoid colorPiston = new DoubleSolenoid(Constants.PCM_1, Constants.COLOR_PISTON[0],Constants.COLOR_PISTON[1]);
+  public DoubleSolenoid colorPiston = new DoubleSolenoid(Constants.PCM_1, Constants.COLOR_PISTON[0], Constants.COLOR_PISTON[1]);
 
   // The matcher that map the sensor value to one of the targets
   public ColorMatch colorMatcher = new ColorMatch();

@@ -26,10 +26,10 @@ public final class Constants {
     /* -------- Intake Subsystem -------- */
 
     // Spark ports for intake
-    public static final int SPARK_INTAKE = 4;
-    public static final int SPARK_UPPER_BELT = 6;
-    public static final int SPARK_LOWER_BELT = 7;
-    public static final int SPARK_OUTTAKE = 5;
+    public static final int TALON_INTAKE = 4;
+    public static final int TALON_UPPER_BELT = 6;
+    public static final int TALON_LOWER_BELT = 7;
+    public static final int TALON_OUTTAKE = 5;
 
     // Solenoid port arrays (forward, reverse)
     public static final int[] SOLENOID_WALL = {5,4};//1
@@ -48,10 +48,10 @@ public final class Constants {
 
     // Climb sparks
 
-    public static final int SPARK_WINCH_CLIMB = 14;
+    public static final int TALON_WINCH_CLIMB = 14;
 
     //Color Wheel 15, PCM: 0 , {2,3}; 
-    public static final int SPARK_WHEEL = 15;
+    public static final int TALON_WHEEL = 15;
     public static final int[] COLOR_PISTON = {2,3};
     
 

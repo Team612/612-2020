@@ -2,25 +2,21 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 public class Intake extends SubsystemBase {
 
   // Spark objects for intake flywheel, belt, and outtake
-  private final WPI_TalonSRX talon_intake = new WPI_TalonSRX(Constants.SPARK_INTAKE);
-  private final WPI_TalonSRX talon_upper_belt = new WPI_TalonSRX(Constants.SPARK_UPPER_BELT);
-  private final WPI_TalonSRX talon_lower_belt = new WPI_TalonSRX(Constants.SPARK_LOWER_BELT);
-  private final WPI_TalonSRX talon_outtake = new WPI_TalonSRX(Constants.SPARK_OUTTAKE);
+  private final WPI_TalonSRX talon_intake = new WPI_TalonSRX(Constants.TALON_INTAKE);
+  private final WPI_TalonSRX talon_upper_belt = new WPI_TalonSRX(Constants.TALON_UPPER_BELT);
+  private final WPI_TalonSRX talon_lower_belt = new WPI_TalonSRX(Constants.TALON_LOWER_BELT);
+  private final WPI_TalonSRX talon_outtake = new WPI_TalonSRX(Constants.TALON_OUTTAKE);
 
   // Piston objects for intake and arm grabber
   private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
@@ -30,16 +26,11 @@ public class Intake extends SubsystemBase {
   private final AnalogInput infrared_upper = new AnalogInput(Constants.INFRARED_UPPER);
   private final AnalogInput infrared_lower = new AnalogInput(Constants.INFRARED_LOWER);
   private final AnalogInput infrared_jump = new AnalogInput(Constants.INFRARED_JUMP);
-  //private final AnalogInput infrared_3 = new AnalogInput(Constants.INFRARED_3);
 
   // Infared threshold to detect balls
   private final double INFRARED_UPPER_THRESHOLD = 1.32;
   private final double INFRARED_JUMP_THRESHOLD = 0.85;
   private final double INFRARED_LOWER_THRESHOLD = .7;
-
-  //Setting up delay values for usde with IR sensors
-  private final double UPPER_DELAY = 0.2;
-  private final double LOWER_DELAY = .5;
 
   // Check if ball is first read of interation
   public boolean firstReadUpper = true;
@@ -127,9 +118,5 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println("Jump IR" + infrared_jump.getAverageVoltage());
-    System.out.println("Lower IR" + infrared_lower.getAverageVoltage());
-    System.out.println("Upper IR" + infrared_upper.getAverageVoltage());
-    System.out.println("UpperBelt" + talon_upper_belt.get());
   }
 }

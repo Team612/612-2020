@@ -17,12 +17,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class Climb extends SubsystemBase {
 
   // Climb winch spark
-  private WPI_TalonSRX talon_winch_climb = new WPI_TalonSRX(Constants.SPARK_WINCH_CLIMB);
+  private WPI_TalonSRX talon_winch_climb = new WPI_TalonSRX(Constants.TALON_WINCH_CLIMB);
 
   // Climb solenoids
   private DoubleSolenoid solenoid_engage_climb = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_ENGAGE_CLIMB[0],Constants.SOLENOID_ENGAGE_CLIMB[1]);
   private DoubleSolenoid solenoid_toggle_hook = new DoubleSolenoid(Constants.PCM_1, Constants.SOLENOID_TOGGLE_HOOK[0],Constants.SOLENOID_TOGGLE_HOOK[1]);
 
+  // Toggle the climb mechanism up or down
   public void toggleClimb() {
     if (solenoid_engage_climb.get() == Value.kForward){
       solenoid_engage_climb.set(Value.kReverse);
@@ -31,23 +32,20 @@ public class Climb extends SubsystemBase {
     }
   }
   
+  // Toggle the climb hook up or down
   public void toggleHook() {
     // If the climb is engaged
     if (solenoid_engage_climb.get() == Value.kForward) {
-
-      // Toggle the status of the hook solenoid
       if (solenoid_toggle_hook.get() == Value.kReverse) {
          solenoid_toggle_hook.set(Value.kForward);
       } else {
         solenoid_toggle_hook.set(Value.kReverse);
       }
-
     }
   }
 
-  // Run the Winch to actually climb
+  // Run the winch to actually climb
   public void setWinch(double speed){
-    System.out.println("Running Winch!");
     talon_winch_climb.set(speed);
   }
 

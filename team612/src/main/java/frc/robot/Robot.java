@@ -14,12 +14,12 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  
-  CameraServer cam; 
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-    cam.getInstance().startAutomaticCapture();
+    
+    // Start reading usb cameras
+    CameraServer.getInstance().startAutomaticCapture();
   }
   
   @Override

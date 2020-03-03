@@ -7,15 +7,11 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -30,14 +26,9 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax spark_br_drive = new CANSparkMax(Constants.SPARK_BR_DRIVE, MotorType.kBrushless);
   private CANSparkMax spark_bl_drive = new CANSparkMax(Constants.SPARK_BL_DRIVE, MotorType.kBrushless);
 
-  // Ultrasonic sensor for drive
-  // private Ultrasonic ultrasonic_drive = new Ultrasonic(Constants.ULTRASONIC_DRIVE[0], Constants.ULTRASONIC_DRIVE[1]);
-
   // Double solenoid for changing gears
   private DoubleSolenoid solenoid_drive = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
 
-  // Arcade drive function (same as tank drive)
-  
   // Basic arcade drive function
   public void arcadeDrive(double x_axis, double y_axis) {  
     //sets up deadzones
@@ -69,9 +60,6 @@ public class Drivetrain extends SubsystemBase {
     spark_bl_drive.set(left_command);
   }
 
-  // Get distance in inches from ultrasonic in drive
- 
-
   // Shift the double solenoid to kForward
   public void shiftForward() {
     solenoid_drive.set(Value.kForward);
@@ -85,15 +73,10 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public Drivetrain() {
-    // Prepare and enable ultrasonic
-    // ultrasonic_drive.setEnabled(true);
-    // ultrasonic_drive.setAutomaticMode(true);
   }
 
-  // Periodic loop for ShuffleBoard values
   @Override
   public void periodic() {
-
   }
   
 }
