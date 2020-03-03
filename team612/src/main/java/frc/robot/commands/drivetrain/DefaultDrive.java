@@ -21,7 +21,7 @@ public class DefaultDrive extends CommandBase {
   @Override
   public void execute() {
     // Arcade drive function from subsystem
-    m_drivetrain.arcadeDrive(ControlMap.driver.getRawAxis(ControlMap.right_axis_X), ControlMap.driver.getRawAxis(ControlMap.left_axis_Y));
+    m_drivetrain.arcadeDrive(ControlMap.driver.getRawAxis(4), ControlMap.driver.getRawAxis(1));
   }
 
   @Override

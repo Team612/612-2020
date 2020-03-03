@@ -5,28 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Drivetrain;
 
-public class RunShooter extends CommandBase {
-  
-  
-  private double distance = 0.2;
-  private double kP = .9;
+public class AlignShooter extends CommandBase {
 
-  private Shooter m_shooter;
+  private final Drivetrain m_drivetrain;
 
-/**
-   * 
-   * Creates a new RunShooter.
-   */
-  public RunShooter(Shooter m_shooter) {
-    this.m_shooter = m_shooter;
-    addRequirements(m_shooter);
-  
-    // Use addRequirements() here to declare subsystem dependencies.
+  public AlignShooter(Drivetrain m_drivetrain) {
+    this.m_drivetrain = m_drivetrain;
+    addRequirements(m_drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -37,26 +27,18 @@ public class RunShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    //distance = m_shooter.getDistance();
-    System.out.println(distance);
-    System.out.println(distance * kP);
-    m_shooter.runOuttake(.75);
-    System.out.println("----");
-  
-
-
+    System.out.println("Driving backwards at: " + m_drivetrain.getInfraredVoltage());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.runOuttake(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_drivetrain.driveToTarget();
   }
+
 }

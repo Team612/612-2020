@@ -1,7 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.RunShooter;
+import frc.robot.commands.shooter.AlignShooter;
+import frc.robot.commands.shooter.RunShooter;
 import frc.robot.commands.autonomous.SampleAuto;
 import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.controls.ControlMap;
@@ -25,7 +26,8 @@ public class RobotContainer {
 
   // Put all button bindings here
   private void configureButtonBindings() {
-    ControlMap.driver_button_A.whileHeld(new RunShooter(m_shooter));
+    ControlMap.driver_button_A.whenPressed(new AlignShooter(m_drivetrain));
+    ControlMap.driver_button_B.whenPressed(new RunShooter(m_shooter));
   }
 
   // Put all default commands here
