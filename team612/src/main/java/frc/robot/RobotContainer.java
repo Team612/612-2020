@@ -27,7 +27,7 @@ public class RobotContainer {
   // Put all button bindings here
   private void configureButtonBindings() {
     ControlMap.driver_button_A.whenPressed(new AlignShooter(m_drivetrain));
-    ControlMap.driver_button_B.whenPressed(new RunShooter(m_shooter));
+    ControlMap.driver_button_B.toggleWhenPressed(new RunShooter(m_shooter));
   }
 
   // Put all default commands here
