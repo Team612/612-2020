@@ -26,6 +26,7 @@ public class RunShooter extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shooter_timer.reset();
     shooter_timer.start();
   }
 
@@ -36,7 +37,7 @@ public class RunShooter extends CommandBase {
     if (shooter_timer.get() > SPEED_DELAY) {
       // TODO: Run the lower belt to feed the balls in
     }
-    System.out.println(shooter_timer.get());
+    System.out.println("Time: " + shooter_timer.get());
     m_shooter.setShooter(0.75);  // Run the shooter at a fixed speed (.75 for 16 inches back)
 
   }

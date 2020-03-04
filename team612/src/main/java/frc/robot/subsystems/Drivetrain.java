@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,13 +18,13 @@ public class Drivetrain extends SubsystemBase {
 
   // Deadzone and voltage output constants
   private final double DEADZONE = 0.1;
-  private final double INFRARED_TARGET = 0.5;
+  private final double INFRARED_TARGET = 0.75;
 
   // Create spark motors
-  private final Spark spark_fr_drive = new Spark(Constants.SPARK_FR_DRIVE);
-  private final Spark spark_fl_drive = new Spark(Constants.SPARK_FL_DRIVE);
-  private final Spark spark_br_drive = new Spark(Constants.SPARK_BR_DRIVE);
-  private final Spark spark_bl_drive = new Spark(Constants.SPARK_BL_DRIVE);
+  private final WPI_TalonSRX spark_fr_drive = new WPI_TalonSRX(Constants.SPARK_FR_DRIVE);
+  private final WPI_TalonSRX spark_fl_drive = new WPI_TalonSRX(Constants.SPARK_FL_DRIVE);
+  private final WPI_TalonSRX spark_br_drive = new WPI_TalonSRX(Constants.SPARK_BR_DRIVE);
+  private final WPI_TalonSRX spark_bl_drive = new WPI_TalonSRX(Constants.SPARK_BL_DRIVE);
 
   // Infrared to tell distance to wall
   private final AnalogInput infrared_distance = new AnalogInput(Constants.INFRARED_DISTANCE);
@@ -53,11 +55,12 @@ public class Drivetrain extends SubsystemBase {
   // Drive backwards smoothly to infrared distance target, returns true if at target
   public boolean driveToTarget() {
     // PID calculations (only proportional constant)
-    double error = Math.abs(infrared_distance.getVoltage() - INFRARED_TARGET);
-    double kP = 0.0;
+    double error = INFRARED_TARGET - infrared_distance.getVoltage();
+    double kP = 0.5;
     double motor_output = error * kP;
-
-    if (motor_output < 0.05) {
+    System.out.println(error);
+    System.out.println(motor_output);
+    if (Math.abs(motor_output) < 0.05) {
       return true;
     } else {
       arcadeDrive(0, motor_output);
