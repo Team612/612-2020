@@ -41,7 +41,7 @@ public class RobotContainer {
     // Intake control bindings
     ControlMap.RUN_INTAKE.toggleWhenPressed(new RunIntake(m_intake));
     ControlMap.RUN_OUTTAKE.whileHeld(new RunOuttake(m_intake));
-    ControlMap.RUN_FLYWHEEL.whileHeld(new RunFlywheel(m_intake));
+    //ControlMap.RUN_FLYWHEEL.whileHeld(new RunFlywheel(m_intake));
 
     // Climb control bindings
     ControlMap.ENGAGE_CLIMB.whenPressed(new EngageClimb(m_climb));

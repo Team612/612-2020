@@ -30,11 +30,16 @@ public class Intake extends SubsystemBase {
   // Infared threshold to detect balls
   private final double INFRARED_UPPER_THRESHOLD = 1.32;
   private final double INFRARED_JUMP_THRESHOLD = 0.85;
-  private final double INFRARED_LOWER_THRESHOLD = .7;
+  private final double INFRARED_LOWER_THRESHOLD = .8;
 
   // Check if ball is first read of interation
   public boolean firstReadUpper = true;
   public boolean firstReadLower = true;
+
+  //new intake variables
+ 
+
+
 
   private boolean enable_ir_intake = true;
 
@@ -53,39 +58,14 @@ public class Intake extends SubsystemBase {
     talon_upper_belt.set(0);
   }
 
-  public void setBelt(double belt_speed) {
+  public void setBelt(double intake_speed, double belt_speed) {
 
-    // set the intake and belt to a certain speed
-    System.out.println("Running intake flywheels");
-
-    // If the upper infrared senses a ball, stop the upper belt and engage the wall
-    if (infrared_upper.getAverageVoltage() > INFRARED_UPPER_THRESHOLD) {
-      System.out.println("Ball in chamber!");
-      
-      // If it is the first time the ball is detected
-      solenoid_wall.set(Value.kForward);
-      talon_upper_belt.set(0);
-     
-      if (infrared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
-        enable_ir_intake = false;
-        System.out.println("Ball in lower chamber!");
-        if(firstReadLower){
-          //Timer.delay(LOWER_DELAY);// yeet this thing right now or else i swear i will do something i regret
-          solenoid_wall.set(Value.kReverse);
-          firstReadLower = false;
-        }
-        talon_lower_belt.set(0);
-      } else {
-        //solenoid_wall.set(Value.kForward);
-        talon_lower_belt.set(belt_speed);
-      }
-
+    if (infrared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
+      talon_lower_belt.set(0);
     } else {
       talon_lower_belt.set(belt_speed);
-      talon_upper_belt.set(belt_speed);
-      solenoid_wall.set(Value.kReverse);
-      talon_outtake.set(0);
     }
+    talon_intake.set(intake_speed);
 
   }
 
@@ -101,22 +81,24 @@ public class Intake extends SubsystemBase {
   // Set the intake flywheel to a certain speed
   public void setIntake(double speed) {
     System.out.println(infrared_jump.getAverageVoltage());
-    if (enable_ir_intake){
       if (infrared_jump.getAverageVoltage() > INFRARED_JUMP_THRESHOLD) {
         talon_intake.set(-0.20);  // Status: Ball is is detected above intake
       } else {
         talon_intake.set(speed);
       }
-    }
+    
   }
 
   public Intake() {
     solenoid_wall.set(Value.kReverse);
+    
     talon_upper_belt.setNeutralMode(NeutralMode.Coast);
     talon_lower_belt.setNeutralMode(NeutralMode.Coast);
   }
 
   @Override
   public void periodic() {
+
+    System.out.println(infrared_lower.getAverageVoltage());
   }
 }
