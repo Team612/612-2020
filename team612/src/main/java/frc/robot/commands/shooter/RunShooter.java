@@ -39,6 +39,7 @@ public class RunShooter extends CommandBase {
     }
     System.out.println("Time: " + shooter_timer.get());
     m_shooter.setShooter(0.75);  // Run the shooter at a fixed speed (.75 for 16 inches back)
+    m_shooter.setBelt(1.0);
 
   }
 
@@ -46,6 +47,7 @@ public class RunShooter extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_shooter.setShooter(0.0);
+    m_shooter.setBelt(0.0);
     shooter_timer.stop();
   }
 

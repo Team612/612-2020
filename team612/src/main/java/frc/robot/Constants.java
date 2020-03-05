@@ -11,6 +11,7 @@ public final class Constants {
 
    // Shooter ports
    public static final int SPARK_SHOOTER = 8;
+   public static final int SPARK_BELT = 7;
    
    public static final int INFRARED_DISTANCE = 3;
 
