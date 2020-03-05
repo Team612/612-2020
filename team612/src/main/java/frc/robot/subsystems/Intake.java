@@ -49,6 +49,8 @@ public class Intake extends SubsystemBase {
     solenoid_intake.set(Value.kReverse);
   }
 
+ 
+
   public void retractIntake() {
     // Retract out the arm and intake to go back to original setup
     System.out.println("Retracted intake");
@@ -62,8 +64,10 @@ public class Intake extends SubsystemBase {
 
     if (infrared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
       talon_lower_belt.set(0);
+      talon_upper_belt.set(belt_speed);
     } else {
       talon_lower_belt.set(belt_speed);
+      talon_upper_belt.set(belt_speed);
     }
     talon_intake.set(intake_speed);
 
@@ -75,7 +79,7 @@ public class Intake extends SubsystemBase {
     System.out.println("Running outtake flywheel");
     talon_outtake.set(speed);
     talon_lower_belt.set(speed);
-    talon_upper_belt.set(speed);
+    talon_upper_belt.set(-speed);
   }
 
   // Set the intake flywheel to a certain speed

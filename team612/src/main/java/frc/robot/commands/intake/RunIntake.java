@@ -14,7 +14,7 @@ import frc.robot.subsystems.Intake;
 public class RunIntake extends CommandBase {
 
   private final Intake m_intake;
-  private final double intake_speed = 0.8; 
+  private final double intake_speed = 1; 
   private final double belt_speed = 0.8; 
   //private double INTAKE_SPEED = .8; 
   //private double BELT_SPEED = .825;

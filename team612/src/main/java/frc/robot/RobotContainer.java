@@ -22,9 +22,11 @@ public class RobotContainer {
 
   // Default command objects
   private final DefaultDrive c_drive = new DefaultDrive(m_drivetrain);
+  
 
   // Autonomous command
   private final SampleAuto c_sampleauto = new SampleAuto(m_drivetrain, m_intake);
+  
   
   public RobotContainer() {
     configureButtonBindings();
@@ -41,7 +43,8 @@ public class RobotContainer {
     // Intake control bindings
     ControlMap.RUN_INTAKE.toggleWhenPressed(new RunIntake(m_intake));
     ControlMap.RUN_OUTTAKE.whileHeld(new RunOuttake(m_intake));
-    //ControlMap.RUN_FLYWHEEL.whileHeld(new RunFlywheel(m_intake));
+    ControlMap.RUN_FLYWHEEL.whileHeld(new RunFlywheel(m_intake));
+    ControlMap.EXTENDINTAKE.toggleWhenPressed(new ExtendIntake(m_intake));
 
     // Climb control bindings
     ControlMap.ENGAGE_CLIMB.whenPressed(new EngageClimb(m_climb));
@@ -54,6 +57,7 @@ public class RobotContainer {
     ControlMap.SPIN_TO_COLOR.toggleWhenPressed(new SpinToColor(m_wheel));
     ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
     
+    
   }
 
   // Put all default commands here
@@ -62,6 +66,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
+     
     return c_sampleauto;
   }
 
