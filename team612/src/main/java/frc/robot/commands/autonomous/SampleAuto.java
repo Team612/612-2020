@@ -51,12 +51,12 @@ public class SampleAuto extends CommandBase {
         outtake_timer.start();
         m_drivetrain.arcadeDrive(0, 0);
         if (FIRST_TIME) {
-          m_intake.setOuttake(1);
+          m_intake.setOuttake(1,0);
           //Timer.delay(2); // what can i say except dElETe ThiS
-          m_intake.setOuttake(0);
+          m_intake.setOuttake(0,0);
           FIRST_TIME = false;
         } else {
-          m_intake.setOuttake(0);
+          m_intake.setOuttake(0,0);
         }
       }
     } else {

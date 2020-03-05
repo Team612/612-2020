@@ -49,6 +49,14 @@ public class Intake extends SubsystemBase {
     solenoid_intake.set(Value.kReverse);
   }
 
+  public void toggleIntake() {
+    if (solenoid_intake.get() == Value.kForward){
+      solenoid_intake.set(Value.kReverse);
+    } else {
+      solenoid_intake.set(Value.kForward);
+    }
+  }
+
  
 
   public void retractIntake() {
@@ -64,29 +72,28 @@ public class Intake extends SubsystemBase {
 
     if (infrared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
       talon_lower_belt.set(0);
-      talon_upper_belt.set(belt_speed);
     } else {
       talon_lower_belt.set(belt_speed);
-      talon_upper_belt.set(belt_speed);
     }
     talon_intake.set(intake_speed);
 
   }
 
-  public void setOuttake(double speed) {
+  public void setOuttake(double speed, double intakespeed) {
     solenoid_wall.set(Value.kReverse);
     // Set the outtake spark to a certain speed
     System.out.println("Running outtake flywheel");
     talon_outtake.set(speed);
     talon_lower_belt.set(speed);
     talon_upper_belt.set(-speed);
+    talon_intake.set(intakespeed);
   }
 
   // Set the intake flywheel to a certain speed
   public void setIntake(double speed) {
     System.out.println(infrared_jump.getAverageVoltage());
       if (infrared_jump.getAverageVoltage() > INFRARED_JUMP_THRESHOLD) {
-        talon_intake.set(-0.20);  // Status: Ball is is detected above intake
+        talon_intake.set(-1);  // Status: Ball is is detected above intake
       } else {
         talon_intake.set(speed);
       }

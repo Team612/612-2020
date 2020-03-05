@@ -31,20 +31,17 @@ public class ExtendIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.extendIntake();
+    m_intake.toggleIntake();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intake.retractIntake();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    
-
     return false;
   }
 }
