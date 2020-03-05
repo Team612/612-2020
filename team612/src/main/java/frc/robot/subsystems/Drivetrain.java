@@ -18,7 +18,8 @@ public class Drivetrain extends SubsystemBase {
 
   // Deadzone and voltage output constants
   private final double DEADZONE = 0.1;
-  private final double INFRARED_TARGET = 0.75;
+  private final double INFRARED_TARGET = 5;
+  private final double INFRARED_DEADZONE = 0.564;
 
   // Create spark motors
   private final WPI_TalonSRX spark_fr_drive = new WPI_TalonSRX(Constants.SPARK_FR_DRIVE);
@@ -40,12 +41,12 @@ public class Drivetrain extends SubsystemBase {
     double rightCommand = y_axis + x_axis;
     
     // right side motor controls
-    spark_fr_drive.set(-rightCommand);
-    spark_br_drive.set(-rightCommand);
+    spark_fr_drive.set(-rightCommand/2);
+    spark_br_drive.set(-rightCommand/2);
 
     //left side motor controls
-    spark_fl_drive.set(leftCommand);
-    spark_bl_drive.set(leftCommand);
+    spark_fl_drive.set(leftCommand/2);
+    spark_bl_drive.set(leftCommand/2);
   }
 
   public double getInfraredVoltage() {
@@ -55,15 +56,15 @@ public class Drivetrain extends SubsystemBase {
   // Drive backwards smoothly to infrared distance target, returns true if at target
   public boolean driveToTarget() {
     // PID calculations (only proportional constant)
-    double error = INFRARED_TARGET - infrared_distance.getVoltage();
+    double error = (1/infrared_distance.getVoltage()) - INFRARED_TARGET;
     double kP = 0.5;
     double motor_output = error * kP;
     System.out.println(error);
-    System.out.println(motor_output);
-    if (Math.abs(motor_output) < 0.05) {
+    System.out.println("Motor Output:" + motor_output);
+    if (Math.abs(motor_output) < INFRARED_DEADZONE) {
       return true;
     } else {
-      arcadeDrive(0, motor_output);
+      arcadeDrive(0, motor_output/2);
       return false;
     }
     
