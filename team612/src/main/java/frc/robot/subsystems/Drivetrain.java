@@ -62,6 +62,7 @@ public class Drivetrain extends SubsystemBase {
     System.out.println("Error:" + error);
     System.out.println("Motor Output:" + motor_output);
     if (Math.abs(error) < INFRARED_DEADZONE) {
+      arcadeDrive(0, 0);
       return true;
     } else {
       arcadeDrive(0, motor_output);

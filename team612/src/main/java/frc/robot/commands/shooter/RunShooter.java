@@ -38,7 +38,7 @@ public class RunShooter extends CommandBase {
       // TODO: Run the lower belt to feed the balls in
     }
     System.out.println("Time: " + shooter_timer.get());
-    m_shooter.setShooter(0.75);  // Run the shooter at a fixed speed (.75 for 16 inches back)
+    m_shooter.setShooter(0.075);  // Run the shooter at a fixed speed (.75 for 16 inches back)
     m_shooter.setBelt(1.0);
 
   }

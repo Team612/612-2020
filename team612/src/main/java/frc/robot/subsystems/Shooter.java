@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
   private final Spark spark_belt = new Spark(Constants.SPARK_BELT);
 
   public void setShooter(double speed) {
-    spark_shooter.set(speed);
+    spark_shooter.setSpeed(speed);
   }
 
   public void setBelt(double speed) {
