@@ -8,8 +8,6 @@ public class ControlMap {
     // Controller objects
     public static Joystick driver = new Joystick(0);
     public static Joystick gunner = new Joystick(1);
-    //public static XboxController X = new XboxController(2);
-
 
     // Driver buttons
     public static JoystickButton driver_button_A    	= new JoystickButton(driver,1);
@@ -28,7 +26,7 @@ public class ControlMap {
     public static JoystickButton RUN_INTAKE    	        = new JoystickButton(gunner,7);// back button
     public static JoystickButton RUN_OUTTAKE            = new JoystickButton(gunner,8);// start
     public static JoystickButton RUN_FLYWHEEL           = new JoystickButton(gunner,9); // Left joystick press
-    public static JoystickButton EXTENDINTAKE           = new JoystickButton(gunner,6); // RB
+    public static JoystickButton TOGGLE_INTAKE           = new JoystickButton(gunner,6); // RB
 
     // Climb buttons
     public static JoystickButton ENGAGE_CLIMB           = new JoystickButton(gunner,2); // B

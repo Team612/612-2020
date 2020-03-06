@@ -47,7 +47,6 @@ public final class Constants {
     public static final int[] SOLENOID_TOGGLE_HOOK = {0,1};//0
 
     // Climb sparks
-
     public static final int TALON_WINCH_CLIMB = 14;
 
     //Color Wheel 15, PCM: 0 , {2,3}; 
