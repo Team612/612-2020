@@ -53,5 +53,8 @@ public final class Constants {
     public static final int TALON_WHEEL = 15;
     public static final int[] COLOR_PISTON = {2,3};
     
+    /* -------- Shooter Subsystem -------- */
+    public static final int SPARK_SHOOTER = 8;
+    public static final int INFRARED_DISTANCE = 3;
 
 }

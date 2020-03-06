@@ -43,30 +43,6 @@ public class SampleAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Constants.SCORE_AUTO) {
-      
-      if (timer.get() < 1.8) {
-        m_drivetrain.arcadeDrive(0, -.70);
-      } else {
-        outtake_timer.start();
-        m_drivetrain.arcadeDrive(0, 0);
-        if (FIRST_TIME) {
-          m_intake.setOuttake(1,0);
-          //Timer.delay(2); // what can i say except dElETe ThiS
-          m_intake.setOuttake(0,0);
-          FIRST_TIME = false;
-        } else {
-          m_intake.setOuttake(0,0);
-        }
-      }
-    } else {
-      if (timer.get() < .5) {
-        m_drivetrain.arcadeDrive(0, -.70);
-      } else {
-        m_drivetrain.arcadeDrive(0, 0);
-      }
-    }
-    System.out.println(timer.get());
   }
 
   // Called once the command ends or is interrupted.

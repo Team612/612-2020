@@ -1,7 +1,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.shooter.AlignShooter;
+import frc.robot.commands.shooter.RunShooter;
 import frc.robot.commands.autonomous.SampleAuto;
+import frc.robot.commands.drivetrain.DefaultDrive;
+import frc.robot.controls.ControlMap;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.intake.*;
@@ -9,8 +15,6 @@ import frc.robot.commands.climb.*;
 import frc.robot.commands.wheel.*;
 
 import frc.robot.subsystems.*;
-
-import frc.robot.controls.ControlMap;
 
 public class RobotContainer {
   
@@ -23,6 +27,7 @@ public class RobotContainer {
   // Default command objects
   private final DefaultDrive c_drive = new DefaultDrive(m_drivetrain);
   
+  private final Shooter m_shooter = new Shooter();
 
   // Autonomous command
   private final SampleAuto c_sampleauto = new SampleAuto(m_drivetrain, m_intake);
@@ -54,6 +59,8 @@ public class RobotContainer {
     ControlMap.SPIN_TO_COLOR.toggleWhenPressed(new SpinToColor(m_wheel));
     ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
     
+    ControlMap.driver_button_A.toggleWhenPressed(new AlignShooter(m_drivetrain));
+    ControlMap.driver_button_B.whileHeld(new RunShooter(m_shooter));
   }
 
   // Put all default commands here
