@@ -37,9 +37,13 @@ public class RunShooter extends CommandBase {
     if (shooter_timer.get() > SPEED_DELAY) {
       // TODO: Run the lower belt to feed the balls in
     }
+    double distance = 5;
+    double speed = .0210526316*distance + .5172368421;
+    
     System.out.println("Time: " + shooter_timer.get());
-    m_shooter.setShooter(0.075);  // Run the shooter at a fixed speed (.75 for 16 inches back)
-    m_shooter.setBelt(1.0);
+    System.out.println("Speed:" + speed);
+    m_shooter.setShooter(0.8);  // Run the shooter at a fixed speed (.75 for 16 inches back)
+    //m_shooter.setBelt(1.0);
 
   }
 

@@ -19,7 +19,7 @@ public class Drivetrain extends SubsystemBase {
   // Deadzone and voltage output constants
   private final double DEADZONE = 0.1;
   private final double INFRARED_TARGET = 5;
-  private final double INFRARED_DEADZONE = 1.12;
+  private final double INFRARED_DEADZONE = 1.0;
 
   // Create spark motors
   private final WPI_TalonSRX spark_fr_drive = new WPI_TalonSRX(Constants.SPARK_FR_DRIVE);
