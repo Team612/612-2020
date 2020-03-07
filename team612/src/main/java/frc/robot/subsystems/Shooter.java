@@ -20,8 +20,8 @@ public class Shooter extends SubsystemBase {
 
   public void setShooter(double speed) {
     spark_shooter.set(speed);
-    System.out.println("Velocity:" + spark_shooter.getEncoder().getVelocity());
-    System.out.println("Speed:" + spark_shooter.get());
+    //System.out.println("Velocity:" + spark_shooter.getEncoder().getVelocity());
+    //System.out.println("Speed:" + spark_shooter.get());
   }
   
   public Shooter() {
