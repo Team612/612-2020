@@ -7,18 +7,23 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
 
-  private final Spark spark_shooter = new Spark(Constants.SPARK_SHOOTER);
+  private final CANSparkMax spark_shooter = new CANSparkMax(Constants.SPARK_SHOOTER, MotorType.kBrushless);
 
   public void setShooter(double speed) {
     spark_shooter.set(speed);
+    System.out.println("Velocity:" + spark_shooter.getEncoder().getVelocity());
+    System.out.println("Speed:" + spark_shooter.get());
   }
-
+  
   public Shooter() {
   }
   

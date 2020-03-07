@@ -60,7 +60,7 @@ public class RobotContainer {
     ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
     
     ControlMap.driver_button_A.toggleWhenPressed(new AlignShooter(m_drivetrain));
-    ControlMap.driver_button_B.whileHeld(new RunShooter(m_shooter));
+    ControlMap.RUN_OUTTAKE.toggleWhenPressed(new RunShooter(m_shooter));
   }
 
   // Put all default commands here
