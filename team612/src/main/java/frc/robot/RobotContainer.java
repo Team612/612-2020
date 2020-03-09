@@ -26,6 +26,7 @@ public class RobotContainer {
 
   // Default command objects
   private final DefaultDrive c_drive = new DefaultDrive(m_drivetrain);
+  private final JogIntake c_intake = new JogIntake(m_intake);
   
   private final Shooter m_shooter = new Shooter();
 
@@ -59,13 +60,14 @@ public class RobotContainer {
     ControlMap.SPIN_TO_COLOR.toggleWhenPressed(new SpinToColor(m_wheel));
     ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
     
-    ControlMap.driver_button_A.toggleWhenPressed(new AlignShooter(m_drivetrain));
+    //ControlMap.driver_button_A.toggleWhenPressed(new AlignShooter(m_drivetrain));
     ControlMap.RUN_OUTTAKE.toggleWhenPressed(new RunShooter(m_shooter, m_intake));
   }
 
   // Put all default commands here
   private void configureDefaultCommands() {
     m_drivetrain.setDefaultCommand(c_drive);
+    m_intake.setDefaultCommand(c_intake);
   }
 
   public Command getAutonomousCommand() {

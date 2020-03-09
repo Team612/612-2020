@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.controls.ControlMap;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -50,6 +51,10 @@ public class Intake extends SubsystemBase {
     talon_lower_belt.set(0);
   }
 
+  public void jogIntake(){
+    talon_intake.set(ControlMap.gunner.getRawAxis(2) - ControlMap.gunner.getRawAxis(3));
+  }
+
   public void runIntake(double intake_speed, double belt_speed) {
 
     if (infrared_lower.getAverageVoltage() > INFRARED_LOWER_THRESHOLD) {
@@ -59,6 +64,10 @@ public class Intake extends SubsystemBase {
     }
     talon_intake.set(intake_speed);
 
+  }
+
+  public void runLowerBelt(double speed){
+    talon_lower_belt.set(speed);
   }
 
   // Set the intake flywheel to a certain speed
@@ -80,6 +89,6 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println(infrared_lower.getAverageVoltage());
+    //System.out.println(infrared_lower.getAverageVoltage());
   }
 }

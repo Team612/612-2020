@@ -17,9 +17,11 @@ public class RunShooter extends CommandBase {
   private final Shooter m_shooter;
   private final Intake m_intake;
 
-  private final double SPEED_DELAY = 4;  // Second count until shooter is at "full speed"
+  private final double SPEED_DELAY = 2;  // Second count until shooter is at "full speed"
   private final Timer shooter_timer = new Timer();  // Timer to measure until full speed is reached
   private double distance = 24; //in inches
+
+  private double vi = 0;
   
   public RunShooter(Shooter m_shooter, Intake m_intake) {
     this.m_shooter = m_shooter;
@@ -37,17 +39,30 @@ public class RunShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    if (shooter_timer.get() > SPEED_DELAY) {
-      // TODO: Run the lower belt to feed the balls in
-      m_intake.runIntake(0.0, 0.5);
+    double vf = m_shooter.spark_shooter.getEncoder().getVelocity();
+    double accel = (vf-vi);
+    //System.out.println("Vf" + vf);
+    //System.out.println("Vi" + vi);
+    //System.out.println("time" + shooter_timer.get());
+    System.out.println("Accel" + accel);
+    if(shooter_timer.get() < SPEED_DELAY){
+      m_intake.runLowerBelt(1.0);
     }
-    //double speed = Math.sqrt((2.179*(10**-5))*(distance**2) + 0.3295); //speed calculation based on distance value in inches
-    double speed = 1.0;
-    //System.out.println("Time: " + shooter_timer.get());
-    m_shooter.setShooter(speed);
+    
+      // TODO: Run the lower belt to feed the balls in
+    
 
-  }
+    //double speed = Math.sqrt((2.179*(10**-5))*(distance**2) + 0.3295); //speed calculation based on distance value in inches
+    double speed = 0.46;
+    //System.out.println("Time: " + shooter_timer.get());
+    
+    m_shooter.setShooter(speed);
+    vi = vf;
+
+    //shooter_timer.reset();
+    }
+
+  
 
   // Called once the command ends or is interrupted.
   @Override

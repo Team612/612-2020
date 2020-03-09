@@ -26,7 +26,7 @@ public class ControlMap {
     public static JoystickButton RUN_INTAKE    	        = new JoystickButton(gunner,7);// back button
     public static JoystickButton RUN_OUTTAKE            = new JoystickButton(gunner,8);// start
     public static JoystickButton RUN_FLYWHEEL           = new JoystickButton(gunner,9); // Left joystick press
-    public static JoystickButton TOGGLE_INTAKE           = new JoystickButton(gunner,6); // RB
+    public static JoystickButton TOGGLE_INTAKE          = new JoystickButton(gunner,6); // RB
 
     // Climb buttons
     public static JoystickButton ENGAGE_CLIMB           = new JoystickButton(gunner,2); // B
@@ -37,6 +37,7 @@ public class ControlMap {
     public static JoystickButton ENGAGE_COLOR_WHEEL     = new JoystickButton(gunner, 4); // Y
     public static JoystickButton ROTATE_WHEEL           = new JoystickButton(gunner, 1); // A
     public static JoystickButton SPIN_TO_COLOR          = new JoystickButton(gunner, 5); // LB
+
     
     
 

@@ -16,7 +16,7 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
 
-  private final CANSparkMax spark_shooter = new CANSparkMax(Constants.SPARK_SHOOTER, MotorType.kBrushless);
+  public final CANSparkMax spark_shooter = new CANSparkMax(Constants.SPARK_SHOOTER, MotorType.kBrushless);
 
   public void setShooter(double speed) {
     spark_shooter.set(speed);
