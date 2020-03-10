@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,10 +21,10 @@ public class Drivetrain extends SubsystemBase {
   private final double VOLTAGE_OUTPUT = 12;
 
   // Create spark motors
-  private final Spark spark_fr_drive = new Spark(Constants.SPARK_FR_DRIVE);
-  private final Spark spark_fl_drive = new Spark(Constants.SPARK_FL_DRIVE);
-  private final Spark spark_br_drive = new Spark(Constants.SPARK_BR_DRIVE);
-  private final Spark spark_bl_drive = new Spark(Constants.SPARK_BL_DRIVE);
+  private final WPI_TalonSRX spark_fr_drive = new WPI_TalonSRX(Constants.SPARK_FR_DRIVE);
+  private final WPI_TalonSRX spark_fl_drive = new WPI_TalonSRX(Constants.SPARK_FL_DRIVE);
+  private final WPI_TalonSRX spark_br_drive = new WPI_TalonSRX(Constants.SPARK_BR_DRIVE);
+  private final WPI_TalonSRX spark_bl_drive = new WPI_TalonSRX(Constants.SPARK_BL_DRIVE);
 
   // Basic arcade drive for west coast drivetrain
   public void arcadeDrive(double x_axis , double y_axis){
