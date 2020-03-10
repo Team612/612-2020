@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RangeSensor;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -32,11 +33,11 @@ public class Drivetrain extends SubsystemBase {
   private DoubleSolenoid solenoid_drive = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
 
   // Basic arcade drive function
-  private final double INFRARED_TARGET = 5;
+  private final int WALL_TARGET = 5;
   private final double INFRARED_DEADZONE = 0.564;
 
   // Infrared to tell distance to wall
-  private final AnalogInput infrared_distance = new AnalogInput(Constants.INFRARED_DISTANCE);
+  private final RangeSensor wall_sensor = new RangeSensor();
 
   // Basic arcade drive for west coast drivetrain
   public void arcadeDrive(double x_axis, double y_axis) {  
@@ -81,27 +82,33 @@ public class Drivetrain extends SubsystemBase {
     System.out.println("Shifted Drive Reverse");
   }
 
-  public double getInfraredVoltage() {
-    return infrared_distance.getVoltage();
+  public int getInfraredVoltage() {
+    return wall_sensor.getDistanceVal();
   }
+
 
   // Drive backwards smoothly to infrared distance target, returns true if at target
   public boolean driveToTarget() {
-    // PID calculations (only proportional constant)
-    double error = (1/infrared_distance.getVoltage()) - INFRARED_TARGET;
-    double kP = 0.5;
-    double motor_output = error * kP;
+    if(!wall_sensor.isIR()){
+      // PID calculations (only proportional constant)
+      double error = wall_sensor.errorVal(WALL_TARGET);
+      double kP = 0.5;
+      double motor_output = error * kP;
 
-    System.out.println(error);
-    System.out.println("Motor Output:" + motor_output);
+      System.out.println("Error: "+ error);
+      System.out.println("Motor Output:" + motor_output);
 
-    if (Math.abs(motor_output) < INFRARED_DEADZONE) {
-      return true;
+      if (wall_sensor.inRange(WALL_TARGET)) {
+        return true;
+      } else {
+        arcadeDrive(0, motor_output/2);
+        return false;
+      }
+
     } else {
-      arcadeDrive(0, motor_output/2);
+      arcadeDrive(0, -.5);
       return false;
     }
-    
   }
 
   public Drivetrain() {
