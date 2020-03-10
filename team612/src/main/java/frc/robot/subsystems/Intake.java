@@ -17,6 +17,8 @@ public class Intake extends SubsystemBase {
   private final WPI_TalonSRX talon_intake = new WPI_TalonSRX(Constants.TALON_INTAKE);
   private final WPI_TalonSRX talon_lower_belt = new WPI_TalonSRX(Constants.TALON_LOWER_BELT);
 
+  private final WPI_TalonSRX talon_index = new WPI_TalonSRX(Constants.TALON_INDEX);
+
   // Piston objects for intake and arm grabber
   private final DoubleSolenoid solenoid_intake = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_INTAKE[0], Constants.SOLENOID_INTAKE[1]);
   private final DoubleSolenoid solenoid_wall = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_WALL[0], Constants.SOLENOID_WALL[1]);
@@ -43,6 +45,7 @@ public class Intake extends SubsystemBase {
 
  
 
+
   public void retractIntake() {
     // Retract out the arm and intake to go back to original setup
     System.out.println("Retracted intake");
@@ -64,6 +67,10 @@ public class Intake extends SubsystemBase {
     }
     talon_intake.set(intake_speed);
 
+  }
+
+  public void runIndex(double speed) {
+    talon_index.set(speed);
   }
 
   public void runLowerBelt(double speed){

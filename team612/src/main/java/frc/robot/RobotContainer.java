@@ -62,6 +62,9 @@ public class RobotContainer {
     
     //ControlMap.driver_button_A.toggleWhenPressed(new AlignShooter(m_drivetrain));
     ControlMap.RUN_OUTTAKE.toggleWhenPressed(new RunShooter(m_shooter, m_intake));
+
+    ControlMap.RUN_INDEX.whileHeld(new JogIndex(m_intake));
+;
   }
 
   // Put all default commands here

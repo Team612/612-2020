@@ -27,7 +27,7 @@ public final class Constants {
 
     // Spark ports for intake
     public static final int TALON_INTAKE = 4;
-    public static final int TALON_UPPER_BELT = 6;
+    public static final int TALON_INDEX = 6;
     public static final int TALON_LOWER_BELT = 7;
     public static final int TALON_OUTTAKE = 5;
 

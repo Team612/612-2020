@@ -17,7 +17,7 @@ public class RunShooter extends CommandBase {
   private final Shooter m_shooter;
   private final Intake m_intake;
 
-  private final double SPEED_DELAY = 2;  // Second count until shooter is at "full speed"
+  private final double SPEED_DELAY = 6;  // Second count until shooter is at "full speed"
   private final Timer shooter_timer = new Timer();  // Timer to measure until full speed is reached
   private double distance = 24; //in inches
 
@@ -26,7 +26,7 @@ public class RunShooter extends CommandBase {
   public RunShooter(Shooter m_shooter, Intake m_intake) {
     this.m_shooter = m_shooter;
     this.m_intake = m_intake;
-    addRequirements(m_shooter, m_intake);
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -44,8 +44,8 @@ public class RunShooter extends CommandBase {
     //System.out.println("Vf" + vf);
     //System.out.println("Vi" + vi);
     //System.out.println("time" + shooter_timer.get());
-    System.out.println("Accel" + accel);
-    if(shooter_timer.get() < SPEED_DELAY){
+    //System.out.println("Accel" + accel);
+    if(shooter_timer.get() > SPEED_DELAY){
       m_intake.runLowerBelt(1.0);
     }
     
