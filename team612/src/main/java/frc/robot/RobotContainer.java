@@ -1,13 +1,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.shooter.AlignShooter;
-import frc.robot.commands.shooter.RunShooter;
 import frc.robot.commands.autonomous.SampleAuto;
-import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.controls.ControlMap;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Shooter;
 
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.intake.*;
@@ -26,9 +22,7 @@ public class RobotContainer {
 
   // Default command objects
   private final DefaultDrive c_drive = new DefaultDrive(m_drivetrain);
-  private final JogIntake c_intake = new JogIntake(m_intake);
-  
-  private final Shooter m_shooter = new Shooter();
+  private final DefaultIntake c_intake = new DefaultIntake(m_intake);
 
   // Autonomous command
   private final SampleAuto c_sampleauto = new SampleAuto(m_drivetrain, m_intake);
@@ -47,7 +41,6 @@ public class RobotContainer {
     ControlMap.driver_button_LB.whenPressed(new SetLowGear(m_drivetrain));
 
     // Intake control bindings
-    ControlMap.RUN_INTAKE.toggleWhenPressed(new RunIntake(m_intake));
     ControlMap.TOGGLE_INTAKE.whenPressed(new ToggleIntake(m_intake));
     
     // Climb control bindings
@@ -60,11 +53,9 @@ public class RobotContainer {
     ControlMap.SPIN_TO_COLOR.toggleWhenPressed(new SpinToColor(m_wheel));
     ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
     
-    //ControlMap.driver_button_A.toggleWhenPressed(new AlignShooter(m_drivetrain));
-    ControlMap.RUN_OUTTAKE.toggleWhenPressed(new RunShooter(m_shooter, m_intake));
-
-    ControlMap.RUN_INDEX.whileHeld(new JogIndex(m_intake));
-;
+    // Intake, Shooter control bindings
+    ControlMap.RUN_OUTTAKE.toggleWhenPressed(new RunShooter(m_intake));
+    ControlMap.RUN_INDEXER.whileHeld(new RunIndexer(m_intake));
   }
 
   // Put all default commands here

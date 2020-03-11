@@ -38,7 +38,7 @@ public class ControlMap {
     public static JoystickButton ROTATE_WHEEL           = new JoystickButton(gunner, 1); // A
     public static JoystickButton SPIN_TO_COLOR          = new JoystickButton(gunner, 5); // LB
 
-    public static JoystickButton RUN_INDEX          = new JoystickButton(gunner, 9); // Left Joy
+    public static JoystickButton RUN_INDEXER          = new JoystickButton(gunner, 9); // Left Joy
     
 
 }

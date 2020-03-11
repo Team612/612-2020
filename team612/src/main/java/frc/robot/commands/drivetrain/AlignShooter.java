@@ -5,21 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Drivetrain;
 
-public class JogIntake extends CommandBase {
-  /**
-   * Creates a new JogIntake.
-   */
-  private final Intake m_intake;
+public class AlignShooter extends CommandBase {
 
-  public JogIntake(Intake m_intake) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.m_intake = m_intake;
-    addRequirements(m_intake);
+  private final Drivetrain m_drivetrain;
+
+  public AlignShooter(Drivetrain m_drivetrain) {
+    this.m_drivetrain = m_drivetrain;
+    addRequirements(m_drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +27,7 @@ public class JogIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.jogIntake();
+    System.out.println("Driving backwards at: " + m_drivetrain.getInfraredVoltage());
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +38,7 @@ public class JogIntake extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_drivetrain.driveToTarget();
   }
+
 }
