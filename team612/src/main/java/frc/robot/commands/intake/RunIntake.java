@@ -9,7 +9,7 @@ package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+//import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
 public class RunIntake extends CommandBase {
@@ -37,7 +37,7 @@ public class RunIntake extends CommandBase {
   public void execute() {
     m_intake.setIntake(INTAKE_SPEED);
     m_intake.setBelt(BELT_SPEED);
-    Robot.led.intake();
+    // Robot.led.intake();
   }
 
   // Called once the command ends or is interrupted.
