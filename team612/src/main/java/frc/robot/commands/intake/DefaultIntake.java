@@ -16,6 +16,7 @@ public class DefaultIntake extends CommandBase {
 
   public DefaultIntake(Intake m_intake) {
     this.m_intake = m_intake;
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.

@@ -54,8 +54,8 @@ public class RobotContainer {
     ControlMap.ENGAGE_COLOR_WHEEL.whenPressed(new ExtendColorWheel(m_wheel));
     
     // Intake, Shooter control bindings
+    ControlMap.driver_button_A.whenPressed(new AlignShooter(m_drivetrain));
     ControlMap.RUN_OUTTAKE.toggleWhenPressed(new RunShooter(m_intake));
-    ControlMap.RUN_INDEXER.whileHeld(new RunIndexer(m_intake));
   }
 
   // Put all default commands here

@@ -11,8 +11,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -32,11 +34,11 @@ public class Drivetrain extends SubsystemBase {
   private DoubleSolenoid solenoid_drive = new DoubleSolenoid(Constants.PCM_2, Constants.SOLENOID_DRIVE[0], Constants.SOLENOID_DRIVE[1]);
 
   // Basic arcade drive function
-  private final double INFRARED_TARGET = 5;
+  private final double INFRARED_TARGET = 75;
   private final double INFRARED_DEADZONE = 0.564;
 
-  // Infrared to tell distance to wall
-  private final AnalogInput infrared_distance = new AnalogInput(Constants.INFRARED_DISTANCE);
+  // I2C to tell distance to wall
+  private final I2C range_finder = new I2C(Port.kOnboard, (0x3e >> 1) | 0x00);
 
   // Basic arcade drive for west coast drivetrain
   public void arcadeDrive(double x_axis, double y_axis) {  
@@ -81,34 +83,40 @@ public class Drivetrain extends SubsystemBase {
     System.out.println("Shifted Drive Reverse");
   }
 
-  public double getInfraredVoltage() {
-    return infrared_distance.getVoltage();
+  public int getDistance() {
+    byte[] buffer = new byte[1];
+    System.out.println(!range_finder.read(0x04, 1, buffer));
+    return buffer[0];
   }
 
   // Drive backwards smoothly to infrared distance target, returns true if at target
   public boolean driveToTarget() {
     // PID calculations (only proportional constant)
-    double error = (1/infrared_distance.getVoltage()) - INFRARED_TARGET;
-    double kP = 0.5;
-    double motor_output = error * kP;
+    if (getDistance() > 0) {
+      double error = getDistance() - INFRARED_TARGET;
+      double kP = 0.025;
+      double motor_output = error * kP;
 
-    System.out.println(error);
-    System.out.println("Motor Output:" + motor_output);
+      System.out.println(error);
+      System.out.println("Motor Output:" + motor_output);
 
-    if (Math.abs(motor_output) < INFRARED_DEADZONE) {
-      return true;
-    } else {
-      arcadeDrive(0, motor_output/2);
-      return false;
+      if (Math.abs(motor_output) < INFRARED_DEADZONE) {
+        return true;
+      } else {
+        arcadeDrive(0, motor_output/2);
+        return false;
+      }
     }
-    
+    return false;
   }
 
   public Drivetrain() {
+    range_finder.write(0x03, 1);
   }
 
   @Override
   public void periodic() {
+    System.out.println(getDistance());
   }
   
 }
